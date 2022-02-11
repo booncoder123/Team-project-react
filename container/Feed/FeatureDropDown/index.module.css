@@ -1,0 +1,12 @@
+.featureDropDown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title {
+  font-family: Roboto Bold;
+  font-size: 33px;
+  margin-left: 25px;
+  margin-right: 12px;
+}
