@@ -11,6 +11,7 @@ export default function Feed() {
  const [type, setType] = useState(0)
   return (
     <Layout>
+      
     </Layout>
   );
 }

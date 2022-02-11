@@ -8,7 +8,17 @@ export default function Discussions() {
   const [postMessage, setPostMessage] = useState("");
   return (
     <Layout>
-     
+    
+      {discussions.map((discussion) => {
+        return (
+          <Discussion
+            title={discussion.title}
+            images={discussion.images}
+            like={discussion.like}
+            comment={discussion.comment}
+          />
+        );
+      })}
     </Layout>
   );
 }
