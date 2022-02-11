@@ -1,17 +1,11 @@
 import classes from "./index.module.css";
 import Image from "next/image";
-export default function ActivityButtonWithNumber() {
+export default function ActivityButtonWithNumber(props) {
+  const {value,icon} = props;
   return (
     <div className={classes.activityButton}>
-         <Image
-            objectPosition="center"
-            alt={"shop icon"}
-            src={"/Feed/Like.svg"}
-            objectFit="contain"
-            width={16}
-            height={12}
-          />
-          <div className={classes.number}>260</div>
+        {icon()}
+          <div className={classes.number}>{value}</div>
      
     </div>
   );
