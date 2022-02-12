@@ -4,9 +4,9 @@ import classes from "/styles/app.module.css";
 function MyApp({ Component, pageProps }) {
   return (
     <div className={classes.app}>
-      <div className={classes.header}>
+      {/* <div className={classes.header}>
         <FeatureDropDown />
-      </div>
+      </div> */}
 
       <Component {...pageProps}></Component>
     </div>
