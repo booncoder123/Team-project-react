@@ -4,7 +4,7 @@ import { useState } from "react"
 import FeatureDropDown from "../../../container/Feed/FeatureDropDown"
 
 export default function Layout(props) {
-    const [typeei, setType] = useState(0);
+    const [typee2222, setType] = useState(0);
     return (
       <div className={classes.content} >
         <div className={classes.header}>  
