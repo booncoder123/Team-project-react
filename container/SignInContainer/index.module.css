@@ -1,0 +1,16 @@
+.block {
+  background-color: var(--neutral);
+  position: absolute;
+  width: 375px;
+  height: 596px;
+  left: 0px;
+  top: 256px;
+  border-radius: 40px;
+}
+
+#text{
+    position:absolute;
+    top: 400px;
+    left: 45px;
+    color:"#a6a0a9";
+}
