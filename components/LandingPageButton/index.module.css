@@ -1,0 +1,20 @@
+.button {
+    background-color: var(--orange);
+    position: absolute;
+    font-family: Roboto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: x-large;
+    text-align: center;
+    padding: 10px;
+  
+    border: none;
+    color: var(--neutral);
+    border-radius: 10px;
+    width: 180px;
+    height: 50px;
+    left: 98px;
+    top: 571px;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
