@@ -4,7 +4,7 @@ import JobPost from "../../../container/JobPost";
 import { useState } from "react";
 import Layout from "../../../components/Layout/Feed";
 
-import Searchbar from "../../../components/SearchBar";
+import SearchBar from "../../../components/SearchBar";
 import Dropdown from "../../../components/Dropdown";
 export default function Discussions() {
   const [postMessage, setPostMessage] = useState("");
@@ -12,10 +12,11 @@ export default function Discussions() {
     <Layout>
       <div className={classes.filter}>
         <div className={classes.Searchbar}>
-          <Searchbar />
+          <SearchBar placeholder="Search..."/>
         </div>
         <div className={classes.Dropdown}>
-          <Dropdown />
+          <Dropdown placeholder="Type" />
+         
         </div>
        
       </div>

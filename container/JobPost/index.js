@@ -7,7 +7,7 @@ export default function JobPost(props) {
 
   return (
     <div className={classes.JobPost}>
-      <div className={classes.logo}></div>
+      <div className={classes.logo}>123</div>
       <div className={classes.content}>
         <div className={classes.jobTitle}>Agoda.com</div>
         <div className={classes.jobIntro}>

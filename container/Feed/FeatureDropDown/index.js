@@ -7,12 +7,12 @@ export default function FeatureDropDown() {
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
             <div className={classes.title}>Feed</div>
             <Image
-            objectPosition="center"
+            objectPosition="absolute"
             alt={"shop icon"}
             src={"/Feed/Down.svg"}
-            objectFit="contain"
             width={20}
             height={30}
+           layout="fixed"
           />
 
       </div>

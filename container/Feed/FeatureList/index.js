@@ -1,16 +1,39 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+
 import Box from "@mui/material/Box";
 import classes from "./index.module.css";
 import { useRouter } from "next/router";
 
+
+import Image from "next/image";
+
+
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+
+import { Directions } from "@mui/icons-material";
+import { yellow } from "@mui/material/colors";
+
+import { fontFamily } from "@mui/system";
+import ModifyTab from "../../../components/ModifyTab";
+import ModifyTabs from "../../../components/ModifyTabs";
+
+
+
 export default function FeatureList(props) {
-  // const type = sessionStorage.getItem('type');
-  // const [value, setValue] = useState(0)
 
   const router = useRouter();
+
+  const checkCurrentPage = (page) => {
+    const router = useRouter();
+    console.log(page,router.pathname.split("/")[2])
+    if(page === router.pathname.split("/")[2]){
+      return 1;
+    }
+    return 0;
+  
+  }
 
   const getValue = () => {
     console.log(router.pathname.split("/")[2]);
@@ -44,26 +67,34 @@ export default function FeatureList(props) {
     }
   };
   const nextPageHandler = (page) => {
-    // router.query.NEWSHOP_SUBPAGE = page;
+
     router.push(`/Feed/${page}`);
   };
   return (
     <Box sx={{ bgcolor: "background.paper" }} className={classes.container}>
-      <Tabs
+      <ModifyTabs
         value={getValue()}
         onChange={handleChange}
         variant="scrollable"
         scrollButtons={false}
         aria-label="scrollable prevent tabs example"
+        TabIndicatorProps={{  
+          style: {
+              display: "none",
+          },
+        }} 
+        
       >
-        <Tab label="Discussions" />
-        <Tab label="News" />
-        <Tab label="Jobs" />
-        <Tab label="Item Four" />
-        <Tab label="Item Five" />
-        <Tab label="Item Six" />
-        <Tab label="Item Seven" />
-      </Tabs>
+        <ModifyTab label="Discussions" active={checkCurrentPage("Discussions")}/>
+        <ModifyTab label="News" active={checkCurrentPage("News")}/>
+        <ModifyTab label="Jobs" active={checkCurrentPage("Jobs")}/>
+        <ModifyTab label="Item Four" />
+        <ModifyTab label="Item Five" />
+        <ModifyTab label="Item Six" />
+        <ModifyTab label="Item Seven" />
+      </ModifyTabs>
     </Box>
   );
 }
+
+
