@@ -20,15 +20,17 @@ export default function Discussion(props) {
             objectFit="contain"
             width={16}
             height={12}
-          />}/>
-        <ActivityButtonWithNumber value={comment} icon={ ()=><Image
+          />}
+          onClick={()=>{}}/>
+        <ActivityButtonWithNumber value={comment}  icon={ ()=><Image
             objectPosition="center"
             alt={"shop icon"}
             src={"/Feed/Comment.svg"}
             objectFit="contain"
             width={16}
             height={12}
-          />}/>
+          />}
+          onClick={()=>{}}/>
         </div>
       </div>
     )

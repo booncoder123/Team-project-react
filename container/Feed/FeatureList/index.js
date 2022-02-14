@@ -6,16 +6,6 @@ import classes from "./index.module.css";
 import { useRouter } from "next/router";
 
 
-import Image from "next/image";
-
-
-import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
-
-import { Directions } from "@mui/icons-material";
-import { yellow } from "@mui/material/colors";
-
-import { fontFamily } from "@mui/system";
 import ModifyTab from "../../../components/ModifyTab";
 import ModifyTabs from "../../../components/ModifyTabs";
 
