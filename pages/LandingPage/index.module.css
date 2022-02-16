@@ -3,58 +3,23 @@
   position: absolute;
 }
 .logo {
-  position: absolute;
+  /* position: absolute; */
   width: 186px;
   height: 100px;
-  left: 188px;
-  top: 233px;
+  margin-bottom: 2vh;
 }
 
 .welcome {
   position: absolute;
-  width: 290px;
-  height: 105px;
-  right: 25px;
-  top: 350px;
+  display:flex;
+  flex-direction: column;
+  align-items: flex-end;
+  top: 30vh;
+  right:10px;
+  line-height: 2.2rem;
   font-family: Roboto;
   font-style: normal;
-  font-weight: bold;
-  font-size: 25px;
-  line-height: 35px;
+  font-size: xx-large;
   text-align: right;
-}
 
-.signin {
-    position: absolute;
-    font-family: Roboto;
-    font-weight: 300;
-    font-size: x-large;
-  
-    border: none;
-    background-color: var(--orange);
-    color: var(--neutral);
-    border-radius: 10px;
-    width: 180px;
-    height: 50px;
-    left: 98px;
-    top: 571px;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-  
-  .signup {
-    position: absolute;
-    font-family: Roboto;
-    font-weight: 300;
-    font-size: x-large;
-  
-    border: none;
-    background-color: var(--secondary-dark);
-    color: var(--neutral);
-    border-radius: 10px;
-    width: 180px;
-    height: 50px;
-    left: 98px;
-    top: 656px;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-  
+}
