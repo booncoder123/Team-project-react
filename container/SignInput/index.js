@@ -10,6 +10,8 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MailIcon from "@mui/icons-material/MailOutlineOutlined";
 import PasswordIcon from "@mui/icons-material/HttpsOutlined";
+import { useRouter } from "next/router";
+
 export default function SignInput(props) {
   const [values, setValues] = React.useState({
     password: "",
@@ -31,8 +33,15 @@ export default function SignInput(props) {
     event.preventDefault();
   };
 
+  const router = useRouter();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    router.push("/Feed/Discussions");
+  };
+
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <Box
           sx={{
@@ -77,10 +86,11 @@ export default function SignInput(props) {
             />
           </Box>
         </FormControl>
-        <div className={classes.button}>
-          <CircleButton name="Sign In" />
-        </div>
+        
       </div>
+      <div className={classes.button}>
+          <CircleButton name="Sign In"/>
+        </div>
     </form>
   );
 }
