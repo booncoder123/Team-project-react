@@ -1,16 +1,32 @@
 .block {
   background-color: var(--neutral);
   position: absolute;
-  width: 375px;
-  height: 596px;
+  bottom: 0px;
+  right: 0px;
   left: 0px;
-  top: 256px;
-  border-radius: 40px;
+  top: 30vh;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
 }
 
-#text{
-    position:absolute;
-    top: 400px;
-    left: 45px;
-    color:"#a6a0a9";
+.input {
+  position: absolute;
+  padding: 10px;
+  top: 15vh;
+  left: 10vw;
+  margin-right: 10vw;
+}
+
+.input .logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10vw;
+  padding-top: 3vh;
+}
+
+.input .link{
+  position: absolute;
+  padding-top: 5vh;
+  color: var(--grey);
 }
