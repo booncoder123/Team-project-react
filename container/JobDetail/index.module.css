@@ -1,11 +1,12 @@
 .JobDetail {
     background-color: var(--neutral);
-    border-radius: 10px;
+    /* border-radius: 10px; */
     padding: 25px 19px 25px 19px;
-    margin-top: 11px;
-    margin-bottom: 11px;
+    /* margin-top: 11px;
+    margin-bottom: 11px; */
     display: flex;
     flex-direction: row;
+    /* background-color: red; */
   }
   
   .heading1 {
@@ -43,4 +44,22 @@
   .jobDetail {
     font-family: Roboto Bold;
     font-size: 10px;
+  }
+  .button {
+    /* background-color: var(--orange); */
+    /* font-family: Roboto;
+    font-weight: 100; */
+    /* font-style: normal; */
+    /* font-size: large; */
+    /* text-align: center; */
+    /* padding: 1rem; */
+    /* border: none;
+    color: var(--neutral);
+    border-radius: 10px; */
+
+    flex-direction: row;
+    display: flex;
+    /* background-color:yellow; */
+    /* top: -5vh; */
+    width:100%;
   }

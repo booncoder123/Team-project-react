@@ -19,12 +19,12 @@ export default function JobDetailContainer(props) {
             </div>
             <div className={classes.button}>
                 <RectangularButton
-                    style={{ backgroundColor: "#F08F34", top: "0vh", left: "0%", right:"20%" }}
+                    style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
                     url="/SignIn"
                     name="Sign In"
                 />
                 <RectangularButton
-                    style={{ backgroundColor: "#424642", top: "-7.65vh", left: "12%", right:"20%" }}
+                    style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
                     url="/Save"
                     name="Save"
                 />
