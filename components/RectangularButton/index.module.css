@@ -1,0 +1,18 @@
+.button {
+    background-color: var(--orange);
+    position: relative;
+    font-family: Roboto;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 15;
+    text-align: center;
+    padding: 1rem;
+    border: none;
+    color: var(--neutral);
+    border-radius: 10px;
+    height: 3rem;
+    width:10%;
+    left: 0%;
+    right:20%;
+    top: -5vh;
+  }
