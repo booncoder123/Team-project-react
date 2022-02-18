@@ -11,8 +11,9 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MailIcon from "@mui/icons-material/MailOutlineOutlined";
 import PasswordIcon from "@mui/icons-material/HttpsOutlined";
 import { useRouter } from "next/router";
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
-export default function SignInput(props) {
+export default function SignUpInput() {
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
@@ -53,12 +54,30 @@ export default function SignInput(props) {
           <MailIcon sx={{ color: "#ff8a00", marginRight: "1rem" }} />
           <Input
             fullWidth
-            id={props.name}
+            id="email"
             placeholder="email address"
-            type={props.type}
+            type="email"
             variant="standard"
             required={true}
           />
+        </Box>
+
+        <Box
+         sx={{
+          display: "flex",
+          alignItems: "flex-end",
+          marginBottom: "3rem",
+        }}>
+          <AssignmentIndIcon  sx={{ color: "#ff8a00", marginRight: "1rem" }}/>
+          <Input
+            fullWidth
+            id="name"
+            placeholder="username"
+            type="text"
+            variant="standard"
+            required={true}
+          />
+
         </Box>
 
         <FormControl style={{ width: "75vw" }} variant="standard">
@@ -89,7 +108,7 @@ export default function SignInput(props) {
         
       </div>
       <div className={classes.button}>
-          <CircleButton name="Sign In"/>
+          <CircleButton name="Sign Up"/>
         </div>
     </form>
   );
