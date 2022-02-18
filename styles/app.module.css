@@ -1,0 +1,11 @@
+.app {
+  background-color: var(--ternary);
+}
+
+.header {
+  padding: 39px 168px 0px 44px;
+}
+
+.content {
+  padding: 0px 0px 25px 25px;
+}

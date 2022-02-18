@@ -1,0 +1,15 @@
+.submit {
+  position: absolute;
+  font-family: Roboto;
+  font-weight: 600;
+  font-size: large;
+  text-align: center;
+  padding: 10px;
+
+  border: none;
+  background-color: var(--orange);
+  color: var(--neutral);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}

@@ -1,0 +1,55 @@
+:root {
+  --orange: #ff8a00;
+  --neutral: #ffffff;
+  --color-background: #efefef;
+  --secondary: #f3f2ed;
+  --secondary-dark: #424642;
+  --secondary-light: #f1f1f1;
+  --ternary: #f6f6f6;
+  --dark: #2d3133;
+  --grey: #a6a0a9;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  white-space: pre-wrap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto/Roboto-Regular.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Bold";
+  src: url("/fonts/Roboto/Roboto-Bold.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* @font-face {
+  font-family: "Helvethaica";
+  src: url("/fonts/Helvethaica/DB Helvethaica X.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvethaica Bold";
+  src: url("/fonts/Helvethaica/DBHelvethaicaX-Bd.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+} */

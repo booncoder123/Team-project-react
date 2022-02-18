@@ -1,0 +1,52 @@
+.JobPost {
+  background-color: var(--neutral);
+  border-radius: 10px;
+  padding: 25px 19px 25px 19px;
+  margin-top: 11px;
+  margin-bottom: 11px;
+  display: flex;
+  flex-direction: row;
+}
+
+.heading1 {
+  font-family: Roboto;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.ActivityButton {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+
+.img {
+  width: 100%;
+}
+
+.logo {
+  min-width: 35px;
+  height: 35px;
+  background-color: var(--primary);
+  border-radius: 5px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 17px;
+}
+
+.jobTitle {
+  font-family: Roboto;
+  font-size: 10px;
+}
+.jobIntro {
+  font-family: Roboto Bold;
+  font-size: 10px;
+  margin-top: 2px;
+  margin-bottom: 13px;
+}
+.jobDetail {
+  font-family: Roboto;
+  font-size: 10px;
+}
