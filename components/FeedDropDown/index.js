@@ -22,7 +22,7 @@ export default function App() {
         sx={{
           color: "#424642",
           backgroundColor: "ffffff",
-          fontSize: 33,
+          fontSize: 30,
           fontFamily: "Roboto Bold",
         }}
         classes={{ root: classes.selectRoot }}
