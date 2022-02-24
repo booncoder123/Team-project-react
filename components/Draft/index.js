@@ -1,5 +1,3 @@
-
-
 import { useState,useEffect } from 'react';
 import dynamic from 'next/dynamic';
 const Editor = dynamic(
@@ -8,8 +6,6 @@ const Editor = dynamic(
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const Test = (props) => {
-
-
   return (
     <div>
      <Editor
@@ -24,6 +20,7 @@ const Test = (props) => {
                   height: 'auto',
                   width: 'auto',
                 }}}}
+    
       />
     </div>
   );
