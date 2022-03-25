@@ -6,9 +6,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { Typography } from "@mui/material";
-export default function App() {
-  const classes = useStyles();
-  const [page, setPage] = React.useState("Feed");
+export default function FeedDropDown(props) {
+  console.log(props.p);
+  const classes = useStyles(); 
+  const [page, setPage] = React.useState(props.p);
   const router = useRouter();
   const handleChange = (event) => {
     setPage(event.target.value);
