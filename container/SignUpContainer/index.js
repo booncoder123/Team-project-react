@@ -1,19 +1,10 @@
 import classes from "./index.module.css";
 import SignUpInput from "../SignUpInput";
-import { useRouter } from "next/router";
+
 import SocialMediaLogo from "../../components/SocialMediaLogo";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ForgetPassword from "../../pages/ForgetPassword";
 export default function SignUpContainer() {
-  const router = useRouter();
-  const signUpHandler = () => {
-    router.push("/SignUp");
-  };
-
-  const forgetPasswordHandler = () => {
-    router.push("/ForgetPassword");
-  };
-
   return (
     <div className={classes.block}>
       <div className={classes.input}>
