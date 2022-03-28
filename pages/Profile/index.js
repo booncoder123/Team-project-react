@@ -7,17 +7,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useRouter } from "next/router";
 export default function Profile() {
   const router = useRouter();
-  const discussionsHandler = () => {
-    router.push("/Profile/MyDiscussions");
-  };
-  const projectsHandler = () => {
-    router.push("/Profile/MyProjects");
-  };
-  const jobsHandler = () => {
-    router.push("/Profile/MyJobs");
-  };
-  const savedItemsHandler = () => {
-    router.push("/Profile/MySavedItems");
+  function nextPagehandler(pageUrl){
+    router.push(pageUrl);
   }
 
   return (
@@ -46,7 +37,7 @@ export default function Profile() {
         <div className={classes.selection}>
           <div className={classes.savedItems}>
             <div>
-              <button onClick={savedItemsHandler}> Saved Items</button>
+              <button onClick={() => nextPagehandler("/Profile/MySavedItems")}> Saved Items</button>
             </div>
           </div>
           <div className={classes.type}>
@@ -54,7 +45,7 @@ export default function Profile() {
             <div className={classes.arrow}>
               <ArrowForwardIosIcon
                 fontSize="small"
-                onClick={discussionsHandler}
+                onClick={() => nextPagehandler("/Profile/MyDiscussions")}
               />
             </div>
           </div>
@@ -63,7 +54,7 @@ export default function Profile() {
             <div className={classes.arrow}>
               <ArrowForwardIosIcon
                 fontSize="small"
-                onClick={jobsHandler}
+                onClick={() => nextPagehandler("/Profile/MyJobs")}
               />
             </div>
           </div>
@@ -72,7 +63,7 @@ export default function Profile() {
             <div className={classes.arrow}>
               <ArrowForwardIosIcon
                 fontSize="small"
-                onClick={projectsHandler}
+                onClick={() => nextPagehandler("/Profile/MyProjects")}
               />
             </div>
           </div>
