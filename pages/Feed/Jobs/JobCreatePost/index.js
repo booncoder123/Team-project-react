@@ -20,9 +20,17 @@ const Test = (props) => {
       <div className={classes.header}>Post Job</div>
       <div className={classes.commentPanel}>
         Company
-        <TextField/>
-      </div>
-      <div className={classes.commentPanel}>
+        <TextField
+          className={classes.TextComponent}
+          label="text field"
+          variant="outlined"
+          inputProps={{
+              style: {
+                height: '30px',
+                padding: '0px 14px',
+              },
+          }}
+        />
         Position
         <TextField
           label="text field"

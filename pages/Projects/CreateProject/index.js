@@ -26,9 +26,17 @@ const Test = (props) => {
       <div className={classes.header}>Post Project</div>
       <div className={classes.commentPanel}>
         Project Name
-        <TextField/>
-      </div>
-      <div className={classes.commentPanel}>
+        <TextField
+          className={classes.TextComponent}
+          label="text field"
+          variant="outlined"
+          inputProps={{
+              style: {
+                height: '30px',
+                padding: '0px 14px',
+              },
+          }}
+        />
         Introduction
         <TextField
           label="text field"
