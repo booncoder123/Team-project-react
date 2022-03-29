@@ -54,8 +54,10 @@ const Test = (props) => {
       <div>
         Description
         <Editor
-          className={classes.Draft}
-          editorStyle={{}}
+          editorStyle={{
+            backgroundColor: ['white'],
+            height: ['120px']
+          }}
           toolbarStyle={{}}
           toolbar={{  
               options: ['link','image'],

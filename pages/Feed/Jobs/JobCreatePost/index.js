@@ -43,7 +43,10 @@ const Test = (props) => {
       <div>
         Job Detail
         <Editor
-          editorStyle={{}}
+          editorStyle={{
+            backgroundColor: ['white'],
+            height: ['120px']
+          }}
           toolbarStyle={{}}
           toolbar={{  
               options: ['link','image'],
