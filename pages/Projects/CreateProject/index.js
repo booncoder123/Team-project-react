@@ -22,13 +22,13 @@ const labelOffset = -6
 const Test = (props) => {
   return (
     <div className={classes.container}>
-      <div className={classes.header}>Post Job</div>
+      <div className={classes.header}>Post Project</div>
       <div className={classes.commentPanel}>
-        Company
+        Project Name
         <TextField/>
       </div>
       <div className={classes.commentPanel}>
-        Position
+        Introduction
         <TextField
           label="text field"
           variant="outlined"
@@ -41,12 +41,18 @@ const Test = (props) => {
           }}
         />
       </div>
-      <div className={classes.Dropdown}>
+
+      <div className={classes.DropdownContainer}>
+        <div className={classes.Dropdown}>
+          <Dropdown placeholder="Year" />
+        </div>
+        <div className={classes.Dropdown}>
           <Dropdown placeholder="Type" />
         </div>
+      </div>
 
       <div>
-        Job Detail
+        Description
         <Editor
           editorStyle={{}}
           toolbarStyle={{}}
@@ -62,14 +68,14 @@ const Test = (props) => {
         />
       </div>
       <div className={classes.button}>
-                <RectangularButton
-                    style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
-                    name="Post"
-                />
-                <RectangularButton
-                    style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
-                    name="Cancel"
-                />
+        <RectangularButton
+            style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
+            name="Post"
+        />
+        <RectangularButton
+            style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
+            name="Cancel"
+        />
       </div>
     </div>
   );

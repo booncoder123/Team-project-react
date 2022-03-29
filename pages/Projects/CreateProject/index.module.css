@@ -33,10 +33,15 @@
     border-top-right-radius: 40px;
   }
   
-  .Dropdown {
-    flex: 1.5;
-    width: 10%;
+  .DropdownContainer {
+    flex-direction: row;
+    display: flex;
     padding-bottom: 20px;
+  }
+
+  .Dropdown {
+    padding-right: 5%;
+    width: 20%;
   }
 
   .button {
