@@ -8,7 +8,8 @@ import classes from "./index.module.css";
 import TextField from "../../../components/TextField"
 import Dropdown from "../../../components/Dropdown";
 import RectangularButton from "../../../components/RectangularButton";
-
+import Avatar from '@mui/material/Avatar';
+import FeedDropDown from "../../../components/FeedDropDown";
 import { useState,useEffect } from 'react';
 import dynamic from 'next/dynamic';
 const Editor = dynamic(
