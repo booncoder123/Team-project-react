@@ -8,14 +8,17 @@ import {useRouter} from "next/router";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 export default function Projects() {
   const router = useRouter();
-  const createProjectHandler  = () => {
-      router.push("/Projects/CreateProject");
-  };
+  // const createProjectHandler  = () => {
+  //     router.push("/Projects/CreateProject");
+  // };
+  function nextPageHandler(pageUrl){
+    router.push(pageUrl);
+  }
   return (
     <div className={classes.container}>
       <div className={classes.heading}>
         <FeatureDropDown />
-        <div style={{ marginBottom: "10px" }} onClick={createProjectHandler}>
+        <div style={{ marginBottom: "10px" }} onClick={() => nextPageHandler("Projects/CreateProject")}>
           <AddCircleOutlineIcon fontSize="large" />
         </div>
       </div>
@@ -34,6 +37,7 @@ export default function Projects() {
       <div className={classes.projects}>
         {projects.map((project) => {
           return (
+            <div onClick={() => nextPageHandler("Projects/ProjectDetail")}>
             <ProjectPost
               name={project.name}
               intro={project.intro}
@@ -42,6 +46,7 @@ export default function Projects() {
               description={project.description}
               images={project.images}
             />
+            </div>
           );
         })}
       </div>
