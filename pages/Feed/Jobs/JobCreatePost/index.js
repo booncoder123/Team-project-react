@@ -1,8 +1,9 @@
 
 import classes from "./index.module.css";
-import TextField from "../../components/TextField"
-import Dropdown from "../../components/Dropdown";
-import RectangularButton from "../../components/RectangularButton";
+import TextField from "../../../../components/TextField"
+import Dropdown from "../../../../components/Dropdown";
+import RectangularButton from "../../../../components/RectangularButton";
+
 import { useState,useEffect } from 'react';
 import dynamic from 'next/dynamic';
 const Editor = dynamic(
@@ -19,9 +20,17 @@ const Test = (props) => {
       <div className={classes.header}>Post Job</div>
       <div className={classes.commentPanel}>
         Company
-        <TextField/>
-      </div>
-      <div className={classes.commentPanel}>
+        <TextField
+          className={classes.TextComponent}
+          label="text field"
+          variant="outlined"
+          inputProps={{
+              style: {
+                height: '30px',
+                padding: '0px 14px',
+              },
+          }}
+        />
         Position
         <TextField
           label="text field"
@@ -42,7 +51,10 @@ const Test = (props) => {
       <div>
         Job Detail
         <Editor
-          editorStyle={{}}
+          editorStyle={{
+            backgroundColor: ['white'],
+            height: ['120px']
+          }}
           toolbarStyle={{}}
           toolbar={{  
               options: ['link','image'],
