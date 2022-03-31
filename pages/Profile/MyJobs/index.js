@@ -1,7 +1,34 @@
+import classes from "./index.module.css";
+import { useRouter } from "next/router";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { discussions } from "../../../const/mockUp.js";
+import JobPost from "../../../container/JobPost";
+
 export default function MyJobs() {
-    return(
-        <div>
-            this is my jobs page
-        </div>
-    );
+  const router = useRouter();
+  function nextPagehandler() {
+    router.push("/Profile");
+  }
+  return (
+    <div className={classes.container}>
+      <div className={classes.title}>My Discussions</div> 
+      <div className={classes.banner}>
+        <ArrowBackIosIcon sx={{ fontSize: 15 }} onClick={nextPagehandler} />
+        My Jobs
+      </div> 
+      <div className={classes.content}>
+      {discussions.map((discussion) => {
+        return (
+          <JobPost
+            title={discussion.title}
+            images={discussion.images}
+            like={discussion.like}
+            comment={discussion.comment}
+          />
+        );
+      })}
+      </div>
+
+    </div>
+  );
 }
