@@ -17,9 +17,8 @@ export default function MyProjects() {
         My Posts
       </div>
       <div className={classes.content}>
-      {projects.map((project) => {
+        {projects.map((project) => {
           return (
-            <div onClick={() => nextPageHandler("Projects/ProjectDetail")}>
             <ProjectPost
               name={project.name}
               intro={project.intro}
@@ -28,7 +27,6 @@ export default function MyProjects() {
               description={project.description}
               images={project.images}
             />
-            </div>
           );
         })}
       </div>
