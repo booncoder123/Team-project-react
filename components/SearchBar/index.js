@@ -170,11 +170,11 @@ export default function SearchBar(props) {
             variant="outlined"
             fullWidth
             placeholder={placeholder}
-            // InputProps={{
-            //     ...params.InputProps,
+            InputProps={{
+                ...params.InputProps,
                
              
-            //   }}
+              }}
           />
         );
       }}
