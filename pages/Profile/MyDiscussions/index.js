@@ -14,7 +14,7 @@ export default function MyDiscussions() {
       <div className={classes.title}>My Discussions</div>
       <div className={classes.banner}>
         <ArrowBackIosIcon sx={{ fontSize: 15 }} onClick={nextPagehandler} />
-        My Projects
+        My Posts
       </div>
       <div className={classes.content}>
         {discussions.map((discussion) => {

@@ -11,10 +11,10 @@ export default function MyJobs() {
   }
   return (
     <div className={classes.container}>
-      <div className={classes.title}>My Discussions</div> 
+      <div className={classes.title}>My Jobs</div> 
       <div className={classes.banner}>
         <ArrowBackIosIcon sx={{ fontSize: 15 }} onClick={nextPagehandler} />
-        My Jobs
+        My Posts
       </div> 
       <div className={classes.content}>
       {discussions.map((discussion) => {
