@@ -4,7 +4,9 @@ import DiscussionPost from "../../../container/DiscussionPost";
 import Discussion from "../../../container/Discussion";
 import { useState } from "react";
 import Layout from "../../../components/Layout/Feed";
-export default function Discussions() {
+import withAuth from "../../../helpers/withAuth"
+
+function Discussions() {
   const [postMessage, setPostMessage] = useState("");
   return (
     <Layout>
@@ -22,3 +24,4 @@ export default function Discussions() {
     </Layout>
   );
 }
+export default withAuth(Discussions);

@@ -6,7 +6,9 @@ import ProjectPost from "../../container/ProjectPost";
 import { projects } from "../../const/mockProject";
 import {useRouter} from "next/router";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-export default function Projects() {
+import withAuth from "../../helpers/withAuth";
+
+function Projects() {
   const router = useRouter();
   // const createProjectHandler  = () => {
   //     router.push("/Projects/CreateProject");
@@ -53,3 +55,5 @@ export default function Projects() {
     </div>
   );
 }
+
+export default withAuth(Projects);

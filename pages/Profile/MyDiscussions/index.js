@@ -3,8 +3,9 @@ import { discussions } from "../../../const/mockUp.js";
 import Discussion from "../../../container/Discussion";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useRouter } from "next/router";
+import withAuth from "../../../helpers/withAuth";
 
-export default function MyDiscussions() {
+function MyDiscussions() {
   const router = useRouter();
   function nextPagehandler() {
     router.push("/Profile");
@@ -31,3 +32,5 @@ export default function MyDiscussions() {
     </div>
   );
 }
+
+export default withAuth(MyDiscussions);

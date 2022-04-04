@@ -17,7 +17,7 @@ export default function FeatureList(props) {
 
   const checkCurrentPage = (page) => {
     const router = useRouter();
-    console.log(page,router.pathname.split("/")[2])
+    // console.log(page,router.pathname.split("/")[2])
     if(page === router.pathname.split("/")[2]){
       return 1;
     }
@@ -26,7 +26,7 @@ export default function FeatureList(props) {
   }
 
   const getValue = () => {
-    console.log(router.pathname.split("/")[2]);
+    // console.log(router.pathname.split("/")[2]);
     switch (router.pathname.split("/")[2]) {
       case "Discussions":
         return 0;

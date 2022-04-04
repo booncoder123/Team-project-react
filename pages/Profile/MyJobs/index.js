@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { discussions } from "../../../const/mockUp.js";
 import JobPost from "../../../container/JobPost";
+import withAuth from "../../../helpers/withAuth";
 
-export default function MyJobs() {
+function MyJobs() {
   const router = useRouter();
   function nextPagehandler() {
     router.push("/Profile");
@@ -32,3 +33,5 @@ export default function MyJobs() {
     </div>
   );
 }
+
+export default withAuth(MyJobs);

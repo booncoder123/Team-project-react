@@ -1,11 +1,10 @@
-
 import classes from "./index.module.css";
 import TextField from "../../../../components/TextField"
 import Dropdown from "../../../../components/Dropdown";
 import RectangularButton from "../../../../components/RectangularButton";
-
 import { useState,useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import withAuth from "../../../helpers/withAuth";
 const Editor = dynamic(
     () => import('react-draft-wysiwyg').then(mod => mod.Editor),
     { ssr: false })
@@ -14,7 +13,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 const height = 76
 const labelOffset = -6
 
-const Test = (props) => {
+const JobCreatePost = (props) => {
   return (
     <div className={classes.container}>
       <div className={classes.header}>Post Job</div>
@@ -81,4 +80,4 @@ const Test = (props) => {
   );
 };
 
-export default Test;
+export default withAuth(JobCreatePost);
