@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ProjectPost from "../../../container/ProjectPost";
 import { projects } from "../../../const/mockProject";
+import withAuth from "../../../helpers/withAuth";
 
-export default function MyProjects() {
+function MyProjects() {
   const router = useRouter();
   function nextPagehandler() {
     router.push("/Profile");
@@ -33,3 +34,5 @@ export default function MyProjects() {
     </div>
   );
 }
+
+export default withAuth(MyProjects);

@@ -13,6 +13,7 @@
     "@mui/material": "^5.4.1",
     "@mui/styles": "^5.4.2",
     "bootstrap": "^3.4.1",
+    "dotenv": "^16.0.0",
     "draft-js": "^0.11.7",
     "firebase": "^9.6.10",
     "next": "latest",

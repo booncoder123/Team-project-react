@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { Typography } from "@mui/material";
 export default function FeedDropDown(props) {
-  console.log(props.p);
+  // console.log(props.p);
   const classes = useStyles(); 
   const [page, setPage] = React.useState(props.p);
   const router = useRouter();

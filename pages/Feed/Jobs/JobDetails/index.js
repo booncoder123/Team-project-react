@@ -3,8 +3,9 @@ import FeatureDropDown from "/container/Feed/FeatureDropDown";
 import JobDetailContainer from "../../../../container/JobDetail"
 import { useState } from "react";
 import Layout from "../../../../components/Layout/Jobs";
+import withAuth from "../../../helpers/withAuth";
 
-export default function JobDetail() {
+function JobDetail() {
 const [postMessage, setPostMessage] = useState("");
 const [type, setType] = useState(0)
     return(
@@ -16,3 +17,5 @@ const [type, setType] = useState(0)
       </div>
     );
 }
+
+export default withAuth(JobDetail);

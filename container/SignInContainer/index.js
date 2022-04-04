@@ -19,11 +19,11 @@ export default function SignInContainer() {
       <div className={classes.input}>
         <SignInInput/>
 
-        <div className={classes.logos}>
+        {/* <div className={classes.logos}>
           <SocialMediaLogo source="/SignIn/googleIcon.svg" />
           <SocialMediaLogo source="/SignIn/FacebookIcon.svg" />
           <SocialMediaLogo source="/SignIn/appleIcon.svg" />
-        </div>
+        </div> */}
 
         <div className={classes.link}>
           <div

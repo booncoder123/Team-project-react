@@ -1,5 +1,4 @@
 .container {
-  
   background: var(--neural);
   /* display: flex;
   flex-direction: column; */
@@ -8,83 +7,97 @@
   /* height:30vh; */
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
 .profileImage {
   position: absolute;
   left: 50%;
-  display:flex;
+  display: flex;
   transform: translate(-50%, -50%);
 }
 
-.addPhotoIcon{
-    position: absolute;
-    background-color: var(--neutral);
-    left: 58%;
-    padding:3px;
-    border-radius: 50%;
-    filter: drop-shadow(2px 3px 3px var(--dark));
-
+.addPhotoIcon {
+  position: absolute;
+  background-color: var(--neutral);
+  left: 58%;
+  padding: 3px;
+  border-radius: 50%;
+  filter: drop-shadow(2px 3px 3px var(--dark));
 }
 .content {
   background: var(--secondary-dark);
   font-family: Roboto Bold;
-  margin-top:5vh;
+  margin-top: 5vh;
   width: 100%;
   height: 90vh;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
 }
 
-
-.name{
-    display: flex;
-    gap:10px;
-    flex-direction: row;
-    justify-content: center;
-    padding:80px 50px 10px 50px;
-    color: var(--secondary-light);
-    font-size: 30px;
-
+.name {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  justify-content: center;
+  padding: 80px 50px 10px 50px;
+  color: var(--secondary-light);
+  font-size: 30px;
 }
-.selection{
-    display: flex;
-    flex-direction: column;
-    gap:25px;
-    margin:35px;    
+.selection {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: 35px;
 }
 
-.savedItems{
-    display:flex;
-    flex-direction: column;
-    background-color: var(--neutral);
-    align-items:flex-start;
-    justify-content: flex-end;
-    padding :40px;
-    border-radius: 10px;
-    height: 180px;
+.savedItems {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--neutral);
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 40px;
+  border-radius: 10px;
+  height: 180px;
 }
 
-.savedItems button{
-    background-color: var(--orange);
-    color: var(--secondary-light);
-    border:none;
-    padding:15px;
-    font-size: 15px;
-    border-radius: 10px;
+.savedItems button {
+  background-color: var(--orange);
+  color: var(--secondary-light);
+  border: none;
+  padding: 15px;
+  font-size: 15px;
+  border-radius: 10px;
 }
 
-.type{
-    display: flex;
-    background-color: var(--neutral);
-    border-radius: 10px;
-    height: 45px;
-    align-items: center;
-    padding:10px;
+.type {
+  display: flex;
+  background-color: var(--neutral);
+  border-radius: 10px;
+  height: 45px;
+  align-items: center;
+  padding: 10px;
 }
 
-.arrow{
-    display: flex;
-    justify-content: flex-end;
-    align-content: flex-end;
-    flex-grow: 1;
+.arrow {
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+  flex-grow: 1;
+}
 
+.logout {
+  padding-top: 35px;
+  margin-left: auto;
+  margin-right: 30px;
+}
+.button {
+  color: var(--secondary-light);
+  background-color: var(--secondary-dark);
+  border-radius: 5px;
+  padding:10px;
+  border: none;
 }

@@ -15,7 +15,6 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import auth from "../../firebase";
 
-
 export default function SignInput() {
   const auth = getAuth();
   const router = useRouter();
@@ -29,17 +28,16 @@ export default function SignInput() {
   };
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    router.push("/Feed/Discussions");
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage);
-  });
-    
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        router.push("/Feed/Discussions");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
   };
 
   return (
@@ -68,6 +66,7 @@ export default function SignInput() {
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
             <PasswordIcon sx={{ color: "#ff8a00", marginRight: "1rem" }} />
             <Input
+              type="password"
               fullWidth
               placeholder="password"
               required={true}
@@ -76,11 +75,10 @@ export default function SignInput() {
             />
           </Box>
         </FormControl>
-
       </div>
       <div className={classes.button} onClick={handleSubmit}>
-          <CircleButton name="Sign In"/>
-        </div>
+        <CircleButton name="Sign In" />
+      </div>
     </div>
   );
 }
