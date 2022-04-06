@@ -8,11 +8,12 @@ import MailIcon from "@mui/icons-material/MailOutlineOutlined";
 import PasswordIcon from "@mui/icons-material/HttpsOutlined";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 export default function SignUpInput() {
-  const auth = getAuth();
+  // const auth = getAuth();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,27 +24,25 @@ export default function SignUpInput() {
   };
   const handleUsername = (event) => {
     setUsername(event.target.value);
-  }
+  };
   const handlePassword = (event) => {
     setPassword(event.target.value);
   };
   const handleSubmit = (event) => {
     createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    user.displayName  = username;
-    console.log(user);
-    router.push("/Feed/Discussions");
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage);
-  });
-
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        user.displayName = username;
+        console.log(user);
+        router.push("/Feed/Discussions");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
   };
-
 
   return (
     <div>
@@ -68,12 +67,13 @@ export default function SignUpInput() {
         </Box>
 
         <Box
-         sx={{
-          display: "flex",
-          alignItems: "flex-end",
-          marginBottom: "3rem",
-        }}>
-          <AssignmentIndIcon  sx={{ color: "#ff8a00", marginRight: "1rem" }}/>
+          sx={{
+            display: "flex",
+            alignItems: "flex-end",
+            marginBottom: "3rem",
+          }}
+        >
+          <AssignmentIndIcon sx={{ color: "#ff8a00", marginRight: "1rem" }} />
           <Input
             fullWidth
             id="name"
@@ -83,7 +83,6 @@ export default function SignUpInput() {
             required={true}
             onChange={handleUsername}
           />
-
         </Box>
 
         <FormControl style={{ width: "75vw" }} variant="standard">
@@ -99,11 +98,10 @@ export default function SignUpInput() {
             />
           </Box>
         </FormControl>
-        
       </div>
       <div className={classes.button} onClick={handleSubmit}>
-          <CircleButton name="Sign Up"/>
-        </div>
+        <CircleButton name="Sign Up" />
+      </div>
     </div>
   );
 }
