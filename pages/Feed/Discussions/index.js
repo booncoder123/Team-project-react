@@ -4,9 +4,9 @@ import DiscussionPost from "../../../container/DiscussionPost";
 import Discussion from "../../../container/Discussion";
 import { useState } from "react";
 import Layout from "../../../components/Layout/Feed";
-import withAuth from "../../../helpers/withAuth"
+import withAuth from "../../../helpers/withAuth";
 
-function Discussions() {
+function Discussions(props) {
   const [postMessage, setPostMessage] = useState("");
   return (
     <Layout>
@@ -25,3 +25,9 @@ function Discussions() {
   );
 }
 export default withAuth(Discussions);
+
+export async function getServerSideProps(context) {
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}

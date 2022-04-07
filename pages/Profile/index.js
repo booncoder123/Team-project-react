@@ -7,9 +7,11 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useRouter } from "next/router";
 import { auth, firebase } from "../../firebase";
 import withAuth from "../../helpers/withAuth";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
+import { parseCookies } from "../../helpers/cookie";
 
-function Profile() {
+function Profile(props) {
+  console.log(props);
   const router = useRouter();
   function handleLogout() {
     auth
@@ -31,12 +33,16 @@ function Profile() {
   return (
     <div className={classes.container}>
       <div className={classes.header}>
-        <div><FeatureDropDown /></div>
-      <div className={classes.logout}>
-        <button className={classes.button} onClick={handleLogout}><LogoutIcon/></button>
+        <div>
+          <FeatureDropDown />
+        </div>
+        <div className={classes.logout}>
+          <button className={classes.button} onClick={handleLogout}>
+            <LogoutIcon />
+          </button>
         </div>
       </div>
-      
+
       <div className={classes.content}>
         <div className={classes.profileImage}>
           <Avatar
@@ -91,16 +97,30 @@ function Profile() {
               />
             </div>
           </div>
-          
         </div>
-
-       
-
-        
       </div>
-      
     </div>
   );
 }
 
 export default withAuth(Profile);
+
+export async function getServerSideProps({ req }) {
+  try {
+    const cookies = parseCookies(req);
+    const { token } = cookies;
+
+    //? call api
+    // const storeDetail = await Store.get({
+    //   type: Store.GET_STORE_DETAIL,
+    //   token,
+    // });
+
+    return {
+      props: { token }, // will be passed to the page component as props
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
+}

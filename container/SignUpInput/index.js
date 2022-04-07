@@ -11,12 +11,30 @@ import { useState } from "react";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import User from "../../lib/api/user";
 
 export default function SignUpInput() {
   // const auth = getAuth();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const postDataToDatabase = async (token) => {
+    try {
+      const result = await User.post({
+        type: User.CREATE_USER,
+        body: {
+          firstName: "Boon",
+          lastName: "Plaisub",
+          username: "Booncoder123",
+        },
+        token,
+      });
+      console.log("Result", result);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   const router = useRouter();
   const handleEmail = (event) => {
@@ -31,10 +49,12 @@ export default function SignUpInput() {
   const handleSubmit = (event) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
+        // Signed in user successfully  login
+        const token = userCredential.user.accessToken;
         const user = userCredential.user;
         user.displayName = username;
         console.log(user);
+        postDataToDatabase(token);
         router.push("/Feed/Discussions");
       })
       .catch((error) => {
