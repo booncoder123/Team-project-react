@@ -7,9 +7,20 @@ import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
 import Post from "../../../lib/api/post";
 import { parseCookies } from "../../../helpers/cookie";
-
+import {useEffect} from "react";
 function Discussions(props) {
   const [postMessage, setPostMessage] = useState("");
+  // useEffect(async () => {
+  //   try {
+  //     const discussions = await Post.get({
+  //       type: Post.GET_DISCUSSIONS,
+  //       token,
+  //     });
+  //     console.log("discussions", discussions);
+  //   } catch (error) {
+  //     console.log("Errorrr", error);
+  //   }
+  // }, []);
   console.log(props);
   return (
     <Layout>
@@ -46,4 +57,5 @@ export async function getServerSideProps({ req }) {
       props: {error: error.data, token},
     };
   }
+  return {props: {}}
 }
