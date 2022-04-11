@@ -31,19 +31,20 @@ export default withAuth(Discussions);
 
 export async function getServerSideProps({ req }) {
   const cookies = parseCookies(req);
-    const { token } = cookies;
+  const { token } = cookies;
   try {
-    
     const discussions = await Post.get({
       type: Post.GET_DISCUSSIONS,
       token,
     });
+    console.log(discussions);
     return {
       props: { token, discussions: discussions.data },
     };
   } catch (error) {
-    return {
-      props: {error: error.data, token},
-    };
+    console.log(error);
   }
+  return {
+    props: {},
+  };
 }
