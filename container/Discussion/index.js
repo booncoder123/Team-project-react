@@ -5,11 +5,12 @@ import Image from "next/image";
 
 export default function Discussion(props) {
   const {title,images,like,comment,name,time} = props;
+  console.log(images)
     return (
       <div className={classes.Discussion}>
         <ProfileTag name={name} time={time}/>
         <div className={classes.heading1}>{title}</div>
-      { images  &&  <img src={images[0]} className={classes.img}/>}
+      { images  &&  <img src={"https://se-community-2022.s3.ap-southeast-1.amazonaws.com/" + images} className={classes.img}/>}
 
         <div className={classes.ActivityButton}>
   
