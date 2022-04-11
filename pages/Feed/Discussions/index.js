@@ -5,17 +5,20 @@ import Discussion from "../../../container/Discussion";
 import { useState } from "react";
 import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
+import Post from "../../../lib/api/post";
+import { parseCookies } from "../../../helpers/cookie";
 
 function Discussions(props) {
   const [postMessage, setPostMessage] = useState("");
+  console.log(props);
   return (
     <Layout>
       <DiscussionPost value={postMessage} setValue={setPostMessage} />
-      {discussions.map((discussion) => {
+      {props.discussions.data.map((discussion) => {
         return (
           <Discussion
-            title={discussion.title}
-            images={discussion.images}
+            title={discussion.description}
+            images={discussion.images[0]}
             like={discussion.like}
             comment={discussion.comment}
           />
@@ -26,8 +29,21 @@ function Discussions(props) {
 }
 export default withAuth(Discussions);
 
-export async function getServerSideProps(context) {
-  return {
-    props: {}, // will be passed to the page component as props
-  };
+export async function getServerSideProps({ req }) {
+  const cookies = parseCookies(req);
+    const { token } = cookies;
+  try {
+    
+    const discussions = await Post.get({
+      type: Post.GET_DISCUSSIONS,
+      token,
+    });
+    return {
+      props: { token, discussions: discussions.data },
+    };
+  } catch (error) {
+    return {
+      props: {error: error.data, token},
+    };
+  }
 }
