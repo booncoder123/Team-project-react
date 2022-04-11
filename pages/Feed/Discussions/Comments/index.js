@@ -3,8 +3,7 @@ import Comment from "../../../../container/Feed/Comment";
 import { useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import TextField from "../../../../components/TextField";
-import withAuth from "../../../helpers/withAuth";
-
+import withAuth from "../../../../helpers/withAuth";
 function Comments() {
  
   return (
