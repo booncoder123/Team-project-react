@@ -23,6 +23,7 @@ export default function ForgetPassword() {
       })
       .catch(function (error) {
         // An error happened.
+        //handle error
         alert(error);
       });
   };
