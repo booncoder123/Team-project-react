@@ -6,7 +6,9 @@ import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
 import SearchBar from "../../../components/SearchBar";
 import Dropdown from "../../../components/Dropdown";
-function JobDetails() {
+import Jobs from "../../../lib/api/jobs";
+import { parseCookies } from "../../../helpers/cookie";
+function JobDetails(props) {
   const [postMessage, setPostMessage] = useState("");
   return (
     <Layout>
@@ -20,13 +22,13 @@ function JobDetails() {
         </div>
        
       </div>
-      {discussions.map((discussion) => {
+      {props.jobs.data.map((discussion) => {
         return (
           <JobPost
-            title={discussion.title}
-            images={discussion.images}
-            like={discussion.like}
-            comment={discussion.comment}
+            companyName = {discussion.companyName}
+            jobTitle = {discussion.title}
+            photo={discussion.images[0]}
+            jobIntro={discussion.description}
           />
         );
       })}
@@ -35,3 +37,21 @@ function JobDetails() {
 }
 
 export default withAuth(JobDetails);
+
+export async function getServerSideProps({ req }) {
+  const cookies = parseCookies(req);
+  const { token } = cookies;
+  try {
+    const jobs = await Jobs.get({
+      type: Jobs.GET_JOBS,
+      token,
+    });
+    console.log(jobs);
+    return {
+      props: { token, jobs: jobs.data },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
+}
