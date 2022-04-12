@@ -3,22 +3,25 @@ import Image from "next/image";
 import Avatar from "@mui/material/Avatar";
 import TextField from "../../components/TextField";
 export default function JobPost(props) {
-  const { value, setValue } = props;
+  // const { value, setValue } = props;
 
   return (
     <div className={classes.JobPost}>
-      <div className={classes.logo}>123</div>
+      <div className={classes.logo}>
+        <img
+          src={
+            "https://se-community-2022.s3.ap-southeast-1.amazonaws.com/" +
+            props.photo
+          }
+          width="35"
+          height="35"
+        />
+      </div>
       <div className={classes.content}>
-        <div className={classes.jobTitle}>Agoda.com</div>
-        <div className={classes.jobIntro}>
-          Associate Software Engineer, Back End team
-        </div>
-        <div className={classes.jobDetail}>
-          Agoda is an online travel booking platform for accommodations,
-          flights, and more. We build and deploy cutting-edge technology that
-          connects travelers with more than 2.5 million accommodations globally.
-          Based in Asia...
-        </div>
+        {/* companyname */}
+        <div className={classes.companyName}>{props.companyName}</div>
+        <div className={classes.jobTitle}>{props.jobTitle}</div>
+        <div className={classes.jobIntro}>{props.jobIntro}</div>
         <div></div>
       </div>
     </div>
