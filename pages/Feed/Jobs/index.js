@@ -3,10 +3,10 @@ import { discussions } from "../../../const/mockUp.js";
 import JobPost from "../../../container/JobPost";
 import { useState } from "react";
 import Layout from "../../../components/Layout/Feed";
-
+import withAuth from "../../../helpers/withAuth";
 import SearchBar from "../../../components/SearchBar";
 import Dropdown from "../../../components/Dropdown";
-export default function Discussions() {
+function JobDetails() {
   const [postMessage, setPostMessage] = useState("");
   return (
     <Layout>
@@ -33,3 +33,5 @@ export default function Discussions() {
     </Layout>
   );
 }
+
+export default withAuth(JobDetails);

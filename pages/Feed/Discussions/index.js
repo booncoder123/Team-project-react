@@ -4,16 +4,32 @@ import DiscussionPost from "../../../container/DiscussionPost";
 import Discussion from "../../../container/Discussion";
 import { useState } from "react";
 import Layout from "../../../components/Layout/Feed";
-export default function Discussions() {
+import withAuth from "../../../helpers/withAuth";
+import Post from "../../../lib/api/post";
+import { parseCookies } from "../../../helpers/cookie";
+import { useEffect } from "react";
+function Discussions(props) {
   const [postMessage, setPostMessage] = useState("");
+  // useEffect(async () => {
+  //   try {
+  //     const discussions = await Post.get({
+  //       type: Post.GET_DISCUSSIONS,
+  //       token,
+  //     });
+  //     console.log("discussions", discussions);
+  //   } catch (error) {
+  //     console.log("Errorrr", error);
+  //   }
+  // }, []);
+  console.log(props);
   return (
     <Layout>
       <DiscussionPost value={postMessage} setValue={setPostMessage} />
-      {discussions.map((discussion) => {
+      {props.discussions.data.map((discussion) => {
         return (
           <Discussion
-            title={discussion.title}
-            images={discussion.images}
+            title={discussion.description}
+            images={discussion.images[0]}
             like={discussion.like}
             comment={discussion.comment}
           />
@@ -21,4 +37,23 @@ export default function Discussions() {
       })}
     </Layout>
   );
+}
+export default withAuth(Discussions);
+
+export async function getServerSideProps({ req }) {
+  const cookies = parseCookies(req);
+  const { token } = cookies;
+  try {
+    const discussions = await Post.get({
+      type: Post.GET_DISCUSSIONS,
+      token,
+    });
+    console.log(discussions);
+    return {
+      props: { token, discussions: discussions.data },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
 }

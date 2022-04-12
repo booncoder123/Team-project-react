@@ -2,8 +2,9 @@ import classes from "./index.module.css";
 import Comment from "../../../../container/Feed/Comment";
 import { useState } from "react";
 import Avatar from '@mui/material/Avatar';
-import TextField from "../../../../components/TextField"
-export default function Comments() {
+import TextField from "../../../../components/TextField";
+import withAuth from "../../../../helpers/withAuth";
+function Comments() {
  
   return (
    <div className={classes.container}>
@@ -36,3 +37,5 @@ export default function Comments() {
    </div>
   );
 }
+
+export default withAuth(Comments);

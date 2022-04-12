@@ -11,37 +11,37 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import MailIcon from "@mui/icons-material/MailOutlineOutlined";
 import PasswordIcon from "@mui/icons-material/HttpsOutlined";
 import { useRouter } from "next/router";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import auth from "../../firebase";
 
 export default function SignInput() {
-  const [values, setValues] = React.useState({
-    password: "",
-    showPassword: false,
-  });
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
+  const auth = getAuth();
   const router = useRouter();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    router.push("/Feed/Discussions");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
   };
-
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+  };
+  const handleSubmit = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        router.push("/Feed/Discussions");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <div>
         <Box
           sx={{
@@ -58,40 +58,27 @@ export default function SignInput() {
             type="email"
             variant="standard"
             required={true}
+            onChange={handleEmail}
           />
         </Box>
-       
 
         <FormControl style={{ width: "75vw" }} variant="standard">
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
             <PasswordIcon sx={{ color: "#ff8a00", marginRight: "1rem" }} />
             <Input
+              type="password"
               fullWidth
               placeholder="password"
               required={true}
               id="password"
-              type={values.showPassword ? "text" : "password"}
-              value={values.password}
-              onChange={handleChange("password")}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
+              onChange={handlePassword}
             />
           </Box>
         </FormControl>
-        
       </div>
-      <div className={classes.button}>
-          <CircleButton name="Sign In"/>
-        </div>
-    </form>
+      <div className={classes.button} onClick={handleSubmit}>
+        <CircleButton name="Sign In" />
+      </div>
+    </div>
   );
 }

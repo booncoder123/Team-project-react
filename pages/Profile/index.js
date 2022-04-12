@@ -5,15 +5,43 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useRouter } from "next/router";
-export default function Profile() {
+import { auth, firebase } from "../../firebase";
+import withAuth from "../../helpers/withAuth";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { parseCookies } from "../../helpers/cookie";
+
+function Profile(props) {
+  console.log(props);
   const router = useRouter();
-  function nextPagehandler(pageUrl){
+  function handleLogout() {
+    auth
+      .signOut()
+      .then(function () {
+        router.push("/");
+        alert("Logout successful");
+      })
+      .catch(function (error) {
+        alert("OOps something went wrong check your console");
+        console.log(err);
+      });
+  }
+
+  function nextPagehandler(pageUrl) {
     router.push(pageUrl);
   }
 
   return (
     <div className={classes.container}>
-      <FeatureDropDown />
+      <div className={classes.header}>
+        <div>
+          <FeatureDropDown />
+        </div>
+        <div className={classes.logout}>
+          <button className={classes.button} onClick={handleLogout}>
+            <LogoutIcon />
+          </button>
+        </div>
+      </div>
 
       <div className={classes.content}>
         <div className={classes.profileImage}>
@@ -33,11 +61,13 @@ export default function Profile() {
             <EditIcon />
           </div>
         </div>
-        {/* saved items */}
         <div className={classes.selection}>
           <div className={classes.savedItems}>
             <div>
-              <button onClick={() => nextPagehandler("/Profile/MySavedItems")}> Saved Items</button>
+              <button onClick={() => nextPagehandler("/Profile/MySavedItems")}>
+                {" "}
+                Saved Items
+              </button>
             </div>
           </div>
           <div className={classes.type}>
@@ -71,4 +101,26 @@ export default function Profile() {
       </div>
     </div>
   );
+}
+
+export default withAuth(Profile);
+
+export async function getServerSideProps({ req }) {
+  try {
+    const cookies = parseCookies(req);
+    const { token } = cookies;
+
+    //? call api
+    // const storeDetail = await Store.get({
+    //   type: Store.GET_STORE_DETAIL,
+    //   token,
+    // });
+
+    return {
+      props: { token }, // will be passed to the page component as props
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
 }

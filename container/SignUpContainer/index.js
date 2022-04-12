@@ -10,11 +10,11 @@ export default function SignUpContainer() {
       <div className={classes.input}>
         <SignUpInput/>
 
-        <div className={classes.logos}>
+        {/* <div className={classes.logos}>
           <SocialMediaLogo source="/SignIn/googleIcon.svg" />
           <SocialMediaLogo source="/SignIn/FacebookIcon.svg" />
           <SocialMediaLogo source="/SignIn/appleIcon.svg" />
-        </div>
+        </div> */}
       </div>
     </div>
   );

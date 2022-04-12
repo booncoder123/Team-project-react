@@ -1,9 +1,3 @@
-// export default function CreateProject() {
-//     return(
-//         <div>This is create project page</div>
-//     );
-// }
-
 import classes from "./index.module.css";
 import TextField from "../../../components/TextField"
 import Dropdown from "../../../components/Dropdown";
@@ -11,6 +5,8 @@ import RectangularButton from "../../../components/RectangularButton";
 import Avatar from '@mui/material/Avatar';
 import FeedDropDown from "../../../components/FeedDropDown";
 import { useState,useEffect } from 'react';
+import withAuth from "../../../helpers/withAuth";
+
 import dynamic from 'next/dynamic';
 const Editor = dynamic(
     () => import('react-draft-wysiwyg').then(mod => mod.Editor),
@@ -20,7 +16,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 const height = 76
 const labelOffset = -6
 
-const Test = (props) => {
+const CreateProject = (props) => {
   return (
     <div className={classes.container}>
       <div className={classes.header}>Post Project</div>
@@ -93,4 +89,4 @@ const Test = (props) => {
   );
 };
 
-export default Test;
+export default withAuth(CreateProject);
