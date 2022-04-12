@@ -20,6 +20,7 @@ function NewsDetails(props) {
             images={discussion.images}
             like={discussion.like}
             comment={discussion.comment}
+            user={discussion.user}
           />
         );
       })}

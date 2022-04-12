@@ -23,9 +23,7 @@ export default function SignUpInput() {
       const result = await User.post({
         type: User.CREATE_USER,
         body: {
-          firstName: "Boon",
-          lastName: "Plaisub",
-          username: "Booncoder123",
+          username: username,
         },
         token,
       });

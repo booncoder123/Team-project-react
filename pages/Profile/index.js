@@ -11,7 +11,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { parseCookies } from "../../helpers/cookie";
 
 function Profile(props) {
-  console.log(props);
+  // console.log(props);
   const router = useRouter();
   function handleLogout() {
     auth

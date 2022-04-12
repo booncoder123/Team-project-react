@@ -21,7 +21,7 @@ function Discussions(props) {
   //     console.log("Errorrr", error);
   //   }
   // }, []);
-  console.log(props);
+
   return (
     <Layout>
       <DiscussionPost value={postMessage} setValue={setPostMessage} />
@@ -32,6 +32,8 @@ function Discussions(props) {
             images={discussion.images[0]}
             like={discussion.like}
             comment={discussion.comment}
+            user={discussion.user}
+
           />
         );
       })}
@@ -48,7 +50,7 @@ export async function getServerSideProps({ req }) {
       type: Post.GET_DISCUSSIONS,
       token,
     });
-    console.log(discussions);
+    // console.log(discussions);
     return {
       props: { token, discussions: discussions.data },
     };
