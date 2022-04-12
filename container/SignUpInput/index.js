@@ -14,7 +14,6 @@ import { auth } from "../../firebase";
 import User from "../../lib/api/user";
 
 export default function SignUpInput() {
-  // const auth = getAuth();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -24,9 +23,7 @@ export default function SignUpInput() {
       const result = await User.post({
         type: User.CREATE_USER,
         body: {
-          firstName: "Boon",
-          lastName: "Plaisub",
-          username: "Booncoder123",
+          username: username,
         },
         token,
       });

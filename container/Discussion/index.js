@@ -5,11 +5,11 @@ import Image from "next/image";
 import ShowMoreText from "react-show-more-text";
 
 export default function Discussion(props) {
-  const { title, images, like, comment } = props;
-  console.log(images);
+  const { title, images, like, comment, user } = props;
+  // console.log(user)
   return (
     <div className={classes.Discussion}>
-      <ProfileTag name={name} />
+      <ProfileTag name={user.username} photo={user.photoURL}/>
       <div className={classes.heading1}>
       <ShowMoreText
                 more={<span style={{ color: "#ff8a00" }}>Show More</span>}
