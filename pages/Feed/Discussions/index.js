@@ -5,7 +5,7 @@ import Discussion from "../../../container/Discussion";
 import { useState } from "react";
 import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
-import Post from "../../../lib/api/post";
+import Post from "../../../lib/api/discussions";
 import { parseCookies } from "../../../helpers/cookie";
 import { useEffect } from "react";
 function Discussions(props) {
