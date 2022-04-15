@@ -9,7 +9,11 @@ const Test = (props) => {
   return (
     <div>
      <Editor
-        editorStyle={{}}
+        editorStyle={{
+          backgroundColor: ['white'],
+          height: ['120px'],
+          fontSize: 13,
+        }}
         toolbarStyle={{}}
         toolbar={{  
             options: ['link','image'],
