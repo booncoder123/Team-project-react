@@ -2,16 +2,26 @@ import classes from "./index.module.css";
 import { discussions } from "../../../const/mockUp.js";
 import JobPost from "../../../container/JobPost";
 import { useState } from "react";
+import {useRouter} from "next/router";
 import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
 import SearchBar from "../../../components/SearchBar";
 import Dropdown from "../../../components/Dropdown";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Jobs from "../../../lib/api/jobs";
 import { parseCookies } from "../../../helpers/cookie";
 function JobDetails(props) {
   const [postMessage, setPostMessage] = useState("");
+
+  const router = useRouter();
+  function nextPageHandler(pageUrl){
+    router.push(pageUrl);
+  }
   return (
     <Layout>
+      <div style={{ marginBottom: "10px" }} onClick={() => nextPageHandler("Jobs/JobCreatePost")}>
+          <AddCircleOutlineIcon fontSize="large" />
+      </div>
       <div className={classes.filter}>
         <div className={classes.Searchbar}>
           <SearchBar placeholder="Search..."/>
