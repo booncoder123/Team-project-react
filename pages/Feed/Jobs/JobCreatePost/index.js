@@ -80,6 +80,7 @@ const JobCreatePost = (props) => {
         className={classes.TextComponent}
           variant="outlined"
           value={values.position}
+          multi={true}
           // onChange={handlePositionInputChange}
           setValue={setValues}
           inputProps={{
