@@ -13,13 +13,13 @@ function ProjectDetail() {
   }
   return(
     <div className={classes.container}>
-      <div className={classes.title}>Quiz Space</div> 
+      <div className={classes.title}>Project Detail</div> 
       <div className={classes.banner}>
         <ArrowBackIosIcon sx={{ fontSize: 15 }} onClick={nextPagehandler} />
         Projects
       </div> 
       <div>
-        {/* <div className={classes.header}>Header</div> */}
+        <div className={classes.header}>Quiz Space</div>
         <div className={classes.introduction}>
           Quiz Space is a web-based examination system where quizzes are taken online i.e. through the internet or using a computer system.
         </div>
