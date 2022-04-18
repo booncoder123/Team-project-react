@@ -8,7 +8,8 @@ export default function RectangularButton(props) {
   };
   return (
 
-      <div className={classes.button} style={{ ...props.style }} onClick={nextPageHandler}>{props.name}</div>
+    // <div className={classes.button} style={{ ...props.style }} onClick={nextPageHandler}>{props.name}</div>
+    <div className={classes.button} style={{ ...props.style }} onClick={() => {props.onClick()}} >{props.name}</div>
 
   );
 }

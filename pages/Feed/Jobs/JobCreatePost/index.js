@@ -9,10 +9,12 @@ import Test from "../../../../components/Draft"
 import { parseCookies } from "../../../../helpers/cookie";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Jobs from "../../../../lib/api/jobs";
+ 
 
 
 const JobCreatePost = (props) => {
   // const {value,setValue} = props;
+
   const [values, setValues] = useState({
     company: "",
     position: "",
@@ -26,8 +28,8 @@ const JobCreatePost = (props) => {
 
   const postDataToDatabase = async (token) => {
     try {
-      const result = await User.post({
-        type: Jobs.CREATE_USER,
+      const result = await Jobs.post({
+        type: Jobs.CREATE_JOB,
         body: {
           companyName: values.company,
           title: values.position,
@@ -43,19 +45,29 @@ const JobCreatePost = (props) => {
     }
   };
 
+  // const handleSubmit = () => {
+  //   createUserWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       // Signed in user successfully  login
+  //       const token = userCredential.user.accessToken;
+  //       postDataToDatabase(token);
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       alert(errorMessage);
+  //     });
+  // };
+  const router = useRouter();
   const handleSubmit = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in user successfully  login
-        const token = userCredential.user.accessToken;
-        postDataToDatabase(token);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
-      });
-  };
+    // const token = userCredential.user.accessToken;
+    // postDataToDatabase(token);
+    console.log('***this is posting a job')
+    const tok = {props}
+    postDataToDatabase(tok.props);
+    // router.push("/Feed/Jobs");
+    
+    };
 
   return (
     <div className={classes.container}>
@@ -117,3 +129,16 @@ const JobCreatePost = (props) => {
 };
 
 export default withAuth(JobCreatePost);
+
+export async function getServerSideProps({ req }) {
+  const cookies = parseCookies(req);
+  const { token } = cookies;
+  try {
+    return {
+      props: { token },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
+}
