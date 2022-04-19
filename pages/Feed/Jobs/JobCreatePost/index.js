@@ -9,8 +9,7 @@ import Test from "../../../../components/Draft"
 import { parseCookies } from "../../../../helpers/cookie";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Jobs from "../../../../lib/api/jobs";
- 
-
+ import SingleImageUpload from "../../../../components/SingleImageUpload";
 
 const JobCreatePost = (props) => {
   // const {value,setValue} = props;
@@ -18,24 +17,41 @@ const JobCreatePost = (props) => {
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
   // const handleCompanyInputChange = (event) => {
   //   setValue({...values, company: event.target.value})
   // }
   // const handlePositionInputChange = (event) => {
   //   setValue({...values, company: event.target.value})
+
+
+
+    
+
   // }
 
   const postDataToDatabase = async (token) => {
     try {
+  
+      
+      console.log("image", image);
+      console.log("company", image);
+     const formData = new FormData();
+     formData.append("description", "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software");
+     formData.append("images", image);
+     formData.append("images", image);
+
+    //  {
+    //   companyName: company,
+    //   title: position,
+    //   images: formData,
+    //   types: "full-time",
+    //   description: "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software",
+    // }
+  
       const result = await Jobs.post({
         type: Jobs.CREATE_JOB,
-        body: {
-          companyName: company,
-          title: position,
-          images: [],
-          types: "full-time",
-          description: "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software",
-        },
+        body: formData,
         token,
       });
       console.log("Result", result);
@@ -78,7 +94,6 @@ const JobCreatePost = (props) => {
     const {token} = cookie
     console.log(token)
     postDataToDatabase(token);
-    // router.push("/Feed/Jobs");
     
     };
 
@@ -115,6 +130,7 @@ const JobCreatePost = (props) => {
             },
           }}
         />
+        <SingleImageUpload setImage={setImage}/>
       </div>
       <div className={classes.Dropdown}>
         <Dropdown placeholder="Type" />
