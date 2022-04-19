@@ -26,13 +26,16 @@ function Discussions(props) {
     <Layout>
       <DiscussionPost value={postMessage} setValue={setPostMessage} />
       {props.discussions.data.map((discussion) => {
+        console.log(discussion)
+
         return (
           <Discussion
             title={discussion.description}
             images={discussion.images[0]}
-            like={discussion.like}
-            comment={discussion.comment}
+            like={discussion.likes}
+            comment={discussion.comments.length}
             user={discussion.user}
+            id={discussion._id}
 
           />
         );
@@ -50,7 +53,7 @@ export async function getServerSideProps({ req }) {
       type: Post.GET_DISCUSSIONS,
       token,
     });
-    // console.log(discussions);
+
     return {
       props: { token, discussions: discussions.data },
     };
