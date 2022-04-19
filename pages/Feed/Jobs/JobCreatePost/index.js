@@ -7,9 +7,8 @@ import { useRouter } from "next/router";
 import withAuth from "../../../../helpers/withAuth"
 import Test from "../../../../components/Draft"
 import { parseCookies } from "../../../../helpers/cookie";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import Jobs from "../../../../lib/api/jobs";
- import SingleImageUpload from "../../../../components/SingleImageUpload";
+import SingleImageUpload from "../../../../components/SingleImageUpload";
 
 const JobCreatePost = (props) => {
   // const {value,setValue} = props;
@@ -23,11 +22,6 @@ const JobCreatePost = (props) => {
   // }
   // const handlePositionInputChange = (event) => {
   //   setValue({...values, company: event.target.value})
-
-
-
-    
-
   // }
 
   const postDataToDatabase = async (token) => {
@@ -36,10 +30,13 @@ const JobCreatePost = (props) => {
       
       console.log("image", image);
       console.log("company", image);
-     const formData = new FormData();
-     formData.append("description", "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software");
-     formData.append("images", image);
-     formData.append("images", image);
+
+      const formData = new FormData();
+      formData.append("companyName", "company A");
+      formData.append("title", "Position A");
+      formData.append("images", image);
+      formData.append("types", "full-time");
+      formData.append("description", "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software");
 
     //  {
     //   companyName: company,
@@ -138,7 +135,7 @@ const JobCreatePost = (props) => {
 
       <div>
         Job Detail
-        <Test/>
+        <Test defaultContent=""/>
       </div>
       <div className={classes.button}>
         <RectangularButton
