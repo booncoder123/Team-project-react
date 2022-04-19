@@ -74,7 +74,7 @@ export default function Discussion(props) {
       </div>
       <div className={classes.ActivityButton}>
         <LikeButton numLikes={like} onClicked={clickedLike} />
-        <CommentButton numComments={comment} />
+        <CommentButton numComments={comment} id={id} />
       </div>
     </div>
   );

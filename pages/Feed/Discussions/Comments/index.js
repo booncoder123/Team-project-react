@@ -11,17 +11,7 @@ function Comments() {
        <div className={classes.header}>Comment</div>
        <div className={classes.comments}>
        <Comment/>
-       <Comment/>
-       <Comment/>
-       <Comment/>
-       <Comment/>
-       <Comment/>
-       <Comment/>
-       <Comment/>
-       <Comment/>
-       <Comment/>
-       <Comment/>
-       <Comment/>
+       
        </div>
       
        <div className={classes.commentPanel}>
@@ -39,3 +29,22 @@ function Comments() {
 }
 
 export default withAuth(Comments);
+
+export async function getServerSideProps({ req }) {
+  const cookies = parseCookies(req);
+  const { token } = cookies;
+  try {
+    const discussions = await Post.get({
+      type: Post.GET_DISCUSSIONS,
+      token,
+    });
+
+    return {
+      props: { token, discussions: discussions.data },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
+}
+

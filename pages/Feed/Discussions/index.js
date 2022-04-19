@@ -26,7 +26,7 @@ function Discussions(props) {
     <Layout>
       <DiscussionPost value={postMessage} setValue={setPostMessage} />
       {props.discussions.data.map((discussion) => {
-        console.log(discussion)
+      
 
         return (
           <Discussion

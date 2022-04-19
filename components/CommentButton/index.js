@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 export default function CommentButton(props) {
     const router = useRouter();
     const nextPageHandler = () => {
-      router.push(`/Feed/Discussions/Comments`);
+      router.push(`/Feed/Discussions/Comments?postId=${props.id}`);
     };
     return (
         <div className={classes.reactButton}>
