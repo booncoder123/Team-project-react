@@ -9,7 +9,7 @@
     color: var(--neutral);
     border-radius: 10px;
     height: 3rem;
-    flex-direction: row;
     display: flex;
+
     /* top: -5vh; */
   }

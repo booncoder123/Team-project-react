@@ -6,7 +6,7 @@ export default function JobPost(props) {
   // const { value, setValue } = props;
 
   return (
-    <div className={classes.JobPost}>
+    <div className={classes.JobPost} onClick={()=>{props.onClick()}}>
       <div className={classes.logo}>
         <img
           src={
