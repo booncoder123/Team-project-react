@@ -25,24 +25,24 @@ const JobCreatePost = (props) => {
   //   setValue({...values, company: event.target.value})
   // }
 
-  const postDataToDatabase = async (token) => {
-    try {
-      const result = await Jobs.post({
-        type: Jobs.CREATE_JOB,
-        body: {
-          companyName: company,
-          title: position,
-          images: [],
-          types: "full-time",
-          description: "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software",
-        },
-        token,
-      });
-      console.log("Result", result);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+//   const postDataToDatabase = async (token) => {
+//     try {
+//       const result = await Jobs.post({
+//         type: Jobs.CREATE_JOB,
+//         body: {
+//           companyName: company,
+//           title: position,
+//           images: "",
+//           types: "full-time",
+//           description: "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software",
+//         },
+//         token,
+//       });
+//       console.log("Result", result);
+//     } catch (error) {
+//       console.log("error", error);
+//     }
+//   };
 
   // const handleSubmit = () => {
   //   createUserWithEmailAndPassword(auth, email, password)
@@ -70,14 +70,10 @@ const JobCreatePost = (props) => {
   const handleSubmit = () => {
     // const token = userCredential.user.accessToken;
     // postDataToDatabase(token);
-    
     console.log('***this is posting a job')
     console.log(company, position)
-    
-    const cookie = parseCookies()
-    const {token} = cookie
-    console.log(token)
-    postDataToDatabase(token);
+
+    // postDataToDatabase(props.token);
     // router.push("/Feed/Jobs");
     
     };
@@ -144,25 +140,19 @@ const JobCreatePost = (props) => {
 export default withAuth(JobCreatePost);
 
 export async function getServerSideProps({ req }) {
-  const cookies = parseCookies(req);
-  const { token } = cookies;
-  try {
-    const result = await Jobs.post({
-      type: Jobs.CREATE_JOB,
-      body: {
-        companyName: company,
-        title: position,
-        images: "",
-        types: "full-time",
-        description: "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software",
-      },
-      token,
-    });
-    return {
-      props: { token },
-    };
-  } catch (error) {
-    console.log(error);
+    const cookies = parseCookies(req);
+    const { token } = cookies;
+    try {
+      const discussions = await Post.get({
+        type: Post.GET_DISCUSSIONS,
+        token,
+      });
+      // console.log(discussions);
+      return {
+        props: { token, discussions: discussions.data },
+      };
+    } catch (error) {
+      console.log(error);
+    }
+    return { props: {} };
   }
-  return { props: {} };
-}
