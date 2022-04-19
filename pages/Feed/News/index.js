@@ -18,8 +18,8 @@ function NewsDetails(props) {
           <Discussion
             title={discussion.description}
             images={discussion.images}
-            like={discussion.like}
-            comment={discussion.comment}
+            like={discussion.likes}
+            comment={discussion.comments.length}
             user={discussion.user}
           />
         );
