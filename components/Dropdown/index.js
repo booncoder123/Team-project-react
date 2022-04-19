@@ -156,12 +156,14 @@ const useStyles = makeStyles(() => ({
 
 export default function Dropdown(props) {
   const classes = useStyles();
-  const { placeholder } = props;
+  const { placeholder, options, defaultValue } = props;
   return (
     <Autocomplete
       id="combo-box-demo"
       classes={classes}
-      options={top100Films}
+      options={options}
+      onChange={() => {}}
+      defaultValue={defaultValue}
       getOptionLabel={(option) => option.title}
       renderInput={(params) => {
         return (

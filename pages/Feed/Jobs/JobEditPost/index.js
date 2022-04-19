@@ -2,14 +2,12 @@ import classes from "./index.module.css";
 import TextField from "../../../../components/TextField";
 import Dropdown from "../../../../components/Dropdown";
 import RectangularButton from "../../../../components/RectangularButton";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from "next/router";
 import withAuth from "../../../../helpers/withAuth"
 import Test from "../../../../components/Draft"
 import { parseCookies } from "../../../../helpers/cookie";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import Jobs from "../../../../lib/api/jobs";
- 
 
 
 const JobCreatePost = (props) => {
@@ -18,6 +16,23 @@ const JobCreatePost = (props) => {
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
   const [description, setDescription] = useState("");
+
+  console.log('hellooo')
+  console.log(props.jobs.data.types)
+  const defaultType = {
+    title: props.jobs.data.types
+  };
+  const types = [
+    { title: "full-time" },
+    { title: "part-time" },
+    { title: "ta" },
+  ];
+  
+  const [typeInput, setTypeInput] = useState(defaultType);
+  const handleChange = event => {
+    setTypeInput(event.target.value);
+  };
+
   // const handleCompanyInputChange = (event) => {
   //   setValue({...values, company: event.target.value})
   // }
@@ -68,25 +83,21 @@ const JobCreatePost = (props) => {
     setDescription(event.target.value);
   };
   const handleSubmit = () => {
-    // const token = userCredential.user.accessToken;
-    // postDataToDatabase(token);
-    console.log('***this is posting a job')
-    console.log(company, position)
+    console.log('***this is editing a job')
 
-    // postDataToDatabase(props.token);
     // router.push("/Feed/Jobs");
     
     };
 
   return (
     <div className={classes.container}>
-      <div className={classes.header}>Post Job</div>
+      <div className={classes.header}>Edit Job</div>
       <div className={classes.commentPanel}>
         Company
         <TextField
           className={classes.TextComponent}
           variant="outlined"
-          value={company}
+          value={props.jobs.data.companyName}
           onChange={handleCompany}
           setValue={setCompany}
           inputProps={{
@@ -100,7 +111,7 @@ const JobCreatePost = (props) => {
         <TextField
         className={classes.TextComponent}
           variant="outlined"
-          value={position}
+          value={props.jobs.data.title}
           multi={true}
           onChange={handlePosition}
           setValue={setPosition}
@@ -113,19 +124,22 @@ const JobCreatePost = (props) => {
         />
       </div>
       <div className={classes.Dropdown}>
-        <Dropdown placeholder="Type" />
+        <Dropdown placeholder="Type" 
+        options={types} 
+        onChange={handleChange}
+        defaultValue={defaultType}/>
       </div>
 
       <div>
         Job Detail
-        <Test/>
+        <Test defaultContent={props.jobs.data.description}/>
       </div>
       <div className={classes.button}>
         <RectangularButton
           onClick={handleSubmit}
           style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
           url="/Feed/Jobs"
-          name="Post"
+          name="Save"
         />
         <RectangularButton
           style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
@@ -145,9 +159,12 @@ export async function getServerSideProps({ req }) {
     try {
       const jobs = await Jobs.get({
         type: Jobs.GET_JOB_BY_ID,
+        body: {
+            jobId: "625556952e14c600a7d53259",
+        },
         token,
       });
-      // console.log(discussions);
+      console.log(jobs);
       return {
         props: { token, jobs: jobs.data },
       };

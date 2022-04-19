@@ -1,14 +1,39 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect, createContext } from 'react';
+import React, { Component } from 'react'
+import { EditorState, ContentState, convertFromHTML } from "draft-js";
 import dynamic from 'next/dynamic';
+import { convertFromRaw, convertToRaw } from 'draft-js';
 const Editor = dynamic(
     () => import('react-draft-wysiwyg').then(mod => mod.Editor),
-    { ssr: false })
+    { ssr: false }
+)
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const Test = (props) => {
+  const { defaultContent } = props;
+
+  const state = {
+    editorState: EditorState.createWithContent(
+      ContentState.createFromBlockArray(
+        convertFromHTML(defaultContent)
+      )
+    )
+  };
+
+  const onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+    });
+    this.props.handleContent(
+        convertToRaw(editorState.getCurrentContent()
+    ));
+  };
+
+  const { editorState } = state;
   return (
     <div>
      <Editor
+        editorState={editorState}
         editorStyle={{
           backgroundColor: ['white'],
           height: ['120px'],

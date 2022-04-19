@@ -13,6 +13,12 @@ import { parseCookies } from "../../../helpers/cookie";
 function JobDetails(props) {
   const [postMessage, setPostMessage] = useState("");
 
+  const types = [
+    { title: "full-time" },
+    { title: "part-time" },
+    { title: "ta" },
+  ];
+
   const router = useRouter();
   function nextPageHandler(pageUrl){
     router.push(pageUrl);
@@ -27,7 +33,9 @@ function JobDetails(props) {
           <SearchBar placeholder="Search..."/>
         </div>
         <div className={classes.Dropdown}>
-          <Dropdown placeholder="Type" />
+          <Dropdown placeholder="Type"
+          options={types}
+          />
          
         </div>
        
