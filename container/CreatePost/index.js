@@ -68,3 +68,4 @@ const JobCreatePost = (props) => {
 };
 
 export default withAuth(JobCreatePost);
+

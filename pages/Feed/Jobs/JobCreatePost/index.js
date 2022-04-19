@@ -75,7 +75,7 @@ const JobCreatePost = (props) => {
     console.log(company, position)
     
     const cookie = parseCookies()
-    const {token} = cookie
+    const { token } = cookie
     console.log(token)
     postDataToDatabase(token);
     // router.push("/Feed/Jobs");
@@ -142,27 +142,3 @@ const JobCreatePost = (props) => {
 };
 
 export default withAuth(JobCreatePost);
-
-export async function getServerSideProps({ req }) {
-  const cookies = parseCookies(req);
-  const { token } = cookies;
-  try {
-    const result = await Jobs.post({
-      type: Jobs.CREATE_JOB,
-      body: {
-        companyName: company,
-        title: position,
-        images: "",
-        types: "full-time",
-        description: "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software",
-      },
-      token,
-    });
-    return {
-      props: { token },
-    };
-  } catch (error) {
-    console.log(error);
-  }
-  return { props: {} };
-}

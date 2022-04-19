@@ -143,13 +143,13 @@ export async function getServerSideProps({ req }) {
     const cookies = parseCookies(req);
     const { token } = cookies;
     try {
-      const discussions = await Post.get({
-        type: Post.GET_DISCUSSIONS,
+      const jobs = await Jobs.get({
+        type: Jobs.GET_JOB_BY_ID,
         token,
       });
       // console.log(discussions);
       return {
-        props: { token, discussions: discussions.data },
+        props: { token, jobs: jobs.data },
       };
     } catch (error) {
       console.log(error);
