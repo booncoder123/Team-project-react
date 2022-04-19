@@ -12,66 +12,25 @@ import Jobs from "../../../../lib/api/jobs";
 
 const JobCreatePost = (props) => {
   // const {value,setValue} = props;
+  const types = [
+    { value: "full-time" },
+    { value: "part-time" },
+    { value: "ta" },
+  ];
 
-  const [company, setCompany] = useState("");
-  const [position, setPosition] = useState("");
-  const [description, setDescription] = useState("");
-
-  console.log('hellooo')
-  console.log(props.jobs.data.types)
+  const defaultCompany = props.jobs.data.companyName;
+  const defaultPosition = props.jobs.data.title;
   const defaultType = {
     title: props.jobs.data.types
   };
-  const types = [
-    { title: "full-time" },
-    { title: "part-time" },
-    { title: "ta" },
-  ];
+  const defaultDescription = props.jobs.data.types;
+
   
+  const [company, setCompany] = useState(defaultCompany);
+  const [position, setPosition] = useState(defaultPosition);
+  const [description, setDescription] = useState("");
   const [typeInput, setTypeInput] = useState(defaultType);
-  const handleChange = event => {
-    setTypeInput(event.target.value);
-  };
-
-  // const handleCompanyInputChange = (event) => {
-  //   setValue({...values, company: event.target.value})
-  // }
-  // const handlePositionInputChange = (event) => {
-  //   setValue({...values, company: event.target.value})
-  // }
-
-//   const postDataToDatabase = async (token) => {
-//     try {
-//       const result = await Jobs.post({
-//         type: Jobs.CREATE_JOB,
-//         body: {
-//           companyName: company,
-//           title: position,
-//           images: "",
-//           types: "full-time",
-//           description: "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software",
-//         },
-//         token,
-//       });
-//       console.log("Result", result);
-//     } catch (error) {
-//       console.log("error", error);
-//     }
-//   };
-
-  // const handleSubmit = () => {
-  //   createUserWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       // Signed in user successfully  login
-  //       const token = userCredential.user.accessToken;
-  //       postDataToDatabase(token);
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       alert(errorMessage);
-  //     });
-  // };
+  
   const router = useRouter();
   const handleCompany = (event) => {
     setCompany(event.target.value);
@@ -82,11 +41,18 @@ const JobCreatePost = (props) => {
   const handleDescription = (event) => {
     setDescription(event.target.value);
   };
+  const handleType = event => {
+    setTypeInput(event.target.value);
+  };
+
   const handleSubmit = () => {
     console.log('***this is editing a job')
+    console.log(company, position, typeInput.value)
 
     // router.push("/Feed/Jobs");
-    
+    };
+  const handleCancel = () => {
+    router.push("/Feed/Jobs");
     };
 
   return (
@@ -97,7 +63,8 @@ const JobCreatePost = (props) => {
         <TextField
           className={classes.TextComponent}
           variant="outlined"
-          value={props.jobs.data.companyName}
+          value = {company}
+          // defaultValue={defaultCompany}
           onChange={handleCompany}
           setValue={setCompany}
           inputProps={{
@@ -111,7 +78,8 @@ const JobCreatePost = (props) => {
         <TextField
         className={classes.TextComponent}
           variant="outlined"
-          value={props.jobs.data.title}
+          value={position}
+          // defaultValue={defaultPosition}
           multi={true}
           onChange={handlePosition}
           setValue={setPosition}
@@ -125,9 +93,11 @@ const JobCreatePost = (props) => {
       </div>
       <div className={classes.Dropdown}>
         <Dropdown placeholder="Type" 
+        value={typeInput}
         options={types} 
-        onChange={handleChange}
-        defaultValue={defaultType}/>
+        onChange={handleType}
+        // defaultValue={defaultType}
+        />
       </div>
 
       <div>
@@ -138,12 +108,13 @@ const JobCreatePost = (props) => {
         <RectangularButton
           onClick={handleSubmit}
           style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
-          url="/Feed/Jobs"
+          // url="/Feed/Jobs"
           name="Save"
         />
         <RectangularButton
+          onClick={handleCancel}
           style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
-          url="/Feed/Jobs"
+          // url="/Feed/Jobs"
           name="Cancel"
         />
       </div>
