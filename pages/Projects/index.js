@@ -7,8 +7,10 @@ import { projects } from "../../const/mockProject";
 import {useRouter} from "next/router";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import withAuth from "../../helpers/withAuth";
+import Projects from "../../lib/api/projects";
+import {parseCookies} from "../../helpers/cookie"
 
-function Projects() {
+function ProjectsLanding() {
   const router = useRouter();
   // const createProjectHandler  = () => {
   //     router.push("/Projects/CreateProject");
@@ -56,4 +58,22 @@ function Projects() {
   );
 }
 
-export default withAuth(Projects);
+export default withAuth(ProjectsLanding);
+
+export async function getServerSideProps({ req }) {
+  const cookies = parseCookies(req);
+  const { token } = cookies;
+  try {
+    const projects = await Projects.get({
+      type: projects.GET_PROJECT,
+      token,
+    });
+
+    return {
+      props: { token, discussions: discussions.data },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
+}
