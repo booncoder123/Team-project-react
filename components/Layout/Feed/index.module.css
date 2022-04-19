@@ -8,7 +8,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 39px 0px 25px 25px;
+  padding: 39px 25px 25px 25px;
 }
 
 .listView {
