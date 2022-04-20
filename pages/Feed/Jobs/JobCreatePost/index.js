@@ -11,29 +11,53 @@ import Jobs from "../../../../lib/api/jobs";
 import SingleImageUpload from "../../../../components/SingleImageUpload";
 
 const JobCreatePost = (props) => {
-  // const {value,setValue} = props;
+  // const { input } = props;
+  const types = [
+    { title: "full-time" },
+    { title: "part-time" },
+    { title: "ta" },
+  ];
 
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
-  const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  // const handleCompanyInputChange = (event) => {
-  //   setValue({...values, company: event.target.value})
-  // }
-  // const handlePositionInputChange = (event) => {
-  //   setValue({...values, company: event.target.value})
-  // }
-
+  const [typeInput, setTypeInput] = useState("");
+  const [description, setDescription] = useState("");
+  
+  const router = useRouter();
+  const handleCompany = (event) => {
+    setCompany(event.target.value);
+  };
+  const handlePosition = (event) => {
+    setPosition(event.target.value);
+  };
+  const handleDescription = (event) => {
+    setDescription(event.target.value);
+  };
+  const handleType = event => {
+    setTypeInput(event.target.value);
+  };
+  const handleSubmit = () => {
+    // const token = userCredential.user.accessToken;
+    // postDataToDatabase(token);
+    
+    console.log('***this is posting a job')
+    console.log(company, position)
+    
+    const cookie = parseCookies()
+    const { token } = cookie
+    console.log(token)
+    postDataToDatabase(token);
+    
+  };
   const postDataToDatabase = async (token) => {
     try {
-  
-      
       console.log("image", image);
       console.log("company", image);
 
       const formData = new FormData();
-      formData.append("companyName", "company A");
-      formData.append("title", "Position A");
+      formData.append("companyName", company);
+      formData.append("title", position);
       formData.append("images", image);
       formData.append("types", "full-time");
       formData.append("description", "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software");
@@ -70,29 +94,8 @@ const JobCreatePost = (props) => {
   //       alert(errorMessage);
   //     });
   // };
-  const router = useRouter();
-  const handleCompany = (event) => {
-    setCompany(event.target.value);
-  };
-  const handlePosition = (event) => {
-    setPosition(event.target.value);
-  };
-  const handleDescription = (event) => {
-    setDescription(event.target.value);
-  };
-  const handleSubmit = () => {
-    // const token = userCredential.user.accessToken;
-    // postDataToDatabase(token);
-    
-    console.log('***this is posting a job')
-    console.log(company, position)
-    
-    const cookie = parseCookies()
-    const { token } = cookie
-    console.log(token)
-    postDataToDatabase(token);
-    
-    };
+  
+
 
   return (
     <div className={classes.container}>
@@ -130,12 +133,16 @@ const JobCreatePost = (props) => {
         <SingleImageUpload setImage={setImage}/>
       </div>
       <div className={classes.Dropdown}>
-        <Dropdown placeholder="Type" />
+        <Dropdown placeholder="Type" 
+        value={typeInput}
+        options={types} 
+        onChange={handleType}
+        />
       </div>
-
       <div>
         Job Detail
-        <Test defaultContent=""/>
+        <Test defaultContent=""
+        />
       </div>
       <div className={classes.button}>
         <RectangularButton
