@@ -9,26 +9,15 @@ import Post from "../../lib/api/discussions";
 import { parseCookies } from "../../helpers/cookie";
 
 export default function Discussion(props) {
-  const { title, images, like, comment, user, id } = props;
-  // const [counter, setCounter] = useState(props.like);
-  const counter = props.like
+  const { title, images, like, comment, user, id ,clicked,likers } = props;
+  const [counter, setCounter] = useState(props.like);
+  // const counter = props.like
   const cookie = parseCookies();
   const { token } = cookie;
-  const [clicked, setClicked] = useState(false);
-  const clickedLike = () => {
-    counter+=1
-    updateLike()
-    // if (!clicked) {
-    //   setCounter(counter + 1);
-    //   console.log("counter jaaaaa", counter)
-    //   updateLike();
-    //   setClicked(true);
-    // } else {
-    //   setCounter(counter - 1);
 
-    //   updateLike();
-    //   setClicked(false);
-    // }
+  const clickedLike = () => {
+  
+    updateLike()
   };
   const updateLike = async () => {
     try {
@@ -40,6 +29,7 @@ export default function Discussion(props) {
         },
         token,
       });
+      setCounter(result.data.data.likers.length);
     } catch (error) {
       console.log("error", error);
     }
@@ -69,7 +59,7 @@ export default function Discussion(props) {
         )}
       </div>
       <div className={classes.ActivityButton}>
-        <LikeButton numLikes={like} onClicked={clickedLike} />
+        <LikeButton numLikes={counter} onClicked={clickedLike} clicked={likers ? likers.includes(user._id): false} />
         <CommentButton numComments={comment} id={id} />
       </div>
     </div>

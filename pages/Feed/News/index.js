@@ -14,13 +14,17 @@ function NewsDetails(props) {
     <Layout>
     
       {props.news.data.map((discussion) => {
+        console.log("discussion", discussion);
         return (
           <Discussion
             title={discussion.description}
             images={discussion.images}
-            like={discussion.likes}
+            like={ discussion.likers ? discussion.likers.length : 0}
             comment={discussion.comments.length}
             user={discussion.user}
+            id={discussion._id}
+            likers={discussion.likers}
+            
           />
         );
       })}
