@@ -11,19 +11,22 @@ import Jobs from "../../../../lib/api/jobs";
 import SingleImageUpload from "../../../../components/SingleImageUpload";
 
 const JobCreatePost = (props) => {
-  // const { input } = props;
+  //Type Options
   const types = [
-    { title: "full-time" },
-    { title: "part-time" },
-    { title: "ta" },
-  ];
+    { label: "full-time" },
+    { label: "part-time" },
+    { label: "intern" },
+ ];
 
+  //Values and Set Values
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
   const [image, setImage] = useState(null);
-  const [typeInput, setTypeInput] = useState("");
   const [description, setDescription] = useState("");
-  
+  const [type, setType] = useState(null);
+  const [inputType, setInputType] = useState('');
+
+  //Functions
   const router = useRouter();
   const handleCompany = (event) => {
     setCompany(event.target.value);
@@ -34,13 +37,15 @@ const JobCreatePost = (props) => {
   const handleDescription = (event) => {
     setDescription(event.target.value);
   };
-  const handleType = event => {
-    setTypeInput(event.target.value);
-  };
+  const handleType = (event, newValue) => {
+    setType(newValue);
+  }
+  const handleInputType = (event, newInputValue) => {
+    setInputType(newInputValue);
+  }
+  // const handleSubmit2 = () => console.log(inputType);
+
   const handleSubmit = () => {
-    // const token = userCredential.user.accessToken;
-    // postDataToDatabase(token);
-    
     console.log('***this is posting a job')
     console.log(company, position)
     
@@ -48,28 +53,17 @@ const JobCreatePost = (props) => {
     const { token } = cookie
     console.log(token)
     postDataToDatabase(token);
-    
   };
+
   const postDataToDatabase = async (token) => {
     try {
-      console.log("image", image);
-      console.log("company", image);
-
       const formData = new FormData();
       formData.append("companyName", company);
       formData.append("title", position);
       formData.append("images", image);
-      formData.append("types", "full-time");
+      formData.append("types", inputType);
       formData.append("description", "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software");
 
-    //  {
-    //   companyName: company,
-    //   title: position,
-    //   images: formData,
-    //   types: "full-time",
-    //   description: "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software",
-    // }
-  
       const result = await Jobs.post({
         type: Jobs.CREATE_JOB,
         body: formData,
@@ -80,22 +74,6 @@ const JobCreatePost = (props) => {
       console.log("error", error);
     }
   };
-
-  // const handleSubmit = () => {
-  //   createUserWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       // Signed in user successfully  login
-  //       const token = userCredential.user.accessToken;
-  //       postDataToDatabase(token);
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       alert(errorMessage);
-  //     });
-  // };
-  
-
 
   return (
     <div className={classes.container}>
@@ -134,9 +112,14 @@ const JobCreatePost = (props) => {
       </div>
       <div className={classes.Dropdown}>
         <Dropdown placeholder="Type" 
-        value={typeInput}
-        options={types} 
+        options={types}
+        value={type}
+        setValue={setType}
         onChange={handleType}
+        inputValue={inputType}
+        setInputValue={setInputType}
+        onInputChange={handleInputType}
+        getOptionLabel={option => option.label}
         />
       </div>
       <div>

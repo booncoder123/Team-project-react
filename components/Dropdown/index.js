@@ -2,7 +2,7 @@ import React from "react";
 import TextField from '@mui/material/TextField';
 import Autocomplete from "@mui/material/Autocomplete";
 import { makeStyles } from '@mui/styles';
-
+import { useState } from 'react'
 import Box from "@mui/material/Box";
 
 
@@ -156,17 +156,30 @@ const useStyles = makeStyles(() => ({
 
 export default function Dropdown(props) {
   const classes = useStyles();
-  const { placeholder, options, value } = props;
+  // const { placeholder, options, propValue, propInputValue } = props;
+  const { placeholder, options, value, setValue, inputValue, setInputValue } = props;
+
+  // const [value, setValue] = useState(propValue);
+  // const [inputValue, setInputValue] = useState(propInputValue);
   return (
+    <div>
+      {/* <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
+      <div>{`inputValue: '${inputValue}'`}</div>
+      <br /> */}
     <Autocomplete
       id="combo-box-demo"
       classes={classes}
       options={options}
-      // options={top100Films}
-      onChange={() => {}}
-      // defaultValue={defaultValue}
+      // onChange={() => {}}
       value={value}
-      getOptionLabel={(option) => option.title}
+      onChange={(event, newValue) => {
+          setValue(newValue);
+      }}
+      inputValue={inputValue}
+      onInputChange={(event, newInputValue) => {
+        setInputValue(newInputValue);
+      }}
+      getOptionLabel={(option) => option.label}
       renderInput={(params) => {
         return (
           <TextField
@@ -183,10 +196,11 @@ export default function Dropdown(props) {
           {...props}
           style={{ fontFamily: "Roboto", fontSize:15 }}
         >
-          {option.title}
+          {option.label}
         </Box>
       )}
     />
+    </div>
   );
 }
 
