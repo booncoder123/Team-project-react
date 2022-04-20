@@ -3,27 +3,33 @@ import classes from "./index.module.css";
 import SearchBar from "../../components/SearchBar";
 import Dropdown from "../../components/Dropdown";
 import ProjectPost from "../../container/ProjectPost";
-import { projects } from "../../const/mockProject";
-import {useRouter} from "next/router";
+// import { projects } from "../../const/mockProject";
+import { useRouter } from "next/router";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import withAuth from "../../helpers/withAuth";
 import Projects from "../../lib/api/projects";
-import {parseCookies} from "../../helpers/cookie"
+import { parseCookies } from "../../helpers/cookie";
 
-function ProjectsLanding() {
+function ProjectsLanding(props) {
   const router = useRouter();
-  // const createProjectHandler  = () => {
-  //     router.push("/Projects/CreateProject");
-  // };
-  function nextPageHandler(pageUrl){
-    router.push(pageUrl);
-  }
+  const createProjectHandler = () => {
+    router.push("/Projects/CreateProject");
+  };
+  const nextPageHandler = (title) => {
+    router.push(`Projects/ProjectDetail?projectId=${title}`);
+  };
+  // function nextPageHandler(pageUrl){
+  //   router.push(pageUrl);
+  // }
   return (
     <div className={classes.container}>
       <div className={classes.heading}>
         <FeatureDropDown />
-        <div style={{ marginBottom: "10px" }} onClick={() => nextPageHandler("Projects/CreateProject")}>
-          <AddCircleOutlineIcon fontSize="large" />
+        <div style={{ marginBottom: "10px" }}>
+          <AddCircleOutlineIcon
+            fontSize="large"
+            onClick={createProjectHandler}
+          />
         </div>
       </div>
 
@@ -39,17 +45,21 @@ function ProjectsLanding() {
         </div>
       </div>
       <div className={classes.projects}>
-        {projects.map((project) => {
+        {props.projects.data.map((project) => {
+          console.log(project)
           return (
             <div onClick={() => nextPageHandler("Projects/ProjectDetail")}>
-            <ProjectPost
-              name={project.name}
-              intro={project.intro}
-              type={project.type}
-              year={project.year}
-              description={project.description}
-              images={project.images}
-            />
+              <ProjectPost
+                name={project.projectDetail.name}
+                intro={project.projectDetail.intro}
+                // type={project.projectDetail.type[0]}
+                // year={project.projectDetail.year[0]}
+                // description={project.projectDetail.projectDescription}
+                images={project.images[0]}
+                onClick={() => {
+                  nextPageHandler(project._id);
+                }}
+              />
             </div>
           );
         })}
@@ -65,12 +75,12 @@ export async function getServerSideProps({ req }) {
   const { token } = cookies;
   try {
     const projects = await Projects.get({
-      type: projects.GET_PROJECT,
+      type: Projects.GET_PROJECTS,
       token,
     });
 
     return {
-      props: { token, discussions: discussions.data },
+      props: { token, projects: projects.data },
     };
   } catch (error) {
     console.log(error);

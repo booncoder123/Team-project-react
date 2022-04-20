@@ -78,11 +78,11 @@ const CreateProject = (props) => {
       <div className={classes.button}>
         <RectangularButton
             style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
-            name="Post"
+            name="Post" url="/Projects"
         />
         <RectangularButton
             style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
-            name="Cancel"
+            name="Cancel" url="/Projects"
         />
       </div>
     </div>
