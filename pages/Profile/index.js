@@ -62,14 +62,14 @@ function Profile(props) {
           </div>
         </div>
         <div className={classes.selection}>
-          <div className={classes.savedItems}>
+          {/* <div className={classes.savedItems}>
             <div>
               <button onClick={() => nextPagehandler("/Profile/MySavedItems")}>
                 {" "}
                 Saved Items
               </button>
             </div>
-          </div>
+          </div> */}
           <div className={classes.type}>
             <div>My Discussions</div>
             <div className={classes.arrow}>
