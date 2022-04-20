@@ -21,8 +21,7 @@ export default function ProjectPost(props) {
             "https://se-community-2022.s3.ap-southeast-1.amazonaws.com/" +
             images
           }
-          width="90" 
-          height="70"
+       
           className={classes.images}
         />
       )}

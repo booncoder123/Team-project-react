@@ -17,7 +17,10 @@
     height:70px; */
     /* background-color: var(--primary); */
     border-radius: 5px;
+    object-fit: cover;
     flex:2;
+    width: 50px;
+    height: 200px;
 
   }
 
