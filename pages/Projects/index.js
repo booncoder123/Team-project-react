@@ -48,7 +48,7 @@ function ProjectsLanding(props) {
         {props.projects.data.map((project) => {
           console.log(project)
           return (
-            <div onClick={() => nextPageHandler("Projects/ProjectDetail")}>
+            <div>
               <ProjectPost
                 name={project.projectDetail.name}
                 intro={project.projectDetail.intro}
