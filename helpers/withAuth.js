@@ -12,7 +12,6 @@ const withAuth = (Component) => {
     }
     componentDidMount() {
       auth.onAuthStateChanged((authUser) => {
-        console.log("authUser here", authUser);
         if (authUser) {
           //   const accessToken = authUser.accessToken;
           //   sessionStorage.setItem("token", accessToken);

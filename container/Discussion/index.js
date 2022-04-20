@@ -11,11 +11,9 @@ import { parseCookies } from "../../helpers/cookie";
 export default function Discussion(props) {
   const { title, images, like, comment, user, id } = props;
   // const [counter, setCounter] = useState(props.like);
-  console.log(title,like)
   const counter = props.like
   const cookie = parseCookies();
   const { token } = cookie;
-  console.log(counter);
   const [clicked, setClicked] = useState(false);
   const clickedLike = () => {
     counter+=1
@@ -42,12 +40,10 @@ export default function Discussion(props) {
         },
         token,
       });
-      console.log("Result", result);
     } catch (error) {
       console.log("error", error);
     }
   };
-  console.log("likessss", like)
   return (
     <div className={classes.Discussion}>
       <ProfileTag name={user.username} photo={user.photoURL} />

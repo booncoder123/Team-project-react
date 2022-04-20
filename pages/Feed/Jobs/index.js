@@ -55,7 +55,6 @@ export async function getServerSideProps({ req }) {
       type: Jobs.GET_JOBS,
       token,
     });
-    console.log(jobs);
     return {
       props: { token, jobs: jobs.data },
     };

@@ -9,7 +9,6 @@ import { parseCookies } from "../../../../helpers/cookie";
 function JobDetail(props) {
   const [postMessage, setPostMessage] = useState("");
 
-  console.log("here ja", props);
 
   const [type, setType] = useState(0);
   return (
@@ -44,7 +43,6 @@ export async function getServerSideProps(context) {
         jobId,
       },
     });
-    console.log(jobs);
     return {
       props: { token, jobs: jobs.data },
     };
