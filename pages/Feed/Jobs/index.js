@@ -10,7 +10,8 @@ import Dropdown from "../../../components/Dropdown";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Jobs from "../../../lib/api/jobs";
 import { parseCookies } from "../../../helpers/cookie";
-import { useRouter } from "next/router";
+import { push } from "draft-js/lib/EditorState";
+import JobCreatePost from "./JobCreatePost";
 function JobDetails(props) {
   const [postMessage, setPostMessage] = useState("");
   const router = useRouter();
@@ -26,7 +27,7 @@ function JobDetails(props) {
   ];
   return (
     <Layout>
-      <div style={{ marginBottom: "10px" }} onClick={() => nextPageHandler("Jobs/JobCreatePost")}>
+      <div style={{ marginBottom: "10px" }} onClick={() => router.push("/Feed/Jobs/JobCreatePost")}>
           <AddCircleOutlineIcon fontSize="large" />
       </div>
       <div className={classes.filter}>

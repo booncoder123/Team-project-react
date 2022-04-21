@@ -9,7 +9,7 @@ import { parseCookies } from "../../../../helpers/cookie";
 function JobDetail(props) {
   // const [postMessage, setPostMessage] = useState("");
 
-
+  console.log(props)
   // const [type, setType] = useState(0);
   return (
     <div>
@@ -21,6 +21,7 @@ function JobDetail(props) {
             type={props.jobs.data.types}
             description={props.jobs.data.description}
           />
+        
         </div>
 
     </div>
