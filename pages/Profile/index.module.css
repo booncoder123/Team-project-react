@@ -50,16 +50,22 @@
   margin: 35px;
 }
 
-.savedItems {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--neutral);
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 40px;
-  border-radius: 10px;
-  height: 180px;
+.dialogButtonCancel{
+  background: var(--secondary-dark);
+  border:none;
+  padding:5px;
+  border-radius:5px;
+  color: var(--neutral)
 }
+
+.dialogButtonConfirm{
+  background: var(--orange);
+  border:none;
+  padding:5px;
+  border-radius:5px;
+  color: var(--neutral)
+}
+
 
 .savedItems button {
   background-color: var(--orange);
