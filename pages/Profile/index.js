@@ -11,17 +11,26 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { parseCookies } from "../../helpers/cookie";
 import { useState, useEffect } from "react";
 import { User } from "../../lib/api";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 function Profile(props) {
   // console.log(props);
   const [username, setUsername] = useState("");
+  const [newName, setNewName] = useState("");
+  const [open, setOpen] = useState(false);
+  const [photo, setPhoto] = useState("");
   const router = useRouter();
   const user = auth.currentUser;
-  console.log("user here", username);
-
+  const cookies = parseCookies();
+  const { token } = cookies;
   useEffect(async () => {
-    const cookies = parseCookies();
-    const { token } = cookies;
-  
+    
+
     try {
       const userDetail = await User.get({
         type: User.GET_USER_BY_ID,
@@ -30,11 +39,20 @@ function Profile(props) {
           uid: user.uid,
         },
       });
-      setUsername(userDetail.data.data.username)
+      setUsername(userDetail.data.data.username);
+      setPhoto(userDetail.data.data.photoURL);
     } catch (error) {
       console.log(error);
     }
   }, []);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function handleLogout() {
     auth
@@ -49,22 +67,26 @@ function Profile(props) {
       });
   }
 
-  //  if(user !== null){
-  //   user.providerData.forEach((profile) => {
-  //     setUsername(profile.displayName);
-  //     // console.log("user detail from firebase", profile)
-  //     // console.log("Sign-in provider: " + profile.providerId);
-  //     // console.log("  Provider-specific UID: " + profile.uid);
-  //     // console.log("  Name: " + profile.displayName);
-  //     // console.log("  Email: " + profile.email);
-  //     // console.log("  Photo URL: " + profile.photoURL);
-  //   });
-  //  }
+  const changeUsername = async () => {
+    try {
+      const result = await User.post({
+        type: User.UPDATE_USER_DETAIL,
+        token,
+        body: {
+          username: newName,
+          images:[],
+        },
+      });
+      setUsername(result.data.data.username)
+    } catch (error) {
+      console.log("error", error);
+    }
+    setOpen(false)
+  };
 
   function nextPagehandler(pageUrl) {
     router.push(pageUrl);
   }
-  console.log("profile", props);
 
   return (
     <div className={classes.container}>
@@ -83,7 +105,10 @@ function Profile(props) {
         <div className={classes.profileImage}>
           <Avatar
             alt="no"
-            src={user.photoURL}
+            src={
+              "https://se-community-2022.s3.ap-southeast-1.amazonaws.com/" +
+              photo
+            }
             style={{ width: "25vw", height: "25vw" }}
           />
         </div>
@@ -94,8 +119,27 @@ function Profile(props) {
         <div className={classes.name}>
           <div>{username}</div>
           <div>
-            <EditIcon />
+            <EditIcon onClick={handleClickOpen} />
           </div>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Change your username</DialogTitle>
+            <TextField
+              autoFocus
+              id="name"
+              label="username"
+              type="text"
+              variant="standard"
+              defaultValue={username}
+              value={newName}
+              color="warning"
+              onChange={(e)=>{setNewName(e.target.value)}}
+              sx={{ marginLeft: "10px", marginRight: "10px" }}
+            />
+            <DialogActions>
+              <button className={classes.dialogButtonCancel} onClick={handleClose}>Cancel</button>
+              <button className={classes.dialogButtonConfirm} onClick={changeUsername}>Confirm</button>
+            </DialogActions>
+          </Dialog>
         </div>
         <div className={classes.selection}>
           <div className={classes.type}>
@@ -137,7 +181,6 @@ function Profile(props) {
               />
             </div>
           </div>
-          {user.uid}
         </div>
       </div>
     </div>
@@ -151,11 +194,11 @@ export default withAuth(Profile);
 //   const { token } = cookies;
 //   const user = auth.currentUser;
 //   try {
-//     const userDetail = await User.get({
-//       type: User.GET_USER_BY_ID,
+//     const userDetail = await User.post({
+//       type: User.UPDATE_USER_DETAIL,
 //       token,
 //       body: {
-//         uid:user.uid,
+//         username,
 //       },
 //     });
 //     return {
