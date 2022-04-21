@@ -20,7 +20,9 @@ export default function JobDetailContainer(props) {
 
          
         </div>
-        <div className={classes.description}>{props.description}</div>
+        <div className={classes.description}>
+          <div dangerouslySetInnerHTML={{__html: props.description}} />
+        </div>
         <div className={classes.button}>
           <RectangularButton
             style={{
