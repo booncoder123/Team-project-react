@@ -9,6 +9,7 @@ import Test from "../../../../components/Draft"
 import { parseCookies } from "../../../../helpers/cookie";
 import Jobs from "../../../../lib/api/jobs";
 import SingleImageUpload from "../../../../components/SingleImageUpload";
+import WYSIWYGEditor from "../../../../components/Editor";
 
 const JobCreatePost = (props) => {
   //Type Options
@@ -43,11 +44,15 @@ const JobCreatePost = (props) => {
   const handleInputType = (event, newInputValue) => {
     setInputType(newInputValue);
   }
-  // const handleSubmit2 = () => console.log(inputType);
-
+  const handleSubmit2 = () => {
+    console.log(inputType);
+    console.log(description)
+    console.log(typeof description)
+  }
   const handleSubmit = () => {
     console.log('***this is posting a job')
     console.log(company, position)
+    console.log(typeof description)
     
     const cookie = parseCookies()
     const { token } = cookie
@@ -62,7 +67,7 @@ const JobCreatePost = (props) => {
       formData.append("title", position);
       formData.append("images", image);
       formData.append("types", inputType);
-      formData.append("description", "ดำเนินการ และตรวจสอบการติดตั้งอุปกรณ์ IT ทั้ง Hardware & Software");
+      formData.append("description", description);
 
       const result = await Jobs.post({
         type: Jobs.CREATE_JOB,
@@ -124,8 +129,10 @@ const JobCreatePost = (props) => {
       </div>
       <div>
         Job Detail
-        <Test defaultContent=""
-        />
+        {/* <Test defaultContent=""
+        /> */}
+        <WYSIWYGEditor 
+        setValue={setDescription}/>
       </div>
       <div className={classes.button}>
         <RectangularButton
