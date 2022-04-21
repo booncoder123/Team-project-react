@@ -6,12 +6,12 @@ export default function JobDetailContainer(props) {
   const router = useRouter();
   return (
     <div className={classes.JobDetail}>
-        
-      <div className={classes.content}>
       <div className={classes.banner}>
         <ArrowBackIosIcon sx={{ fontSize: 15 }} onClick={()=>{router.push("/Feed/Jobs")}} />
-        Back
-      </div> 
+        Jobs
+      </div>
+      <div className={classes.content}>
+       
         <div className={classes.jobTitle}>{props.companyName}</div>
         <div className={classes.jobIntro}>
           <div>Position: {props.title}</div>
@@ -24,7 +24,7 @@ export default function JobDetailContainer(props) {
         <div className={classes.button}>
           <RectangularButton
             style={{
-              backgroundColor: "#F08F34",
+              backgroundColor: "#424642",
               width: "50%",
               justifyContent: "center",
             }}

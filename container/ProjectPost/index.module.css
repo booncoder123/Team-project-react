@@ -28,7 +28,6 @@
     display: flex;
     flex-direction: column;
     padding:10px;
-    width:80%;
   }
 
   .projectName{
@@ -43,6 +42,6 @@
  }
 
  .images{
-   display:flex;
-  justify-content: end;
+  width:100px;
+  height:100px;
  }
