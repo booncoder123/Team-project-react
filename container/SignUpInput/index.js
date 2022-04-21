@@ -27,7 +27,6 @@ export default function SignUpInput() {
         },
         token,
       });
-      console.log("Result", result);
     } catch (error) {
       console.log("error", error);
     }
@@ -50,7 +49,6 @@ export default function SignUpInput() {
         const token = userCredential.user.accessToken;
         const user = userCredential.user;
         user.displayName = username;
-        console.log(user);
         postDataToDatabase(token);
         router.push("/Feed/Discussions");
       })

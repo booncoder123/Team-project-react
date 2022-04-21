@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 export default function ActivityButtonWithNumber(props) {
   const {value,icon,onClick} = props;
   const router = useRouter();
-  const nextPageHandler = (page) => {
- 
+  const nextPageHandler = () => {
     router.push(`/Feed/Discussions/Comments`);
   };
   return (

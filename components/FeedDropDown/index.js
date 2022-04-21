@@ -37,7 +37,7 @@ export default function FeedDropDown(props) {
           classes={{ selected: classes.selected, root: classes.rootMenuItem }}
           value="Feed"
         >
-         { page != "Feed" &&  <img src="/Feed/discussion.svg" style={{ marginRight: "30px" }} />}
+         { page != "Feed" && <img src="/Feed/discussion.svg" style={{ marginRight: "30px" }} />}
           Feed
         </MenuItem>
         <MenuItem

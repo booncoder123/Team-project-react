@@ -19,7 +19,11 @@ const BootstrapInput = styled(InputBase)((props) => ({
     // cursor: "pointer",
     "&:focus": {},
     paddingLeft: 10,
+
+ 
+ 
     ...props.contentStyle,
+    height:200
   },
 }));
 
@@ -38,6 +42,7 @@ const TextField = (props) => {
         placeholder={placeholder}
         multiline={multi}
         value={value}
+ 
         contentStyle={contentStyle}
         onClick={() => {
           onClick ? onClick() : () => {};

@@ -10,30 +10,22 @@ import { parseCookies } from "../../../helpers/cookie";
 import { useEffect } from "react";
 function Discussions(props) {
   const [postMessage, setPostMessage] = useState("");
-  // useEffect(async () => {
-  //   try {
-  //     const discussions = await Post.get({
-  //       type: Post.GET_DISCUSSIONS,
-  //       token,
-  //     });
-  //     console.log("discussions", discussions);
-  //   } catch (error) {
-  //     console.log("Errorrr", error);
-  //   }
-  // }, []);
 
   return (
     <Layout>
       <DiscussionPost value={postMessage} setValue={setPostMessage} />
       {props.discussions.data.map((discussion) => {
+        console.log("discussion", discussion);
+
         return (
           <Discussion
             title={discussion.description}
             images={discussion.images[0]}
-            like={discussion.like}
-            comment={discussion.comment}
+            like={discussion.likers ? discussion.likers.length : 0}
+            comment={discussion.comments.length}
             user={discussion.user}
-
+            id={discussion._id}
+            likers={discussion.likers}
           />
         );
       })}
@@ -50,7 +42,7 @@ export async function getServerSideProps({ req }) {
       type: Post.GET_DISCUSSIONS,
       token,
     });
-    // console.log(discussions);
+
     return {
       props: { token, discussions: discussions.data },
     };

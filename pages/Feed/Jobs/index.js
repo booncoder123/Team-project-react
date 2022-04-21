@@ -10,6 +10,7 @@ import Dropdown from "../../../components/Dropdown";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Jobs from "../../../lib/api/jobs";
 import { parseCookies } from "../../../helpers/cookie";
+import { useRouter } from "next/router";
 function JobDetails(props) {
   const [postMessage, setPostMessage] = useState("");
 
@@ -20,9 +21,10 @@ function JobDetails(props) {
   ];
 
   const router = useRouter();
-  function nextPageHandler(pageUrl){
-    router.push(pageUrl);
-  }
+  const nextPageHandler = (title) => {
+    // router.query.SUBPAGE = title;
+    router.push(`Jobs/JobDetails?jobId=${title}`);
+  };
   return (
     <Layout>
       <div style={{ marginBottom: "10px" }} onClick={() => nextPageHandler("Jobs/JobCreatePost")}>
@@ -30,26 +32,29 @@ function JobDetails(props) {
       </div>
       <div className={classes.filter}>
         <div className={classes.Searchbar}>
-          <SearchBar placeholder="Search..."/>
+          <SearchBar placeholder="Search..." />
         </div>
         <div className={classes.Dropdown}>
           <Dropdown placeholder="Type"
           options={types}
           />
-         
         </div>
-       
       </div>
-      {props.jobs.data.map((discussion) => {
-        return (
-          <JobPost
-            companyName = {discussion.companyName}
-            jobTitle = {discussion.title}
-            photo={discussion.images[0]}
-            jobIntro={discussion.description}
-          />
-        );
-      })}
+      <div
+
+      >
+        {props.jobs.data.map((discussion) => {
+          return (
+            <JobPost
+              companyName={discussion.companyName}
+              jobTitle={discussion.title}
+              photo={discussion.images[0]}
+              jobIntro={discussion.description}
+              onClick={() => {nextPageHandler(discussion._id)}}
+            />
+          );
+        })}
+      </div>
     </Layout>
   );
 }
@@ -64,7 +69,6 @@ export async function getServerSideProps({ req }) {
       type: Jobs.GET_JOBS,
       token,
     });
-    console.log(jobs);
     return {
       props: { token, jobs: jobs.data },
     };
