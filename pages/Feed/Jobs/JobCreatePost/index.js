@@ -1,19 +1,85 @@
 import classes from "./index.module.css";
-import TextField from "../../../../components/TextField"
+import TextField from "../../../../components/TextField";
 import Dropdown from "../../../../components/Dropdown";
 import RectangularButton from "../../../../components/RectangularButton";
-import { useState,useEffect } from 'react';
-import dynamic from 'next/dynamic';
-import withAuth from "../../../helpers/withAuth";
-const Editor = dynamic(
-    () => import('react-draft-wysiwyg').then(mod => mod.Editor),
-    { ssr: false })
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-
-const height = 76
-const labelOffset = -6
+import { useState, useEffect } from 'react';
+import { useRouter } from "next/router";
+import withAuth from "../../../../helpers/withAuth"
+import Test from "../../../../components/Draft"
+import { parseCookies } from "../../../../helpers/cookie";
+import Jobs from "../../../../lib/api/jobs";
+import SingleImageUpload from "../../../../components/SingleImageUpload";
+import WYSIWYGEditor from "../../../../components/Editor";
 
 const JobCreatePost = (props) => {
+  //Type Options
+  const types = [
+    { label: "full-time" },
+    { label: "part-time" },
+    { label: "intern" },
+ ];
+
+  //Values and Set Values
+  const [company, setCompany] = useState("");
+  const [position, setPosition] = useState("");
+  const [image, setImage] = useState(null);
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState(null);
+  const [inputType, setInputType] = useState('');
+
+  //Functions
+  const router = useRouter();
+  const handleCompany = (event) => {
+    setCompany(event.target.value);
+  };
+  const handlePosition = (event) => {
+    setPosition(event.target.value);
+  };
+  const handleDescription = (event) => {
+    setDescription(event.target.value);
+  };
+  const handleType = (event, newValue) => {
+    setType(newValue);
+  }
+  const handleInputType = (event, newInputValue) => {
+    setInputType(newInputValue);
+  }
+  const handleSubmit2 = () => {
+    console.log(inputType);
+    console.log(description)
+    console.log(typeof description)
+  }
+  const handleSubmit = () => {
+    console.log('***this is posting a job')
+    console.log(company, position)
+    console.log(typeof description)
+    
+    const cookie = parseCookies()
+    const { token } = cookie
+    console.log(token)
+    postDataToDatabase(token);
+  };
+
+  const postDataToDatabase = async (token) => {
+    try {
+      const formData = new FormData();
+      formData.append("companyName", company);
+      formData.append("title", position);
+      formData.append("images", image);
+      formData.append("types", inputType);
+      formData.append("description", description);
+
+      const result = await Jobs.post({
+        type: Jobs.CREATE_JOB,
+        body: formData,
+        token,
+      });
+      console.log("Result", result);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>Post Job</div>
@@ -21,60 +87,65 @@ const JobCreatePost = (props) => {
         Company
         <TextField
           className={classes.TextComponent}
-          label="text field"
           variant="outlined"
+          value={company}
+          onChange={handleCompany}
+          setValue={setCompany}
           inputProps={{
-              style: {
-                height: '30px',
-                padding: '0px 14px',
-              },
+            style: {
+              height: '30px',
+              padding: '0px 14px',
+            },
           }}
         />
         Position
         <TextField
-          label="text field"
+        className={classes.TextComponent}
           variant="outlined"
-          style={{ height }}
+          value={position}
+          multi={true}
+          onChange={handlePosition}
+          setValue={setPosition}
           inputProps={{
-              style: {
-                height,
-                padding: '0 14px',
-              },
+            style: {
+              height: '70px',
+              padding: '2px 14px 2px 14px',
+            },
           }}
         />
+        <SingleImageUpload setImage={setImage}/>
       </div>
       <div className={classes.Dropdown}>
-          <Dropdown placeholder="Type" />
-        </div>
-
-      <div>
-        Job Detail
-        <Editor
-          editorStyle={{
-            backgroundColor: ['white'],
-            height: ['120px']
-          }}
-          toolbarStyle={{}}
-          toolbar={{  
-              options: ['link','image'],
-              image: {
-                  inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
-                  alt: { present: false, mandatory: false },
-                  defaultSize: {
-                    height: 'auto',
-                    width: 'auto',
-                  }}}}
+        <Dropdown placeholder="Type" 
+        options={types}
+        value={type}
+        setValue={setType}
+        onChange={handleType}
+        inputValue={inputType}
+        setInputValue={setInputType}
+        onInputChange={handleInputType}
+        getOptionLabel={option => option.label}
         />
       </div>
+      <div>
+        Job Detail
+        {/* <Test defaultContent=""
+        /> */}
+        <WYSIWYGEditor 
+        setValue={setDescription}/>
+      </div>
       <div className={classes.button}>
-                <RectangularButton
-                    style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
-                    name="Post"
-                />
-                <RectangularButton
-                    style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
-                    name="Cancel"
-                />
+        <RectangularButton
+          onClick={handleSubmit}
+          style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
+          url="/Feed/Jobs"
+          name="Post"
+        />
+        <RectangularButton
+          style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
+          url="/Feed/Jobs"
+          name="Cancel"
+        />
       </div>
     </div>
   );

@@ -15,7 +15,6 @@ function ProjectDetail(props) {
   console.log("propsss", props);
   return (
     <div className={classes.container}>
-      
       <div className={classes.banner}>
         <ArrowBackIosIcon sx={{ fontSize: 15 }} onClick={nextPagehandler} />
         Projects
