@@ -108,7 +108,7 @@ const JobCreatePost = (props) => {
           setValue={setPosition}
           inputProps={{
             style: {
-              height: '80px',
+              height: '70px',
               padding: '2px 14px 2px 14px',
             },
           }}

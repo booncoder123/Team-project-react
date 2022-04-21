@@ -31,7 +31,7 @@ const WYSIWYGEditor = ({setValue}) => {
         editorState={editorState} 
         editorStyle={{
           backgroundColor: ['white'],
-          height: ['120px'],
+          height: ['100px'],
           fontSize: 13,
 
         }}
