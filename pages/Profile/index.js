@@ -62,14 +62,6 @@ function Profile(props) {
           </div>
         </div>
         <div className={classes.selection}>
-          {/* <div className={classes.savedItems}>
-            <div>
-              <button onClick={() => nextPagehandler("/Profile/MySavedItems")}>
-                {" "}
-                Saved Items
-              </button>
-            </div>
-          </div> */}
           <div className={classes.type}>
             <div>My Discussions</div>
             <div className={classes.arrow}>
@@ -79,6 +71,17 @@ function Profile(props) {
               />
             </div>
           </div>
+
+          <div className={classes.type}>
+            <div>My News</div>
+            <div className={classes.arrow}>
+              <ArrowForwardIosIcon
+                fontSize="small"
+                onClick={() => nextPagehandler("/Profile/MyNews")}
+              />
+            </div>
+          </div>
+
           <div className={classes.type}>
             <div>My Jobs</div>
             <div className={classes.arrow}>
@@ -88,6 +91,7 @@ function Profile(props) {
               />
             </div>
           </div>
+          
           <div className={classes.type}>
             <div>My Projects</div>
             <div className={classes.arrow}>
@@ -97,6 +101,7 @@ function Profile(props) {
               />
             </div>
           </div>
+         
         </div>
       </div>
     </div>
