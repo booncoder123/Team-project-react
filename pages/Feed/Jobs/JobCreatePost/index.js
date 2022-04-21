@@ -22,6 +22,7 @@ const JobCreatePost = (props) => {
   //Values and Set Values
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
+  const [applyLink, setApplyLink] = useState("");
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
   const [type, setType] = useState(null);
@@ -34,6 +35,9 @@ const JobCreatePost = (props) => {
   };
   const handlePosition = (event) => {
     setPosition(event.target.value);
+  };
+  const handleApplyLink = (event) => {
+    setApplyLink(event.target.value);
   };
   const handleDescription = (event) => {
     setDescription(event.target.value);
@@ -52,12 +56,17 @@ const JobCreatePost = (props) => {
   const handleSubmit = () => {
     console.log('***this is posting a job')
     console.log(company, position)
-    console.log(typeof description)
     
     const cookie = parseCookies()
     const { token } = cookie
     console.log(token)
     postDataToDatabase(token);
+
+    router.push('/Feed/Jobs/')
+
+  };
+  const handleCancel = () => {
+    router.push('/Feed/Jobs/')
   };
 
   const postDataToDatabase = async (token) => {
@@ -93,7 +102,7 @@ const JobCreatePost = (props) => {
           setValue={setCompany}
           inputProps={{
             style: {
-              height: '30px',
+              height: '25px',
               padding: '0px 14px',
             },
           }}
@@ -108,8 +117,22 @@ const JobCreatePost = (props) => {
           setValue={setPosition}
           inputProps={{
             style: {
-              height: '70px',
+              height: '40px',
               padding: '2px 14px 2px 14px',
+            },
+          }}
+        />
+        Apply Link
+        <TextField
+          className={classes.TextComponent}
+          variant="outlined"
+          value={applyLink}
+          onChange={handleApplyLink}
+          setValue={setApplyLink}
+          inputProps={{
+            style: {
+              height: '25px',
+              padding: '0px 14px',
             },
           }}
         />
@@ -138,12 +161,13 @@ const JobCreatePost = (props) => {
         <RectangularButton
           onClick={handleSubmit}
           style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
-          url="/Feed/Jobs"
+          // url="/Feed/Jobs"
           name="Post"
         />
         <RectangularButton
+          onClick={handleCancel}
           style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
-          url="/Feed/Jobs"
+          // url="/Feed/Jobs"
           name="Cancel"
         />
       </div>
