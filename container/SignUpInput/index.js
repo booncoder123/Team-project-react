@@ -9,7 +9,7 @@ import PasswordIcon from "@mui/icons-material/HttpsOutlined";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
 import User from "../../lib/api/user";
 
@@ -48,6 +48,17 @@ export default function SignUpInput() {
         // Signed in user successfully  login
         const token = userCredential.user.accessToken;
         const user = userCredential.user;
+        updateProfile(user, {
+          displayName: username, photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgSmojUgwjIB87c4Q0hLCAyl__oiTySWGWJUZtUNHlHjBALLzTsu_vMHYMaEwLts4QEoo&usqp=CAU"
+        }).then(() => {
+          // Profile updated!
+          // ...
+          console.log(auth.currentUser.displayName)
+        }).catch((error) => {
+          // An error occurred
+          console.log("errorrrrrrrrr",error)
+          // ...
+        });
         user.displayName = username;
         postDataToDatabase(token);
         router.push("/Feed/Discussions");
@@ -58,7 +69,7 @@ export default function SignUpInput() {
         alert(errorMessage);
       });
   };
-
+  
   return (
     <div>
       <div>

@@ -9,10 +9,33 @@ import { auth, firebase } from "../../firebase";
 import withAuth from "../../helpers/withAuth";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { parseCookies } from "../../helpers/cookie";
-
+import { useState, useEffect } from "react";
+import { User } from "../../lib/api";
 function Profile(props) {
   // console.log(props);
+  const [username, setUsername] = useState("");
   const router = useRouter();
+  const user = auth.currentUser;
+  console.log("user here", username);
+
+  useEffect(async () => {
+    const cookies = parseCookies();
+    const { token } = cookies;
+  
+    try {
+      const userDetail = await User.get({
+        type: User.GET_USER_BY_ID,
+        token,
+        body: {
+          uid: user.uid,
+        },
+      });
+      setUsername(userDetail.data.data.username)
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   function handleLogout() {
     auth
       .signOut()
@@ -26,9 +49,22 @@ function Profile(props) {
       });
   }
 
+  //  if(user !== null){
+  //   user.providerData.forEach((profile) => {
+  //     setUsername(profile.displayName);
+  //     // console.log("user detail from firebase", profile)
+  //     // console.log("Sign-in provider: " + profile.providerId);
+  //     // console.log("  Provider-specific UID: " + profile.uid);
+  //     // console.log("  Name: " + profile.displayName);
+  //     // console.log("  Email: " + profile.email);
+  //     // console.log("  Photo URL: " + profile.photoURL);
+  //   });
+  //  }
+
   function nextPagehandler(pageUrl) {
     router.push(pageUrl);
   }
+  console.log("profile", props);
 
   return (
     <div className={classes.container}>
@@ -46,8 +82,8 @@ function Profile(props) {
       <div className={classes.content}>
         <div className={classes.profileImage}>
           <Avatar
-            alt="Remy Sharp"
-            src="/static/images/avatar/1.jpg"
+            alt="no"
+            src={user.photoURL}
             style={{ width: "25vw", height: "25vw" }}
           />
         </div>
@@ -56,7 +92,7 @@ function Profile(props) {
         </div>
 
         <div className={classes.name}>
-          <div>Mine Jung</div>
+          <div>{username}</div>
           <div>
             <EditIcon />
           </div>
@@ -91,7 +127,7 @@ function Profile(props) {
               />
             </div>
           </div>
-          
+
           <div className={classes.type}>
             <div>My Projects</div>
             <div className={classes.arrow}>
@@ -101,7 +137,7 @@ function Profile(props) {
               />
             </div>
           </div>
-         
+          {user.uid}
         </div>
       </div>
     </div>
@@ -110,22 +146,23 @@ function Profile(props) {
 
 export default withAuth(Profile);
 
-export async function getServerSideProps({ req }) {
-  try {
-    const cookies = parseCookies(req);
-    const { token } = cookies;
-
-    //? call api
-    // const storeDetail = await Store.get({
-    //   type: Store.GET_STORE_DETAIL,
-    //   token,
-    // });
-
-    return {
-      props: { token }, // will be passed to the page component as props
-    };
-  } catch (error) {
-    console.log(error);
-  }
-  return { props: {} };
-}
+// export async function getServerSideProps({req}) {
+//   const cookies = parseCookies(req);
+//   const { token } = cookies;
+//   const user = auth.currentUser;
+//   try {
+//     const userDetail = await User.get({
+//       type: User.GET_USER_BY_ID,
+//       token,
+//       body: {
+//         uid:user.uid,
+//       },
+//     });
+//     return {
+//       props: { token, userDetail: userDetail.data },
+//     };
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   return { props: {} };
+// }
