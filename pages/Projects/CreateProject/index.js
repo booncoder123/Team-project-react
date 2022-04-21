@@ -6,17 +6,35 @@ import Avatar from '@mui/material/Avatar';
 import FeedDropDown from "../../../components/FeedDropDown";
 import { useState,useEffect } from 'react';
 import withAuth from "../../../helpers/withAuth";
-
-import dynamic from 'next/dynamic';
-const Editor = dynamic(
-    () => import('react-draft-wysiwyg').then(mod => mod.Editor),
-    { ssr: false })
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-
-const height = 76
-const labelOffset = -6
+import WYSIWYGEditor from "../../../components/Editor";
 
 const CreateProject = (props) => {
+  //Year and Type Options
+  const years = [
+    { label: "1" },
+    { label: "2" },
+    { label: "3" },
+    { label: "3" },
+  ];
+  const types = [
+    { label: "ai" },
+    { label: "iot" },
+    { label: "enterprise" },
+  ];
+
+  //Values and Set Values
+  const [name, setName] = useState("");
+  const [intro, setIntro] = useState("");
+  const [image, setImage] = useState(null);
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState(null);
+  const [inputType, setInputType] = useState('');
+  const [year, setYear] = useState(null);
+  const [inputYear, setInputYear] = useState('');
+
+  //Functions
+  const router = useRouter();
+  
   return (
     <div className={classes.container}>
       <div className={classes.header}>Post Project</div>
@@ -37,10 +55,9 @@ const CreateProject = (props) => {
         <TextField
           label="text field"
           variant="outlined"
-          style={{ height }}
           inputProps={{
               style: {
-                height,
+                height: '70px',
                 padding: '0 14px',
               },
           }}
@@ -58,21 +75,7 @@ const CreateProject = (props) => {
 
       <div>
         Description
-        <Editor
-          editorStyle={{
-            backgroundColor: ['white'],
-            height: ['120px']
-          }}
-          toolbarStyle={{}}
-          toolbar={{  
-              options: ['link','image'],
-              image: {
-                  inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
-                  alt: { present: false, mandatory: false },
-                  defaultSize: {
-                    height: 'auto',
-                    width: 'auto',
-                  }}}}
+        <WYSIWYGEditor 
         />
       </div>
       <div className={classes.button}>
