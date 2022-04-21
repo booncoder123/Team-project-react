@@ -8,8 +8,8 @@ export default function Layout(props) {
     return (
       <div className={classes.content} >
         <div className={classes.header}>  
-          <FeatureDropDown/>
-          </div>
+         <FeatureDropDown/>
+         </div>
        
           {/* <FeatureList value={type} setValue={setType}/> */}
           <div className={classes.layout}>{props.children}</div>
