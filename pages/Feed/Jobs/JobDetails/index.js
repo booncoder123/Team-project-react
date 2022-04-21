@@ -7,10 +7,10 @@ import withAuth from "../../../../helpers/withAuth";
 import Jobs from "../../../../lib/api/jobs";
 import { parseCookies } from "../../../../helpers/cookie";
 function JobDetail(props) {
-  const [postMessage, setPostMessage] = useState("");
+  // const [postMessage, setPostMessage] = useState("");
 
 
-  const [type, setType] = useState(0);
+  // const [type, setType] = useState(0);
   return (
     <div>
 

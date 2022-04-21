@@ -1,8 +1,6 @@
 .JobDetail {
     display: flex;
-    flex-direction: row;
-    padding-left:25px;
-    padding-top:20px;
+    flex-direction: column;
   }
   
   .heading1 {
@@ -32,6 +30,8 @@
   
   .jobTitle {
     font-family: Roboto Bold;
+    padding-top:10px;
+    /* color: var(--orange); */
     font-size: 25px;
     display:flex;
     justify-content: center;
@@ -41,7 +41,7 @@
     display:flex;
     flex-direction:column;
     gap:10px;
-    background: var(--secondary-dark);
+    background: var(--orange);
     color: var(--secondary-light);
     padding:10px;
     border-radius: 10px;
@@ -52,7 +52,8 @@
 .description{
   text-indent:2rem;
   padding-top:10px;
-  padding-bottom:10px
+  padding-bottom:10px;
+  color: var(--secondary-dark);
 }
   .button {
     margin-top:20px;
@@ -60,5 +61,8 @@
     justify-content: center;
   }
   .banner{
-    font-family: Roboto Bold;
+    background: var(--secondary-dark);
+    padding:15px;
+    color: var(--neutral);
+    margin-top:39px;
 }

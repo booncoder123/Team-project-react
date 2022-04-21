@@ -5,7 +5,8 @@ import { discussions } from "../../../const/mockUp.js";
 import withAuth from "../../../helpers/withAuth";
 import Projects from "../../../lib/api/projects";
 import { parseCookies } from "../../../helpers/cookie";
-
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 function ProjectDetail(props) {
   const router = useRouter();
   function nextPagehandler() {
@@ -14,24 +15,33 @@ function ProjectDetail(props) {
   console.log("propsss", props);
   return (
     <div className={classes.container}>
-      <div className={classes.title}>
-        {props.project.data[0].project[0].name}
-      </div>
+      
       <div className={classes.banner}>
         <ArrowBackIosIcon sx={{ fontSize: 15 }} onClick={nextPagehandler} />
         Projects
       </div>
-      {props.project.data[0].images[0] && (
-        <img
-          src={
-            "https://se-community-2022.s3.ap-southeast-1.amazonaws.com/" +
-            props.project.data[0].images[0]
-          }
-          className={classes.images}
-        />
-      )}
+      <div className={classes.title}>
+        {props.project.data[0].project[0].name}
+      </div>
+      <div className={classes.type}>
+        Type: {props.project.data[0].project[0].type}
+      </div>
+      <div className={classes.images}>
+        <ImageList sx={{  height: 250 }} cols={2} rowHeight={164} gap={20}>
+          {props.project.data[0].images.map((item) => (
+            <ImageListItem key={item}>
+              <img
+                src={`https://se-community-2022.s3.ap-southeast-1.amazonaws.com/${item}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`https://se-community-2022.s3.ap-southeast-1.amazonaws.com/${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                cols="1"
+                // alt={item.title}
+                // loading="lazy"
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </div>
       <div>
-        {/* <div className={classes.header}>Header</div> */}
         <div className={classes.introduction}>
           {props.project.data[0].project[0].intro}
         </div>

@@ -14,7 +14,7 @@ export default function ProjectPost(props) {
         <div className={classes.projectName}>{name}</div>
         <div className={classes.projectIntro}>{intro}</div>
       </div>
-      <div className={classes.images}>
+      <div>
       {images && (
         <img
           src={
