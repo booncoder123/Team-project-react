@@ -6,13 +6,18 @@ import { useState } from "react";
 import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
 import Post from "../../../lib/api/discussions";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { parseCookies } from "../../../helpers/cookie";
 import { useEffect } from "react";
+import {useRouter} from "next/router";
+
 function Discussions(props) {
   const [postMessage, setPostMessage] = useState("");
-
+  const router = useRouter();
   return (
     <Layout>
+      <div style={{ marginBottom: "10px" }} onClick={() => router.push("Feed/Discussions")} handleCircle={() => router.push("Feed/Discussions")}>
+      </div>
       <DiscussionPost value={postMessage} setValue={setPostMessage} />
       {props.discussions.data.map((discussion) => {
         console.log("discussion", discussion);
