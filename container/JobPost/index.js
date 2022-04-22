@@ -21,7 +21,9 @@ export default function JobPost(props) {
         {/* companyname */}
         <div className={classes.companyName}>{props.companyName}</div>
         <div className={classes.jobTitle}>{props.jobTitle}</div>
-        <div className={classes.jobIntro}>{props.jobIntro}</div>
+        <div className={classes.jobIntro}>
+          <div dangerouslySetInnerHTML={{__html: props.jobIntro}} />
+        </div>
         <div></div>
       </div>
     </div>
