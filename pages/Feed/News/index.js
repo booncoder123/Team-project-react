@@ -47,9 +47,9 @@ export async function getServerSideProps({ req }) {
       props: { token, news: news.data },
     };
   } catch (error) {
-    return {
-      props: {error: error.data, token},
-    };
+    // return {
+    //   props: {error: error.data, token},
+    // };
   }
   return {props: {}}
 }
