@@ -14,9 +14,12 @@ import {useRouter} from "next/router";
 function Discussions(props) {
   const [postMessage, setPostMessage] = useState("");
   const router = useRouter();
+  const nextPageHandler = (title) => {
+    router.push(`/Feed/Discussions/CreateDiscussion/`);
+  };
   return (
-    <Layout>
-      <div style={{ marginBottom: "10px" }} onClick={() => router.push("Feed/Discussions")} handleCircle={() => router.push("Feed/Discussions")}>
+    <Layout nextPageHandler={nextPageHandler}>
+      <div style={{ marginBottom: "10px" }} onClick={() => router.push("Feed/Discussions")} >
       </div>
       <DiscussionPost value={postMessage} setValue={setPostMessage} />
       {props.discussions.data.map((discussion) => {

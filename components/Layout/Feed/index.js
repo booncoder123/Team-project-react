@@ -6,6 +6,8 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 export default function Layout(props) {
     const [type, setType] = useState(0);
+    const {nextPageHandler} = props;
+
     return (
       <div className={classes.content} >
         <div className={classes.header}> 
@@ -14,8 +16,7 @@ export default function Layout(props) {
          <div style={{ marginBottom: "10px", marginTop: "10px" }}>
           <AddCircleOutlineIcon
             fontSize="large"
-            onClick={props.handleCircle}
-            // onClick={createProjectHandler}
+            onClick={nextPageHandler}
           />
         </div>
         </div>

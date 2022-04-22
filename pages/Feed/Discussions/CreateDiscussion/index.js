@@ -1,1 +1,5 @@
-<h1>this is create discussion page</h1>
+export default function CreateDiscussion() {
+    return(
+        <div>This is create discussion page</div>
+    );
+}

@@ -3,6 +3,7 @@ import { discussions } from "../../../const/mockUp.js";
 import DiscussionPost from "../../../container/DiscussionPost";
 import Discussion from "../../../container/Discussion";
 import { useState } from "react";
+import {useRouter} from "next/router";
 import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
 import JobDetailContainer from "../../../container/JobDetail";
@@ -10,8 +11,9 @@ import News from "../../../lib/api/news";
 import { parseCookies } from "../../../helpers/cookie";
 function NewsDetails(props) {
   const [postMessage, setPostMessage] = useState("");
+  const router = useRouter();
   return (
-    <Layout>
+    <Layout nextPageHandler={() => {router.push(`/Feed/News/CreateNews/`);}}>
     
       {props.news.data.map((discussion) => {
         console.log("discussion", discussion);
