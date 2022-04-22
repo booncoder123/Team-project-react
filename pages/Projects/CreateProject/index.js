@@ -78,12 +78,13 @@ const CreateProject = (props) => {
   };
   const postDataToDatabase = async (token) => {
     try {
+      //Unsolved
       const formData = new FormData();
       formData.append("name", "name");
       formData.append("intro", "intro");
-      formData.append("images", "image");
-      formData.append("type", "inputType");
-      formData.append("year", "inputType");
+      // formData.append("images", "image");
+      formData.append("type", ["ai", "iot"]);
+      formData.append("year", [1, 2]);
       formData.append("description", "description");
 
       const result = await Projects.post({
