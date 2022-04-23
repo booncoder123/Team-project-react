@@ -45,7 +45,8 @@ export default function Discussion(props) {
           truncatedEndingComponent=" ... "
           width={800}
         >
-          <p>{title}</p>
+          {/* <p>{title}</p> */}
+          <div dangerouslySetInnerHTML={{__html: title}} />
         </ShowMoreText>
 
         {images && (

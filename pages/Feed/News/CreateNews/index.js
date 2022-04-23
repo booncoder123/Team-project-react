@@ -1,6 +1,4 @@
 import classes from "./index.module.css";
-import TextField from "../../../../components/TextField";
-import Dropdown from "../../../../components/Dropdown";
 import RectangularButton from "../../../../components/RectangularButton";
 import SingleImageUpload from "../../../../components/SingleImageUpload";
 import { useState, useEffect } from 'react';
@@ -47,9 +45,9 @@ const CreateNews = (props) => {
   const postDataToDatabase = async (token) => {
     try {
       const formData = new FormData();
-      formData.append("description", "this is des");
+      formData.append("description", description);
       formData.append("postType", "news");
-      formData.append("images", [""]);
+      formData.append("images", [image]);
       formData.append("likers", []);
 
       const result = await News.post({
