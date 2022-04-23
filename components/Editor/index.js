@@ -10,9 +10,8 @@ const Editor = dynamic(
 )
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-
 // Hooks version of the Class below (done by me)
-const WYSIWYGEditor = ({setValue}) => {
+const WYSIWYGEditor = ({setValue, height}) => {
   const [content, setContent] = useState('');
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -24,14 +23,13 @@ const WYSIWYGEditor = ({setValue}) => {
     return editorState.getCurrentContent();
     // return input.onChange(setContent(draftToHtml(convertToRaw(editorState.getCurrentContent()))));
   } 
-
   return (
     <div className="editor">
       <Editor 
         editorState={editorState} 
         editorStyle={{
           backgroundColor: ['white'],
-          height: ['100px'],
+          height: [height],
           fontSize: 13,
 
         }}
