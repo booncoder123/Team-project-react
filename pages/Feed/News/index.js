@@ -6,7 +6,6 @@ import { useState } from "react";
 import {useRouter} from "next/router";
 import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
-import JobDetailContainer from "../../../container/JobDetail";
 import News from "../../../lib/api/news";
 import { parseCookies } from "../../../helpers/cookie";
 function NewsDetails(props) {

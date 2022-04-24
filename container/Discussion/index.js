@@ -45,8 +45,8 @@ export default function Discussion(props) {
           truncatedEndingComponent=" ... "
           width={800}
         >
-          {/* <p>{title}</p> */}
-          <div dangerouslySetInnerHTML={{__html: title}} />
+          <p>{title}</p>
+          {/* <div dangerouslySetInnerHTML={{__html: title}} /> */}
         </ShowMoreText>
 
         {images && (
@@ -54,6 +54,7 @@ export default function Discussion(props) {
             src={
               "https://se-community-2022.s3.ap-southeast-1.amazonaws.com/" +
               images
+      
             }
             className={classes.img}
           />

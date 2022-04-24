@@ -17,6 +17,7 @@ function Discussions(props) {
   const nextPageHandler = (title) => {
     router.push(`/Feed/Discussions/CreateDiscussion/`);
   };
+  console.log("this is the main dis", props)
   return (
     <Layout nextPageHandler={nextPageHandler}>
       <div style={{ marginBottom: "10px" }} onClick={() => router.push("Feed/Discussions")} >
@@ -28,7 +29,7 @@ function Discussions(props) {
         return (
           <Discussion
             title={discussion.description}
-            images={discussion.images[0]}
+            images={discussion.images}
             like={discussion.likers ? discussion.likers.length : 0}
             comment={discussion.comments.length}
             user={discussion.user}

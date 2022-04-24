@@ -15,6 +15,7 @@ const CreateNews = (props) => {
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
 
+  console.log("this is image:", image)
   //Functions
   const router = useRouter();
   const handlePostType = (postType) => {
@@ -31,6 +32,7 @@ const CreateNews = (props) => {
   const handleSubmit = () => {
     console.log('***this is posting a job')
     console.log(description, postType)
+    console.log(image)
     
     const cookie = parseCookies()
     const { token } = cookie
@@ -47,7 +49,7 @@ const CreateNews = (props) => {
       const formData = new FormData();
       formData.append("description", description);
       formData.append("postType", "news");
-      formData.append("images", [image]);
+      formData.append("images", image);
       formData.append("likers", []);
 
       const result = await News.post({
