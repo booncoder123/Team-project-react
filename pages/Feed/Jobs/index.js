@@ -26,10 +26,10 @@ function JobDetails(props) {
     { title: "ta" },
   ];
   return (
-    <Layout>
-      <div style={{ marginBottom: "10px" }} onClick={() => router.push("/Feed/Jobs/JobCreatePost")}>
+    <Layout nextPageHandler={() => {router.push(`/Feed/Jobs/JobCreatePost/`);}}>
+      {/* <div style={{ marginBottom: "10px" }} onClick={() => router.push("/Feed/Jobs/JobCreatePost")}>
           <AddCircleOutlineIcon fontSize="large" />
-      </div>
+      </div> */}
       <div className={classes.filter}>
         <div className={classes.Searchbar}>
           <SearchBar placeholder="Search..." />

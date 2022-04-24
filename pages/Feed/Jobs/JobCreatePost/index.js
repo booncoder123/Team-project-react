@@ -155,7 +155,8 @@ const JobCreatePost = (props) => {
         {/* <Test defaultContent=""
         /> */}
         <WYSIWYGEditor 
-        setValue={setDescription}/>
+        setValue={setDescription}
+        height={'100px'}/>
       </div>
       <div className={classes.button}>
         <RectangularButton

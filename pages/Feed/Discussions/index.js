@@ -6,13 +6,22 @@ import { useState } from "react";
 import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
 import Post from "../../../lib/api/discussions";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { parseCookies } from "../../../helpers/cookie";
 import { useEffect } from "react";
+import {useRouter} from "next/router";
+
 function Discussions(props) {
   const [postMessage, setPostMessage] = useState("");
-
+  const router = useRouter();
+  const nextPageHandler = (title) => {
+    router.push(`/Feed/Discussions/CreateDiscussion/`);
+  };
+  console.log("this is the main dis", props)
   return (
-    <Layout>
+    <Layout nextPageHandler={nextPageHandler}>
+      <div style={{ marginBottom: "10px" }} onClick={() => router.push("Feed/Discussions")} >
+      </div>
       <DiscussionPost value={postMessage} setValue={setPostMessage} />
       {props.discussions.data.map((discussion) => {
         console.log("discussion", discussion);
@@ -20,7 +29,7 @@ function Discussions(props) {
         return (
           <Discussion
             title={discussion.description}
-            images={discussion.images[0]}
+            images={discussion.images}
             like={discussion.likers ? discussion.likers.length : 0}
             comment={discussion.comments.length}
             user={discussion.user}
