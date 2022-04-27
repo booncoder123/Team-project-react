@@ -8,8 +8,6 @@ import { parseCookies } from "../../../../helpers/cookie";
 import WYSIWYGEditor from "../../../../components/Editor";
 import Discussions from "../../../../lib/api/discussions";
 
-
-
 const CreateDiscussion = (props) => {
   //Values and Set Values
   const [postType, setPostType] = useState("");
@@ -40,7 +38,7 @@ const CreateDiscussion = (props) => {
     console.log(token)
     postDataToDatabase(token);
 
-    // router.push('/Feed/Discussion/')
+    router.push('/Feed/Discussions/')
   };
   const handleCancel = () => {
     router.push('/Feed/Discussions/')
@@ -49,7 +47,7 @@ const CreateDiscussion = (props) => {
     try {
       const formData = new FormData();
       formData.append("description", description);
-      formData.append("postType", "disscusion");
+      formData.append("postType", "discussion");
       formData.append("images", image);
       // for (let i = 0; i < image.length; i++) {
       //   formData.append("images", image[i]);
