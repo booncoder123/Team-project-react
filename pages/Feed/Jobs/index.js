@@ -20,22 +20,11 @@ function JobDetails(props) {
     router.push(`Jobs/JobDetails?jobId=${title}`);
   };
 
-  //Type Options
   const types = [
-    { label: "full-time" },
-    { label: "part-time" },
-    { label: "intern" },
+    { title: "full-time" },
+    { title: "part-time" },
+    { title: "ta" },
   ];
-
-  const [type, setType] = useState(null);
-  const [inputType, setInputType] = useState('');
-
-  const handleType = (event, newValue) => {
-    setType(newValue);
-  }
-  const handleInputType = (event, newInputValue) => {
-    setInputType(newInputValue);
-  }
   return (
     <Layout nextPageHandler={() => {router.push(`/Feed/Jobs/JobCreatePost/`);}}>
       {/* <div style={{ marginBottom: "10px" }} onClick={() => router.push("/Feed/Jobs/JobCreatePost")}>
@@ -48,12 +37,8 @@ function JobDetails(props) {
         <div className={classes.Dropdown}>
           <Dropdown placeholder="Type"
           options={types}
-          setValue={setType}
-          onChange={handleType}
-          inputValue={inputType}
-          setInputValue={setInputType}
-          onInputChange={handleInputType}
           />
+         
         </div>
       </div>
       <div
