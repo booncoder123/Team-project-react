@@ -29,8 +29,6 @@ function Profile(props) {
   const cookies = parseCookies();
   const { token } = cookies;
   useEffect(async () => {
-    
-
     try {
       const userDetail = await User.get({
         type: User.GET_USER_BY_ID,
@@ -69,19 +67,19 @@ function Profile(props) {
 
   const changeUsername = async () => {
     try {
+      const formData = new FormData();
+      formData.append("username", newName);
+
       const result = await User.post({
         type: User.UPDATE_USER_DETAIL,
         token,
-        body: {
-          username: newName,
-          images:[],
-        },
+        body: formData,
       });
-      setUsername(result.data.data.username)
+      setUsername(result.data.data.username);
     } catch (error) {
       console.log("error", error);
     }
-    setOpen(false)
+    setOpen(false);
   };
 
   function nextPagehandler(pageUrl) {
@@ -132,12 +130,24 @@ function Profile(props) {
               defaultValue={username}
               value={newName}
               color="warning"
-              onChange={(e)=>{setNewName(e.target.value)}}
+              onChange={(e) => {
+                setNewName(e.target.value);
+              }}
               sx={{ marginLeft: "10px", marginRight: "10px" }}
             />
             <DialogActions>
-              <button className={classes.dialogButtonCancel} onClick={handleClose}>Cancel</button>
-              <button className={classes.dialogButtonConfirm} onClick={changeUsername}>Confirm</button>
+              <button
+                className={classes.dialogButtonCancel}
+                onClick={handleClose}
+              >
+                Cancel
+              </button>
+              <button
+                className={classes.dialogButtonConfirm}
+                onClick={changeUsername}
+              >
+                Confirm
+              </button>
             </DialogActions>
           </Dialog>
         </div>
