@@ -84,6 +84,7 @@ const JobCreatePost = (props) => {
         token,
       });
       console.log("Result", result);
+      router.push('/Feed/Jobs/')
     } catch (error) {
       console.log("error", error);
     }

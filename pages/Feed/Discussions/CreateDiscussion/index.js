@@ -38,7 +38,7 @@ const CreateDiscussion = (props) => {
     console.log(token)
     postDataToDatabase(token);
 
-    router.push('/Feed/Discussions/')
+    // router.push('/Feed/Discussions/')
   };
   const handleCancel = () => {
     router.push('/Feed/Discussions/')
@@ -60,6 +60,7 @@ const CreateDiscussion = (props) => {
         token,
       });
       console.log("Result", result);
+      router.push('/Feed/Discussions/')
     } catch (error) {
       console.log("error", error);
     }
