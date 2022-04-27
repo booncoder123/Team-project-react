@@ -1,6 +1,7 @@
 import classes from "./index.module.css";
 import TextField from "../../../components/TextField"
 import Dropdown from "../../../components/Dropdown";
+import SingleImageUpload from "../../../components/SingleImageUpload";
 import RectangularButton from "../../../components/RectangularButton";
 import { useState,useEffect } from 'react';
 import { useRouter } from "next/router";
@@ -58,12 +59,12 @@ const CreateProject = (props) => {
   }
   const handleSubmit2 = () => {
     console.log(inputType);
-    console.log(description)
-    console.log(typeof description)
+    console.log(inputYear)
+    console.log(parseInt(inputYear))
+    console.log(typeof parseInt(inputYear))
   }
   const handleSubmit = () => {
     console.log('***this is posting a job')
-    console.log(name, intro)
     
     const cookie = parseCookies()
     const { token } = cookie
@@ -80,12 +81,12 @@ const CreateProject = (props) => {
     try {
       //Unsolved
       const formData = new FormData();
-      formData.append("name", "name");
-      formData.append("intro", "intro");
-      // formData.append("images", "image");
-      formData.append("type", ["ai", "iot"]);
-      formData.append("year", [1, 2]);
-      formData.append("description", "description");
+      formData.append("name", name);
+      formData.append("intro", intro);
+      formData.append("images", image);
+      formData.append("type", [inputType]);
+      formData.append("year", [parseInt(inputYear)]);
+      formData.append("description", description);
 
       const result = await Projects.post({
         type: Projects.CREATE_PROJECT,
@@ -124,11 +125,12 @@ const CreateProject = (props) => {
           setValue={setIntro}
           inputProps={{
               style: {
-                height: '70px',
+                height: '50px',
                 padding: '0 14px',
               },
           }}
         />
+        <SingleImageUpload setImage={setImage}/>
       </div>
       <div className={classes.DropdownContainer}>
         <div className={classes.Dropdown}>
@@ -159,7 +161,8 @@ const CreateProject = (props) => {
       <div>
         Description
         <WYSIWYGEditor 
-        setValue={setDescription}/>
+        setValue={setDescription}
+        height={'100px'}/>
       </div>
       <div className={classes.button}>
         <RectangularButton
