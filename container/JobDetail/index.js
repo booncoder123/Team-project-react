@@ -4,6 +4,13 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useRouter } from "next/router";
 export default function JobDetailContainer(props) {
   const router = useRouter();
+  const nextPageHandler = (title) => {
+    router.push(title);
+  };
+  const nextPageHandler2 = (title) => {
+    window.open(title, "_blank");
+  }
+
   return (
     <div className={classes.JobDetail}>
       <div className={classes.banner}>
@@ -30,6 +37,7 @@ export default function JobDetailContainer(props) {
             }}
             url="/SignIn"
             name="Apply Now"
+            onClick={() => {nextPageHandler2(props.applyLink)}}
           />
         </div>
       </div>

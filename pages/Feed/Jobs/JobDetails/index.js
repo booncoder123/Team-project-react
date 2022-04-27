@@ -20,6 +20,7 @@ function JobDetail(props) {
             title={props.jobs.data.title}
             type={props.jobs.data.types}
             description={props.jobs.data.description}
+            applyLink={props.jobs.data.applyLink}
           />
         
         </div>
