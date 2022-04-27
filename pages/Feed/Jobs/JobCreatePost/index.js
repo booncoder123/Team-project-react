@@ -52,18 +52,17 @@ const JobCreatePost = (props) => {
     console.log(inputType);
     console.log(description)
     console.log(typeof description)
+    console.log(applyLink)
   }
   const handleSubmit = () => {
     console.log('***this is posting a job')
-    console.log(company, position)
     
     const cookie = parseCookies()
     const { token } = cookie
     console.log(token)
     postDataToDatabase(token);
 
-    router.push('/Feed/Jobs/')
-
+    // router.push('/Feed/Jobs/')
   };
   const handleCancel = () => {
     router.push('/Feed/Jobs/')
@@ -77,6 +76,7 @@ const JobCreatePost = (props) => {
       formData.append("images", image);
       formData.append("types", inputType);
       formData.append("description", description);
+      formData.append("applyLink", applyLink);
 
       const result = await Jobs.post({
         type: Jobs.CREATE_JOB,

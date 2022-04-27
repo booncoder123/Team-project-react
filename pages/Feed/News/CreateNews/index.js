@@ -39,7 +39,7 @@ const CreateNews = (props) => {
     console.log(token)
     postDataToDatabase(token);
 
-    // router.push('/Feed/News/')
+    router.push('/Feed/News/')
   };
   const handleCancel = () => {
     router.push('/Feed/News/')
@@ -89,5 +89,5 @@ const CreateNews = (props) => {
   );
 };
   
-  export default withAuth(CreateNews);
+export default withAuth(CreateNews);
   

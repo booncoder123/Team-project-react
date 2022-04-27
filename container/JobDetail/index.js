@@ -16,8 +16,6 @@ export default function JobDetailContainer(props) {
         <div className={classes.jobIntro}>
           <div>Position: {props.title}</div>
           <div>Type: {props.type}</div>
-          
-
          
         </div>
         <div className={classes.description}>
