@@ -18,8 +18,8 @@
 
 .addPhotoIcon {
   position: absolute;
-  background-color: var(--neutral);
-  left: 58%;
+  right: 0px;
+  bottom: 0px;
   padding: 3px;
   border-radius: 50%;
   filter: drop-shadow(2px 3px 3px var(--dark));
@@ -50,22 +50,21 @@
   margin: 35px;
 }
 
-.dialogButtonCancel{
+.dialogButtonCancel {
   background: var(--secondary-dark);
-  border:none;
-  padding:5px;
-  border-radius:5px;
-  color: var(--neutral)
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: var(--neutral);
 }
 
-.dialogButtonConfirm{
+.dialogButtonConfirm {
   background: var(--orange);
-  border:none;
-  padding:5px;
-  border-radius:5px;
-  color: var(--neutral)
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: var(--neutral);
 }
-
 
 .savedItems button {
   background-color: var(--orange);
@@ -101,6 +100,6 @@
   color: var(--secondary-light);
   background-color: var(--secondary-dark);
   border-radius: 5px;
-  padding:10px;
+  padding: 10px;
   border: none;
 }
