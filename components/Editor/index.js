@@ -33,6 +33,14 @@ const WYSIWYGEditor = ({setValue, height}) => {
           fontSize: 13,
 
         }}
+        // toolbar={{
+        //   options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'embedded', 'emoji', 'image', 'remove', 'history'],
+        //   inline: { inDropdown: true },
+        //   list: { inDropdown: true },
+        //   textAlign: { inDropdown: true },
+        //   link: { inDropdown: true },
+        //   history: { inDropdown: true },
+        // }}
         wrapperClassName="demo-wrapper"
         editorClassName="demo-editor"
         onEditorStateChange={onEditorStateChange}
