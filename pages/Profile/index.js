@@ -15,8 +15,6 @@ import { User } from "../../lib/api";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { async } from "@firebase/util";
