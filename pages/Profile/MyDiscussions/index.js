@@ -12,7 +12,6 @@ function MyDiscussions(props) {
   function nextPagehandler() {
     router.push("/Profile");
   }
-  console.log("prDis: ", props)
   return (
     <div className={classes.container}>
       <div className={classes.title}>My Discussions</div>
