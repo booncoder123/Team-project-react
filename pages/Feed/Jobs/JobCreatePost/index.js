@@ -64,7 +64,7 @@ const JobCreatePost = (props) => {
     // router.push('/Feed/Jobs/')
   };
   const handleCancel = () => {
-    router.push('/Feed/Jobs/')
+    router.push('/Feed/Jobs')
   };
 
   const postDataToDatabase = async (token) => {
@@ -83,7 +83,7 @@ const JobCreatePost = (props) => {
         token,
       });
       console.log("Result", result);
-      router.push('/Feed/Jobs/')
+      router.push('/Feed/Jobs')
     } catch (error) {
       console.log("error", error);
     }
