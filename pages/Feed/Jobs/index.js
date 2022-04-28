@@ -7,7 +7,6 @@ import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
 import SearchBar from "../../../components/SearchBar";
 import Dropdown from "../../../components/Dropdown";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Jobs from "../../../lib/api/jobs";
 import { parseCookies } from "../../../helpers/cookie";
 import { push } from "draft-js/lib/EditorState";
@@ -27,6 +26,8 @@ function JobDetails(props) {
     { label: "intern" },
   ];
 
+  //
+
   const [type, setType] = useState(null);
   const [inputType, setInputType] = useState("");
 
@@ -37,14 +38,7 @@ function JobDetails(props) {
     setInputType(newInputValue);
   };
   return (
-    <Layout
-      nextPageHandler={() => {
-        router.push(`/Feed/Jobs/JobCreatePost/`);
-      }}
-    >
-      {/* <div style={{ marginBottom: "10px" }} onClick={() => router.push("/Feed/Jobs/JobCreatePost")}>
-          <AddCircleOutlineIcon fontSize="large" />
-      </div> */}
+    <Layout nextPageHandler={() => {router.push(`/Feed/Jobs/JobCreatePost/`);}}>
       <div className={classes.filter}>
         <div className={classes.Searchbar}>
           <SearchBar placeholder="Search..." />
@@ -61,7 +55,8 @@ function JobDetails(props) {
           />
         </div>
       </div>
-      <div>
+      <div
+      >
         {props.jobs.data.map((discussion) => {
           return (
             <JobPost

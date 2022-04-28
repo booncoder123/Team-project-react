@@ -39,7 +39,7 @@ const CreateNews = (props) => {
     console.log(token)
     postDataToDatabase(token);
 
-    router.push('/Feed/News/')
+    // router.push('/Feed/News/')
   };
   const handleCancel = () => {
     router.push('/Feed/News/')
@@ -58,6 +58,7 @@ const CreateNews = (props) => {
         token,
       });
       console.log("Result", result);
+      router.push('/Feed/News/')
     } catch (error) {
       console.log("error", error);
     }

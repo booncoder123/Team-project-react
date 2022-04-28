@@ -94,6 +94,7 @@ const CreateProject = (props) => {
         token,
       });
       console.log("Result", result);
+      router.push('/Projects/')
     } catch (error) {
       console.log("error", error);
     }

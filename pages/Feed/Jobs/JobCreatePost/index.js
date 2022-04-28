@@ -5,7 +5,6 @@ import RectangularButton from "../../../../components/RectangularButton";
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 import withAuth from "../../../../helpers/withAuth"
-import Test from "../../../../components/Draft"
 import { parseCookies } from "../../../../helpers/cookie";
 import Jobs from "../../../../lib/api/jobs";
 import SingleImageUpload from "../../../../components/SingleImageUpload";
@@ -84,6 +83,7 @@ const JobCreatePost = (props) => {
         token,
       });
       console.log("Result", result);
+      router.push('/Feed/Jobs/')
     } catch (error) {
       console.log("error", error);
     }
@@ -152,8 +152,6 @@ const JobCreatePost = (props) => {
       </div>
       <div>
         Job Detail
-        {/* <Test defaultContent=""
-        /> */}
         <WYSIWYGEditor 
         setValue={setDescription}
         height={'100px'}/>
