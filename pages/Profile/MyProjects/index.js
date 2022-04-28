@@ -1,12 +1,14 @@
 import classes from "./index.module.css";
 import { useRouter } from "next/router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ProjectPost from "../../../container/ProjectPost";
 import { projects } from "../../../const/mockProject";
 import withAuth from "../../../helpers/withAuth";
-
-function MyProjects() {
+import ProfileProject from "../../../container/ProfileProject";
+import Profile from "../../../lib/api/profile";
+import {parseCookies} from "../../../helpers/cookie";
+function MyProjects(props) {
   const router = useRouter();
+  console.log("Project", props)
   function nextPagehandler() {
     router.push("/Profile");
   }
@@ -18,15 +20,13 @@ function MyProjects() {
         My Posts
       </div>
       <div className={classes.content}>
-        {projects.map((project) => {
+        {props.projects.data.map((projectDetail) => {
           return (
-            <ProjectPost
-              name={project.name}
-              intro={project.intro}
-              type={project.type}
-              year={project.year}
-              description={project.description}
-              images={project.images}
+            <ProfileProject
+              name={projectDetail.project.name}
+              intro={projectDetail.project.intro}
+              type={projectDetail.type}
+              images={projectDetail.images}
             />
           );
         })}
@@ -36,3 +36,21 @@ function MyProjects() {
 }
 
 export default withAuth(MyProjects);
+
+export async function getServerSideProps({ req }) {
+  const cookies = parseCookies(req);
+  const { token } = cookies;
+  try {
+    const projects = await Profile.get({
+      type: Profile.GET_PROJECTS,
+      token,
+    });
+
+    return {
+      props: { token, projects: projects.data },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
+}

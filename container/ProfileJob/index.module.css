@@ -50,3 +50,19 @@
       display: flex;
       justify-content: flex-end;
   }
+  
+  .dialogButtonCancel{
+    background: var(--secondary-dark);
+    border:none;
+    padding:5px;
+    border-radius:5px;
+    color: var(--neutral)
+  }
+  
+  .dialogButtonConfirm{
+    background: var(--orange);
+    border:none;
+    padding:5px;
+    border-radius:5px;
+    color: var(--neutral)
+  }
