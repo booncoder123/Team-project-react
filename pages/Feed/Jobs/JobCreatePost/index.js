@@ -153,8 +153,6 @@ const JobCreatePost = (props) => {
       </div>
       <div>
         Job Detail
-        {/* <Test defaultContent=""
-        /> */}
         <WYSIWYGEditor 
         setValue={setDescription}
         height={'100px'}/>
