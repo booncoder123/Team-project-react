@@ -75,7 +75,7 @@ const CreateProject = (props) => {
 
   };
   const handleCancel = () => {
-    router.push('/Projects/')
+    router.push('/Projects')
   };
   const postDataToDatabase = async (token) => {
     try {
@@ -94,7 +94,7 @@ const CreateProject = (props) => {
         token,
       });
       console.log("Result", result);
-      router.push('/Projects/')
+      router.push('/Projects')
     } catch (error) {
       console.log("error", error);
     }
