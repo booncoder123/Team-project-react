@@ -9,15 +9,14 @@ import Post from "../../lib/api/discussions";
 import { parseCookies } from "../../helpers/cookie";
 
 export default function Discussion(props) {
-  const { title, images, like, comment, user, id ,clicked,likers } = props;
+  const { title, images, like, comment, user, id, clicked, likers } = props;
   const [counter, setCounter] = useState(props.like);
   // const counter = props.like
   const cookie = parseCookies();
   const { token } = cookie;
 
   const clickedLike = () => {
-  
-    updateLike()
+    updateLike();
   };
   const updateLike = async () => {
     try {
@@ -54,14 +53,19 @@ export default function Discussion(props) {
             src={
               "https://se-community-2022.s3.ap-southeast-1.amazonaws.com/" +
               images
-      
             }
             className={classes.img}
           />
-        ):<div></div>}
+        ) : (
+          <div></div>
+        )}
       </div>
       <div className={classes.ActivityButton}>
-        <LikeButton numLikes={counter} onClicked={clickedLike} clicked={likers ? likers.includes(user._id): false} />
+        <LikeButton
+          numLikes={counter}
+          onClicked={clickedLike}
+          clicked={likers.includes(user._id)}
+        />
         <CommentButton numComments={comment} id={id} />
       </div>
     </div>

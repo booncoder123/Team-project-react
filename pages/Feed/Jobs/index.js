@@ -2,7 +2,7 @@ import classes from "./index.module.css";
 import { discussions } from "../../../const/mockUp.js";
 import JobPost from "../../../container/JobPost";
 import { useState } from "react";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import Layout from "../../../components/Layout/Feed";
 import withAuth from "../../../helpers/withAuth";
 import SearchBar from "../../../components/SearchBar";
@@ -28,16 +28,20 @@ function JobDetails(props) {
   ];
 
   const [type, setType] = useState(null);
-  const [inputType, setInputType] = useState('');
+  const [inputType, setInputType] = useState("");
 
   const handleType = (event, newValue) => {
     setType(newValue);
-  }
+  };
   const handleInputType = (event, newInputValue) => {
     setInputType(newInputValue);
-  }
+  };
   return (
-    <Layout nextPageHandler={() => {router.push(`/Feed/Jobs/JobCreatePost/`);}}>
+    <Layout
+      nextPageHandler={() => {
+        router.push(`/Feed/Jobs/JobCreatePost/`);
+      }}
+    >
       {/* <div style={{ marginBottom: "10px" }} onClick={() => router.push("/Feed/Jobs/JobCreatePost")}>
           <AddCircleOutlineIcon fontSize="large" />
       </div> */}
@@ -46,19 +50,18 @@ function JobDetails(props) {
           <SearchBar placeholder="Search..." />
         </div>
         <div className={classes.Dropdown}>
-          <Dropdown placeholder="Type"
-          options={types}
-          setValue={setType}
-          onChange={handleType}
-          inputValue={inputType}
-          setInputValue={setInputType}
-          onInputChange={handleInputType}
+          <Dropdown
+            placeholder="Type"
+            options={types}
+            setValue={setType}
+            onChange={handleType}
+            inputValue={inputType}
+            setInputValue={setInputType}
+            onInputChange={handleInputType}
           />
         </div>
       </div>
-      <div
-
-      >
+      <div>
         {props.jobs.data.map((discussion) => {
           return (
             <JobPost
@@ -66,7 +69,9 @@ function JobDetails(props) {
               jobTitle={discussion.title}
               photo={discussion.images[0]}
               jobIntro={discussion.description}
-              onClick={() => {nextPageHandler(discussion._id)}}
+              onClick={() => {
+                nextPageHandler(discussion._id);
+              }}
             />
           );
         })}
