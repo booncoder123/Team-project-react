@@ -11,7 +11,6 @@ import { parseCookies } from "../../helpers/cookie";
 export default function Discussion(props) {
   const { title, images, like, comment, user, id ,clicked,likers } = props;
   const [counter, setCounter] = useState(props.like);
-  console.log("images: ", images);
   // const counter = props.like
   const cookie = parseCookies();
   const { token } = cookie;
