@@ -11,6 +11,7 @@ import { parseCookies } from "../../helpers/cookie";
 export default function Discussion(props) {
   const { title, images, like, comment, user, id ,clicked,likers } = props;
   const [counter, setCounter] = useState(props.like);
+  console.log("images: ", images);
   // const counter = props.like
   const cookie = parseCookies();
   const { token } = cookie;
@@ -49,7 +50,7 @@ export default function Discussion(props) {
           {/* <div dangerouslySetInnerHTML={{__html: title}} /> */}
         </ShowMoreText>
 
-        {images && (
+        {images.length ? (
           <img
             src={
               "https://se-community-2022.s3.ap-southeast-1.amazonaws.com/" +
@@ -58,7 +59,7 @@ export default function Discussion(props) {
             }
             className={classes.img}
           />
-        )}
+        ):<div></div>}
       </div>
       <div className={classes.ActivityButton}>
         <LikeButton numLikes={counter} onClicked={clickedLike} clicked={likers ? likers.includes(user._id): false} />
