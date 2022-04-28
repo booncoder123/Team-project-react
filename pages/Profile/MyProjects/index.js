@@ -25,8 +25,8 @@ function MyProjects(props) {
             <ProfileProject
               name={projectDetail.project.name}
               intro={projectDetail.project.intro}
-              type={projectDetail.type}
               images={projectDetail.images}
+              postId={projectDetail._id}
             />
           );
         })}
