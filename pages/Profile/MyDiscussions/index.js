@@ -26,6 +26,7 @@ function MyDiscussions(props) {
             <ProfileDiscussion
             title={discussion.description}
             images={discussion.images}
+            postId={discussion._id}
             />
           );
         })}
