@@ -2,10 +2,13 @@ import classes from "./index.module.css";
 import { useRouter } from "next/router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { discussions } from "../../../const/mockUp.js";
-import JobPost from "../../../container/JobPost";
+import ProfileJob from "../../../container/ProfileJob";
 import withAuth from "../../../helpers/withAuth";
+import {parseCookies} from "../../../helpers/cookie";
+import Profile from "../../../lib/api/profile";
 
-function MyJobs() {
+function MyJobs(props) {
+  console.log(props)
   const router = useRouter();
   function nextPagehandler() {
     router.push("/Profile");
@@ -18,13 +21,14 @@ function MyJobs() {
         My Posts
       </div> 
       <div className={classes.content}>
-      {discussions.map((discussion) => {
+      {props.jobDetail.data.map((job) => {
         return (
-          <JobPost
-            title={discussion.title}
-            images={discussion.images}
-            like={discussion.like}
-            comment={discussion.comment}
+          <ProfileJob
+            companyName={job.companyName}
+            jobTitle={job.title}
+            images={job.images[0]}
+            jobIntro={job.description}
+            jobId={job._id}
           />
         );
       })}
@@ -35,3 +39,21 @@ function MyJobs() {
 }
 
 export default withAuth(MyJobs);
+
+export async function getServerSideProps({ req }) {
+  const cookies = parseCookies(req);
+  const { token } = cookies;
+  try {
+    const jobDetail = await Profile.get({
+      type: Profile.GET_JOBS,
+      token,
+    });
+
+    return {
+      props: { token, jobDetail: jobDetail.data },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
+}
