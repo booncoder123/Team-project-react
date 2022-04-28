@@ -1,48 +1,65 @@
 .ProjectPost {
-    background-color: var(--neutral);
-    border-radius: 10px;
-    padding: 25px 19px 25px 19px;
-    margin-top: 11px;
-    margin-bottom: 11px;
-    display: flex;
-    flex-direction: row;
-    gap:5px;
-    font-family: Roboto;
-  }
+  background-color: var(--neutral);
+  border-radius: 10px;
+  padding: 25px 19px 25px 19px;
+  margin-top: 11px;
+  margin-bottom: 11px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  font-family: Roboto;
+}
 
-  .images {
-    display:flex;
-    justify-content: flex-end;
-    /* width:50px;
-    height:70px; */
-    /* background-color: var(--primary); */
-    border-radius: 5px;
-    object-fit: cover;
-    flex:2;
-    width: 50px;
-    height: 200px;
+.images {
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 5px;
+  object-fit: cover;
+  flex: 2;
+  width: 50px;
+  height: 200px;
+}
 
-  }
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  flex-grow: 2;
+}
 
-  .content {
-    display: flex;
-    flex-direction: column;
-    padding:10px;
-    flex-grow:2;
-  }
+.projectName {
+  font-size: 15px;
+  color: var(--orange);
+}
 
-  .projectName{
-    font-size: 15px;
-    color: var(--orange);
-  }
+.projectIntro {
+  font-size: 10px;
+  color: var(--grey);
+}
 
-  
- .projectIntro{
-     font-size: 10px;
-     color: var(--grey);
- }
+.images {
+  width: 100px;
+  height: 100px;
+}
+.delete {
+  display: flex;
+  justify-content: flex-end;
+  padding:0px;
+  margin-left:5px;
+}
 
- .images{
-  width:100px;
-  height:100px;
- }
+.dialogButtonCancel{
+  background: var(--secondary-dark);
+  border:none;
+  padding:5px;
+  border-radius:5px;
+  color: var(--neutral)
+}
+
+.dialogButtonConfirm{
+  background: var(--orange);
+  border:none;
+  padding:5px;
+  border-radius:5px;
+  color: var(--neutral)
+}
