@@ -5,7 +5,6 @@ import RectangularButton from "../../../../components/RectangularButton";
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 import withAuth from "../../../../helpers/withAuth"
-import Test from "../../../../components/Draft"
 import { parseCookies } from "../../../../helpers/cookie";
 import Jobs from "../../../../lib/api/jobs";
 import SingleImageUpload from "../../../../components/SingleImageUpload";
