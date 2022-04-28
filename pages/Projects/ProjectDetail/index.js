@@ -26,7 +26,7 @@ function ProjectDetail(props) {
       <div className={classes.type}>
         Type: {props.project.data[0].project[0].type}
       </div>
-      <div className={classes.images}>
+      {props.project.data[0].images.length ? (<div className={classes.images}>
         <ImageList sx={{  height: 250 }} cols={2} rowHeight={164} gap={20}>
           {props.project.data[0].images.map((item) => (
             <ImageListItem key={item}>
@@ -40,7 +40,7 @@ function ProjectDetail(props) {
             </ImageListItem>
           ))}
         </ImageList>
-      </div>
+      </div>):<div></div>}
       <div>
         <div className={classes.introduction}>
           {props.project.data[0].project[0].intro}
