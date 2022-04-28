@@ -64,7 +64,7 @@ function JobDetails(props) {
             <JobPost
               companyName={discussion.companyName}
               jobTitle={discussion.title}
-              photo={discussion.images[0]}
+              photo={discussion.images}
               jobIntro={discussion.description}
               onClick={() => {nextPageHandler(discussion._id)}}
             />
