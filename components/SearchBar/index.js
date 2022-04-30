@@ -154,14 +154,18 @@ const useStyles = makeStyles(() => ({
 
 export default function SearchBar(props) {
   const classes = useStyles();
-  const { placeholder, items } = props;
+  const { placeholder, options, setValue } = props;
   return (
     <Autocomplete
     freeSolo
       
       classes={classes}
-      options={top100Films}
-      getOptionLabel={(option) => option.title}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      options={options}
+      // getOptionLabel={(option) => option.label}
+      getOptionLabel={(option) => `${option.companyName} ${option.position}`}
       renderInput={(params) => {
         return (
           <TextField
@@ -171,8 +175,6 @@ export default function SearchBar(props) {
             placeholder={placeholder}
             // InputProps={{
             //     ...params.InputProps,
-               
-             
             //   }}
           />
         );
@@ -183,9 +185,18 @@ export default function SearchBar(props) {
           {...props}
           style={{ fontFamily: "Roboto", fontSize: 15 }}
         >
-          {option.title}
+          {option.companyName}: {option.position}
         </Box>
       )}
+      // renderOption={(props, option) => (
+      //   <Box
+      //     component="li"
+      //     {...props}
+      //     style={{ fontFamily: "Roboto", fontSize: 15 }}
+      //   >
+      //     {option.label}
+      //   </Box>
+      // )}
     />
   );
 }

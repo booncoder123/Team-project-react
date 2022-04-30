@@ -20,13 +20,30 @@ function JobDetails(props) {
   };
 
   //Type Options
+  const [searchValue, setSearchValue] = useState("");
+
   const types = [
     { label: "full-time" },
     { label: "part-time" },
     { label: "intern" },
   ];
+  const allJobs = []
+  for (const item of props.jobs.data) {
+    allJobs.push({companyName: item.companyName, position: item.title});
+  }
 
-  //
+  const tempJob = []
+  tempJob.push({
+    companyName: 'robert walters bangkok',
+    title: "director of software engineering",
+    images: ["jobs/625537168acdc12495a56f63/ac820eeefd3078aab7669d3d6fe752c9e8e9a6f9-ab3c-4fd8-bb49-f73467fc0a4c.jpeg"],
+    description: "<p>as a vice president of engineering to director level, you will work on critical areas with a focus on working effectively in a highly collaborative, cross-functional environment. you’ll be responsible for leading the engineering team and driving the core product. this headcount will be another management position who help planning on people development strategy to drive the technical career path for all product, software engineer team. the salary offered is competitive with healthcare insurance.</p>",
+  })
+  console.log(props.jobs.data[0])
+  if (searchValue !== null ) { 
+    console.log('search value', searchValue.companyName)
+
+  }
 
   const [type, setType] = useState(null);
   const [inputType, setInputType] = useState("");
@@ -41,7 +58,10 @@ function JobDetails(props) {
     <Layout nextPageHandler={() => {router.push(`/Feed/Jobs/JobCreatePost/`);}}>
       <div className={classes.filter}>
         <div className={classes.Searchbar}>
-          <SearchBar placeholder="Search..." />
+          <SearchBar 
+          placeholder="Search..." 
+          options={allJobs}
+          setValue={setSearchValue}/>
         </div>
         <div className={classes.Dropdown}>
           <Dropdown
