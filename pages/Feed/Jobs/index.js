@@ -55,12 +55,8 @@ function JobDetails(props) {
   
   //Intersection
   const filteredArrayFunc = (list1, list2) => {
-    if(list1.length < list2.length) {
-      return list1.filter(value => list2.includes(value))
-    }
-    else {
-      return list2.filter(value => list1.includes(value))
-    }
+    const data = [list1, list2]
+    return data.reduce((a, b) => a.filter(c => b.includes(c)))
   }
   const filteredArray = filteredArrayFunc(searchResults, dropDownResults)
 
