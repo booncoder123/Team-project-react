@@ -165,7 +165,7 @@ export default function SearchBar(props) {
       }}
       options={options}
       // getOptionLabel={(option) => option.label}
-      getOptionLabel={(option) => `${option.companyName} ${option.position}`}
+      getOptionLabel={(option) => `${option.companyName} ${option.title}`}
       renderInput={(params) => {
         return (
           <TextField
@@ -185,7 +185,7 @@ export default function SearchBar(props) {
           {...props}
           style={{ fontFamily: "Roboto", fontSize: 15 }}
         >
-          {option.companyName}: {option.position}
+          {option.companyName}: {option.title}
         </Box>
       )}
       // renderOption={(props, option) => (
