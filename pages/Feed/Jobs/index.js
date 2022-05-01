@@ -19,39 +19,27 @@ function JobDetails(props) {
     router.push(`Jobs/JobDetails?jobId=${title}`);
   };
 
-  //Type Options
-  const [searchValue, setSearchValue] = useState("");
+  //Variables and functions
   const types = [
     { label: "full-time" },
     { label: "part-time" },
     { label: "intern" },
   ];
+  const [searchValue, setSearchValue] = useState("");
+  const [type, setType] = useState(null);
+  const [inputType, setInputType] = useState("");
 
-  //List of all job objects
-  // const allJobs = []
-  // for (const item of props.jobs.data) {
-  //   allJobs.push({companyName: item.companyName, position: item.title});
-  // }
-  //Temp list of job objects
-  // const tempJob = []
-  // tempJob.push({
-  //   companyName: 'robert walters bangkok',
-  //   title: "director of software engineering",
-  //   images: ["jobs/625537168acdc12495a56f63/ac820eeefd3078aab7669d3d6fe752c9e8e9a6f9-ab3c-4fd8-bb49-f73467fc0a4c.jpeg"],
-  //   description: "<p>as a vice president of engineering to director level, you will work on critical areas with a focus on working effectively in a highly collaborative, cross-functional environment. you’ll be responsible for leading the engineering team and driving the core product. this headcount will be another management position who help planning on people development strategy to drive the technical career path for all product, software engineer team. the salary offered is competitive with healthcare insurance.</p>",
-  // })
-  //Rendering jobs
-  console.log(props.jobs.data[0])
-  if (searchValue !== null ) { 
-    console.log('search value', searchValue.companyName)
-  }
+  const handleType = (event, newValue) => {
+    setType(newValue);
+  };
+  const handleInputType = (event, newInputValue) => {
+    setInputType(newInputValue);
+  };
 
   //Filter function
   const jobList = props.jobs.data
-  // const tempSearchValue = {companyName: 'robert walters bangkok', position: 'director of software engineering'}
   const searchHandler = (searchValue) => {
     if(searchValue != null) {
-      console.log("in")
       const newJobList = jobList.filter((job) => {
         const searchString = Object.values(searchValue).join(" ").toLowerCase()
         return Object.values(job).join(" ").toLowerCase().includes(searchString)
@@ -63,18 +51,19 @@ function JobDetails(props) {
     }
   }
   const searchResults = searchHandler(searchValue)
-  console.log("search result", searchResults)
+  const dropDownResults = searchHandler(type)
+  
+  //Intersection
+  const filteredArrayFunc = (list1, list2) => {
+    if(list1.length < list2.length) {
+      return list1.filter(value => list2.includes(value))
+    }
+    else {
+      return list2.filter(value => list1.includes(value))
+    }
+  }
+  const filteredArray = filteredArrayFunc(searchResults, dropDownResults)
 
-  //Variables and functions
-  const [type, setType] = useState(null);
-  const [inputType, setInputType] = useState("");
-
-  const handleType = (event, newValue) => {
-    setType(newValue);
-  };
-  const handleInputType = (event, newInputValue) => {
-    setInputType(newInputValue);
-  };
   return (
     <Layout nextPageHandler={() => {router.push(`/Feed/Jobs/JobCreatePost/`);}}>
       <div className={classes.filter}>
@@ -90,7 +79,7 @@ function JobDetails(props) {
             options={types}
             setValue={setType}
             onChange={handleType}
-            inputValue={inputType}
+            // inputValue={inputType}
             setInputValue={setInputType}
             onInputChange={handleInputType}
           />
@@ -98,7 +87,7 @@ function JobDetails(props) {
       </div>
       <div
       >
-        {searchResults.map((discussion) => {
+        {filteredArray.map((discussion) => {
           return (
             <JobPost
               companyName={discussion.companyName}
