@@ -46,7 +46,8 @@ function ProjectDetail(props) {
           {props.project.data[0].project[0].intro}
         </div>
         <div className={classes.description}>
-          {props.project.data[0].project[0].projectDescription}
+        <div dangerouslySetInnerHTML={{__html: props.project.data[0].project[0].projectDescription}} />
+          {/* {props.project.data[0].project[0].projectDescription} */}
         </div>
       </div>
     </div>
