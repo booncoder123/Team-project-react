@@ -3,6 +3,7 @@ import TextField from "../../../components/TextField"
 import Dropdown from "../../../components/Dropdown";
 import SingleImageUpload from "../../../components/SingleImageUpload";
 import RectangularButton from "../../../components/RectangularButton";
+import MultipleImageUploadComponent from "../../../components/MultipleImageUpload";
 import { useState,useEffect } from 'react';
 import { useRouter } from "next/router";
 import withAuth from "../../../helpers/withAuth";
@@ -27,7 +28,8 @@ const CreateProject = (props) => {
   //Values and Set Values
   const [name, setName] = useState("");
   const [intro, setIntro] = useState("");
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
   const [type, setType] = useState(null);
   const [inputType, setInputType] = useState('');
@@ -70,20 +72,20 @@ const CreateProject = (props) => {
     const { token } = cookie
     console.log(token)
     postDataToDatabase(token);
-
-    // router.push('/Projects/')
-
   };
   const handleCancel = () => {
     router.push('/Projects')
   };
   const postDataToDatabase = async (token) => {
+    const img = images.file;
     try {
-      //Unsolved
       const formData = new FormData();
       formData.append("name", name);
       formData.append("intro", intro);
-      formData.append("images", image);
+      for (let i = 0; i < img.length; i++) {
+        formData.append("images", img[i]);
+      }
+      formData.append("likers", []);
       formData.append("type", [inputType]);
       formData.append("year", [parseInt(inputYear)]);
       formData.append("description", description);
@@ -131,7 +133,7 @@ const CreateProject = (props) => {
               },
           }}
         />
-        <SingleImageUpload setImage={setImage}/>
+        <MultipleImageUploadComponent setImage={setImages} />
       </div>
       <div className={classes.DropdownContainer}>
         <div className={classes.Dropdown}>
