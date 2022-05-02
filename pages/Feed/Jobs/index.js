@@ -19,15 +19,13 @@ function JobDetails(props) {
     router.push(`Jobs/JobDetails?jobId=${title}`);
   };
 
-  //Type Options
+  //Variables and functions
   const types = [
     { label: "full-time" },
     { label: "part-time" },
     { label: "intern" },
   ];
-
-  //
-
+  const [searchValue, setSearchValue] = useState("");
   const [type, setType] = useState(null);
   const [inputType, setInputType] = useState("");
 
@@ -37,11 +35,41 @@ function JobDetails(props) {
   const handleInputType = (event, newInputValue) => {
     setInputType(newInputValue);
   };
+
+  //Filter function
+  const jobList = props.jobs.data
+  const searchHandler = (searchValue) => {
+    if(searchValue != null) {
+      const newJobList = jobList.filter((job) => {
+        const searchString = Object.values(searchValue).join(" ").toLowerCase()
+        return Object.values(job).join(" ").toLowerCase().includes(searchString)
+      });
+      return newJobList
+    }
+    else {
+      return jobList
+    }
+  }
+  const searchResults = searchHandler(searchValue)
+  const dropDownResults = searchHandler(type)
+  
+  //Intersection
+  const filteredArrayFunc = (list1, list2) => {
+    const data = [list1, list2]
+    return data.reduce((a, b) => a.filter(c => b.includes(c)))
+  }
+  const filteredArray = filteredArrayFunc(searchResults, dropDownResults)
+
   return (
     <Layout nextPageHandler={() => {router.push(`/Feed/Jobs/JobCreatePost/`);}}>
       <div className={classes.filter}>
         <div className={classes.Searchbar}>
-          <SearchBar placeholder="Search..." />
+          <SearchBar 
+          placeholder="Search..." 
+          options={props.jobs.data}
+          setValue={setSearchValue}
+          getOptionLabel={(option) => `${option.companyName}: ${option.title}`}
+          />
         </div>
         <div className={classes.Dropdown}>
           <Dropdown
@@ -49,7 +77,7 @@ function JobDetails(props) {
             options={types}
             setValue={setType}
             onChange={handleType}
-            inputValue={inputType}
+            // inputValue={inputType}
             setInputValue={setInputType}
             onInputChange={handleInputType}
           />
@@ -57,7 +85,7 @@ function JobDetails(props) {
       </div>
       <div
       >
-        {props.jobs.data.map((discussion) => {
+        {filteredArray.map((discussion) => {
           return (
             <JobPost
               companyName={discussion.companyName}

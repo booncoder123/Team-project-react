@@ -24,7 +24,7 @@ function Discussions(props) {
         style={{ marginBottom: "10px" }}
         onClick={() => router.push("Feed/Discussions")}
       ></div>
-      <DiscussionPost value={postMessage} setValue={setPostMessage} />
+      {/* <DiscussionPost value={postMessage} setValue={setPostMessage} /> */}
       {props.discussions.data.map((discussion) => {
         console.log("discussion", discussion);
 
