@@ -67,7 +67,9 @@ function JobDetails(props) {
           <SearchBar 
           placeholder="Search..." 
           options={props.jobs.data}
-          setValue={setSearchValue}/>
+          setValue={setSearchValue}
+          getOptionLabel={(option) => `${option.companyName}: ${option.title}`}
+          />
         </div>
         <div className={classes.Dropdown}>
           <Dropdown

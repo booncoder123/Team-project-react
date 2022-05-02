@@ -154,7 +154,7 @@ const useStyles = makeStyles(() => ({
 
 export default function SearchBar(props) {
   const classes = useStyles();
-  const { placeholder, options, setValue } = props;
+  const { placeholder, options, setValue, getOptionLabel } = props;
   return (
     <Autocomplete
     freeSolo
@@ -165,7 +165,7 @@ export default function SearchBar(props) {
       }}
       options={options}
       // getOptionLabel={(option) => option.label}
-      getOptionLabel={(option) => `${option.companyName} ${option.title}`}
+      getOptionLabel={getOptionLabel}
       renderInput={(params) => {
         return (
           <TextField
@@ -179,15 +179,15 @@ export default function SearchBar(props) {
           />
         );
       }}
-      renderOption={(props, option) => (
-        <Box
-          component="li"
-          {...props}
-          style={{ fontFamily: "Roboto", fontSize: 15 }}
-        >
-          {option.companyName}: {option.title}
-        </Box>
-      )}
+      // renderOption={(props, option) => (
+      //   <Box
+      //     component="li"
+      //     {...props}
+      //     style={{ fontFamily: "Roboto", fontSize: 15 }}
+      //   >
+      //     {option.companyName}: {option.title}
+      //   </Box>
+      // )}
       // renderOption={(props, option) => (
       //   <Box
       //     component="li"
