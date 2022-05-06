@@ -30,7 +30,12 @@ function Profile(props) {
   const cookies = parseCookies();
   const { token } = cookies;
   const [value, setValue] = useState(null);
+  console.log("Value here", username);
+  console.log("Value here", newName);
+  console.log("Value here", photo);
   console.log("Value here", value);
+  console.log("Value here", open);
+
   useEffect(async () => {
     try {
       const userDetail = await User.get({
