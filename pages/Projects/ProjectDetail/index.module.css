@@ -1,0 +1,53 @@
+.container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto Bold;
+    background: var(--neutral);
+}
+
+.title{
+    font-size: 33px;
+    padding: 25px 25px 15px 15px;
+    color: var(--orange);
+}
+
+
+.introduction{
+    font-size: 12px;
+    color: var(--grey);
+    padding: 25px 25px 15px 25px;
+
+
+}
+
+.description{
+    text-indent:2rem;
+    font-size: 12px;
+    color: var(--dark);
+    font-family: Roboto;
+    padding: 15px 25px 0px 25px;
+}
+
+.banner{
+    background: var(--secondary-dark);
+    color: var(--neutral);
+    padding:15px;
+    color: var(--neutral);
+    margin-top:39px;
+}
+.images{
+    padding:20px 10px 20px 10px;
+    margin-bottom:0;
+}
+
+.type{
+    font-family: Roboto;
+    border-radius: 10px;
+    background: var(--orange);
+    display: table;
+    margin: 10px auto 0px 10px;
+    padding: 10px;
+    font-size: 12px;
+    color: #fff;
+}

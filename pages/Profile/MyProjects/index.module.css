@@ -16,6 +16,5 @@
 .banner{
     background-color: var(--secondary-dark);
     padding:15px;
-    border-radius: 5px;
     color: var(--secondary-light);
 }

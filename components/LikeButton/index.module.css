@@ -1,0 +1,14 @@
+.reactButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+  }
+  
+  .number {
+    font-size: 12px;
+    font-family: Roboto;
+    color: var(--grey);
+    display:flex;
+    align-items: center;
+  }

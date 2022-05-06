@@ -5,7 +5,6 @@ import { makeStyles } from '@mui/styles';
 
 import Box from "@mui/material/Box";
 
-
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
   { title: "The Godfather", year: 1972 },
@@ -155,14 +154,18 @@ const useStyles = makeStyles(() => ({
 
 export default function SearchBar(props) {
   const classes = useStyles();
-  const { placeholder } = props;
+  const { placeholder, options, setValue, getOptionLabel } = props;
   return (
     <Autocomplete
     freeSolo
       
       classes={classes}
-      options={top100Films}
-      getOptionLabel={(option) => option.title}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      options={options}
+      // getOptionLabel={(option) => option.label}
+      getOptionLabel={getOptionLabel}
       renderInput={(params) => {
         return (
           <TextField
@@ -172,23 +175,28 @@ export default function SearchBar(props) {
             placeholder={placeholder}
             // InputProps={{
             //     ...params.InputProps,
-               
-             
             //   }}
           />
         );
       }}
-      renderOption={(props, option) => (
-        <Box
-          component="li"
-          {...props}
-          style={{ fontFamily: "Roboto", fontSize: 15 }}
-        >
-          {option.title}
-        </Box>
-      )}
+      // renderOption={(props, option) => (
+      //   <Box
+      //     component="li"
+      //     {...props}
+      //     style={{ fontFamily: "Roboto", fontSize: 15 }}
+      //   >
+      //     {option.companyName}: {option.title}
+      //   </Box>
+      // )}
+      // renderOption={(props, option) => (
+      //   <Box
+      //     component="li"
+      //     {...props}
+      //     style={{ fontFamily: "Roboto", fontSize: 15 }}
+      //   >
+      //     {option.label}
+      //   </Box>
+      // )}
     />
   );
 }
-
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top

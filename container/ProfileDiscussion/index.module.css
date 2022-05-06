@@ -1,0 +1,40 @@
+.Discussion {
+    background-color: var(--neutral);
+    border-radius: 10px;
+    padding: 18px 35px 16px 21px;
+    margin-top: 11px;
+    margin-bottom: 11px;
+  }
+  
+  .heading1 {
+    font-family: Roboto;
+    font-size: 14px;
+    margin-top: 16px;
+    
+  }
+
+  .img {
+      margin-top: 10px;
+    width: 100%;
+  }
+
+  .delete{
+      margin-left:95%
+  }
+
+  .dialogButtonCancel{
+    background: var(--secondary-dark);
+    border:none;
+    padding:5px;
+    border-radius:5px;
+    color: var(--neutral)
+  }
+  
+  .dialogButtonConfirm{
+    background: var(--orange);
+    border:none;
+    padding:5px;
+    border-radius:5px;
+    color: var(--neutral)
+  }
+  

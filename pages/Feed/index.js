@@ -6,7 +6,9 @@ import {discussions} from "../../const/mockUp.js";
 import DiscussionPost from "../../container/Feed/Comment"
 import { useState } from "react";
 import Layout from "../../components/Layout/Feed";
-export default function Feed() {
+import withAuth from "../../helpers/withAuth";
+
+function Feed() {
  const [postMessage, setPostMessage] = useState("");
  const [type, setType] = useState(0)
   return (
@@ -15,4 +17,4 @@ export default function Feed() {
     </Layout>
   );
 }
-
+export default withAuth(Feed);

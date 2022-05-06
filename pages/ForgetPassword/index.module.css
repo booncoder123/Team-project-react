@@ -1,0 +1,45 @@
+.block {
+  background-color: var(--neutral);
+  position: absolute;
+  display: flex;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  top: 30vh;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.input {
+  background: var(--neutral);
+  font-family: Roboto Bold;
+  margin-top: 25vh;
+  width: 100%;
+  height: 75vh;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  padding: 50px;
+}
+
+.bg {
+  background: var(--orange);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  background: var(--orange);
+  font-family: Roboto;
+  font-size: 15px;
+  color: var(--neutral);
+  margin: 0;
+  position: absolute;
+  left:50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  border: none;
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+}

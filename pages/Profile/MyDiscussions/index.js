@@ -1,10 +1,13 @@
 import classes from "./index.module.css";
 import { discussions } from "../../../const/mockUp.js";
-import Discussion from "../../../container/Discussion";
+import ProfileDiscussion from "../../../container/ProfileDiscussion";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useRouter } from "next/router";
+import withAuth from "../../../helpers/withAuth";
+import { parseCookies } from "../../../helpers/cookie";
+import Profile from "../../../lib/api/profile";
 
-export default function MyDiscussions() {
+function MyDiscussions(props) {
   const router = useRouter();
   function nextPagehandler() {
     router.push("/Profile");
@@ -17,17 +20,36 @@ export default function MyDiscussions() {
         My Posts
       </div>
       <div className={classes.content}>
-        {discussions.map((discussion) => {
+        {props.discussions.data.map((discussion) => {
           return (
-            <Discussion
-              title={discussion.title}
-              images={discussion.images}
-              like={discussion.like}
-              comment={discussion.comment}
+            <ProfileDiscussion
+            title={discussion.description}
+            images={discussion.images}
+            postId={discussion._id}
             />
           );
         })}
       </div>
     </div>
   );
+}
+
+export default withAuth(MyDiscussions);
+
+export async function getServerSideProps({ req }) {
+  const cookies = parseCookies(req);
+  const { token } = cookies;
+  try {
+    const discussions = await Profile.get({
+      type: Profile.GET_DISCUSSIONS,
+      token,
+    });
+
+    return {
+      props: { token, discussions: discussions.data },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  return { props: {} };
 }
