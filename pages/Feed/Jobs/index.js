@@ -36,28 +36,36 @@ function JobDetails(props) {
     setInputType(newInputValue);
   };
 
+  //Filter function
+  const jobList = props.jobs || []
+  console.log("job list", jobList)
   const searchHandler = (searchValue) => {
     if (searchValue != null) {
-      const newJobList = props.jobs.filter((job) => {
+      const newJobList = jobList.filter((job) => {
         const searchString = Object.values(searchValue).join(" ").toLowerCase();
-        return Object.values(job)
-          .join(" ")
-          .toLowerCase()
-          .includes(searchString);
+        return Object.values(job).join(" ").toLowerCase().includes(searchString)
       });
       return newJobList;
+    }
+    else {
+      return jobList
     }
   };
   const searchResults = searchHandler(searchValue);
   const dropDownResults = searchHandler(type);
+  console.log("search Results", searchResults)
+  console.log("dropdown Results", dropDownResults)
+
 
   //Intersection
-  const filteredArrayFunc = (list1, list2) => {
-    // const data = [list1, list2];
-    // return data.reduce((a, b) => a.filter((c) => b.includes(c)));
+  const filteredArrayFunc = (list1=[], list2=[]) => {
+    // const data = [...list1, ...list2]
+    // return data.reduce((a, b) => a.filter(c => b.includes(c)))
+    return list1.filter(x => list2.includes(x));
   };
   // const filteredArray = filteredArrayFunc(searchResults, dropDownResults);
-  const filteredArray = props.jobs;
+  const filteredArray = filteredArrayFunc(searchResults, dropDownResults)
+
   return (
     <Layout
       nextPageHandler={() => {
@@ -68,7 +76,7 @@ function JobDetails(props) {
         <div className={classes.Searchbar}>
           <SearchBar
             placeholder="Search..."
-            options={props.jobs.data}
+            options={props.jobs}
             setValue={setSearchValue}
             getOptionLabel={(option) =>
               `${option.companyName}: ${option.title}`
