@@ -1,7 +1,9 @@
 import classes from "./index.module.css";
 import Comment from "../../../../container/Feed/Comment";
-import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
+import { auth } from "../../../../firebase";
+import { User } from "../../../../lib/api";
+import { useState, useEffect } from "react";
 // import Comments from "../../../../lib/api/comment";
 import withAuth from "../../../../helpers/withAuth";
 import CommentApi from "../../../../lib/api/comment";
@@ -16,8 +18,26 @@ function Comments(props) {
   const [value, setValue] = useState("");
   const { comments } = props;
   const [fakedComment, setFakedComment] = useState(comments);
-  const router =useRouter();
-  const {postId} = router.query;  
+  const router = useRouter();
+  const { postId } = router.query;
+  const user = auth.currentUser;
+  const cookies = parseCookies();
+  const [photo, setPhoto] = useState("");
+  const { token } = cookies;
+  useEffect(async () => {
+    try {
+      const userDetail = await User.get({
+        type: User.GET_USER_BY_ID,
+        token,
+        body: {
+          uid: user.uid,
+        },
+      });
+      setPhoto(userDetail.data.data.photoURL);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   // METHOD TO ADD COMMENT
   const addComment = async () => {
@@ -30,12 +50,12 @@ function Comments(props) {
       const comment = await CommentApi.postComment({
         token,
         body: {
-          postId:postId,
+          postId: postId,
           content: value,
         },
       });
       console.log("comment", comment.data.data[0]);
-     const chunk = [...fakedComment, comment.data.data[0]]
+      const chunk = [...fakedComment, comment.data.data[0]];
       setFakedComment(chunk);
       setValue("");
       console.log("comment hereeeee", fakedComment);
@@ -75,24 +95,33 @@ function Comments(props) {
 
       <div className={classes.commentPanel}>
         <div className={classes.comment}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <Avatar
+            alt="Remy Sharp"
+            src={
+              "https://se-community-2022.s3.ap-southeast-1.amazonaws.com/" +
+              photo
+            }
+            style={{ marginRight: "10px" }}
+          />
+
           <TextField
             id="outlined-multiline-static"
             onChange={handleChange}
             value={value}
             multiline
-            rows={2}
+            rows={1}
             placeholder="Write a comment..."
             style={{
               width: "100%",
               marginLeft: 10,
               marginRight: 10,
               backgroundColor: "white",
+              borderRadius: 10,
             }}
           />
           <Button
             variant="contained"
-            style={{ height: 50 }}
+            style={{ height: 50, backgroundColor: "#ff8a00" }}
             onClick={addComment}
           >
             send
