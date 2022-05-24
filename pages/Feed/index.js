@@ -1,9 +1,3 @@
-import classes from "./index.module.css";
-import FeatureDropDown from "../../container/Feed/FeatureDropDown";
-import FeatureList from "../../container/Feed/FeatureList";
-import Discussion from "../../container/Discussion";
-import { discussions } from "../../const/mockUp.js";
-import DiscussionPost from "../../container/Feed/Comment";
 import { useState } from "react";
 import Layout from "../../components/Layout/Feed";
 import withAuth from "../../helpers/withAuth";
