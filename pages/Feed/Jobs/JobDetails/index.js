@@ -1,30 +1,26 @@
 import classes from "./index.module.css";
-import FeatureDropDown from "/container/Feed/FeatureDropDown";
+
 import JobDetailContainer from "../../../../container/JobDetail";
-import { useState } from "react";
-import Layout from "../../../../components/Layout/Jobs";
+
 import withAuth from "../../../../helpers/withAuth";
 import Jobs from "../../../../lib/api/jobs";
 import { parseCookies } from "../../../../helpers/cookie";
 function JobDetail(props) {
   // const [postMessage, setPostMessage] = useState("");
 
-  console.log(props)
+  console.log(props);
   // const [type, setType] = useState(0);
   return (
     <div>
-
-        <div className={classes.content}>
-          <JobDetailContainer
-            companyName={props.jobs.data.companyName}
-            title={props.jobs.data.title}
-            type={props.jobs.data.types}
-            description={props.jobs.data.description}
-            applyLink={props.jobs.data.applyLink}
-          />
-        
-        </div>
-
+      <div className={classes.content}>
+        <JobDetailContainer
+          companyName={props.jobs.data.companyName}
+          title={props.jobs.data.title}
+          type={props.jobs.data.types}
+          description={props.jobs.data.description}
+          applyLink={props.jobs.data.applyLink}
+        />
+      </div>
     </div>
   );
 }

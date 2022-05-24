@@ -36,39 +36,43 @@ function JobDetails(props) {
     setInputType(newInputValue);
   };
 
-  //Filter function
-  const jobList = props.jobs.data
   const searchHandler = (searchValue) => {
-    if(searchValue != null) {
-      const newJobList = jobList.filter((job) => {
-        const searchString = Object.values(searchValue).join(" ").toLowerCase()
-        return Object.values(job).join(" ").toLowerCase().includes(searchString)
+    if (searchValue != null) {
+      const newJobList = props.jobs.filter((job) => {
+        const searchString = Object.values(searchValue).join(" ").toLowerCase();
+        return Object.values(job)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchString);
       });
-      return newJobList
+      return newJobList;
     }
-    else {
-      return jobList
-    }
-  }
-  const searchResults = searchHandler(searchValue)
-  const dropDownResults = searchHandler(type)
-  
+  };
+  const searchResults = searchHandler(searchValue);
+  const dropDownResults = searchHandler(type);
+
   //Intersection
   const filteredArrayFunc = (list1, list2) => {
-    const data = [list1, list2]
-    return data.reduce((a, b) => a.filter(c => b.includes(c)))
-  }
-  const filteredArray = filteredArrayFunc(searchResults, dropDownResults)
-
+    // const data = [list1, list2];
+    // return data.reduce((a, b) => a.filter((c) => b.includes(c)));
+  };
+  // const filteredArray = filteredArrayFunc(searchResults, dropDownResults);
+  const filteredArray = props.jobs;
   return (
-    <Layout nextPageHandler={() => {router.push(`/Feed/Jobs/JobCreatePost/`);}}>
+    <Layout
+      nextPageHandler={() => {
+        router.push(`/Feed/Jobs/JobCreatePost/`);
+      }}
+    >
       <div className={classes.filter}>
         <div className={classes.Searchbar}>
-          <SearchBar 
-          placeholder="Search..." 
-          options={props.jobs.data}
-          setValue={setSearchValue}
-          getOptionLabel={(option) => `${option.companyName}: ${option.title}`}
+          <SearchBar
+            placeholder="Search..."
+            options={props.jobs.data}
+            setValue={setSearchValue}
+            getOptionLabel={(option) =>
+              `${option.companyName}: ${option.title}`
+            }
           />
         </div>
         <div className={classes.Dropdown}>
@@ -83,21 +87,24 @@ function JobDetails(props) {
           />
         </div>
       </div>
-      <div
-      >
-        {filteredArray.map((discussion) => {
-          return (
-            <JobPost
-              companyName={discussion.companyName}
-              jobTitle={discussion.title}
-              photo={discussion.images}
-              jobIntro={discussion.description}
-              onClick={() => {
-                nextPageHandler(discussion._id);
-              }}
-            />
-          );
-        })}
+      <div>
+        {filteredArray.length ? (
+          filteredArray.map((discussion) => {
+            return (
+              <JobPost
+                companyName={discussion.companyName}
+                jobTitle={discussion.title}
+                photo={discussion.images}
+                jobIntro={discussion.description}
+                onClick={() => {
+                  nextPageHandler(discussion._id);
+                }}
+              />
+            );
+          })
+        ) : (
+          <div />
+        )}
       </div>
     </Layout>
   );
@@ -108,16 +115,17 @@ export default withAuth(JobDetails);
 export async function getServerSideProps({ req }) {
   const cookies = parseCookies(req);
   const { token } = cookies;
+  let jobsList = [];
   try {
     const jobs = await Jobs.get({
       type: Jobs.GET_JOBS,
       token,
     });
-    return {
-      props: { token, jobs: jobs.data },
-    };
+    jobsList = jobs.data.data;
   } catch (error) {
     console.log(error);
   }
-  return { props: {} };
+  return {
+    props: { token, jobs: jobsList },
+  };
 }

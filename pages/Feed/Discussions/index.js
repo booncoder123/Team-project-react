@@ -14,10 +14,13 @@ import { useRouter } from "next/router";
 function Discussions(props) {
   const [postMessage, setPostMessage] = useState("");
   const router = useRouter();
+  console.log("disscussion", props);
   const nextPageHandler = (title) => {
     router.push(`/Feed/Discussions/CreateDiscussion/`);
   };
   console.log("this is the main dis", props);
+
+  const discussionList = props.discussions;
   return (
     <Layout nextPageHandler={nextPageHandler}>
       <div
@@ -25,21 +28,26 @@ function Discussions(props) {
         onClick={() => router.push("Feed/Discussions")}
       ></div>
       {/* <DiscussionPost value={postMessage} setValue={setPostMessage} /> */}
-      {props.discussions.data.map((discussion) => {
-        console.log("discussion", discussion);
 
-        return (
-          <Discussion
-            title={discussion.description}
-            images={discussion.images}
-            like={discussion.likers ? discussion.likers.length : 0}
-            comment={discussion.comments.length}
-            user={discussion.user}
-            id={discussion._id}
-            likers={discussion.likers}
-          />
-        );
-      })}
+      {discussionList.length ? (
+        discussionList.map((discussion) => {
+          console.log("discussion", discussion);
+
+          return (
+            <Discussion
+              title={discussion.description}
+              images={discussion.images}
+              like={discussion.likers ? discussion.likers.length : 0}
+              comment={discussion.comments.length}
+              user={discussion.user}
+              id={discussion._id}
+              likers={discussion.likers}
+            />
+          );
+        })
+      ) : (
+        <div />
+      )}
     </Layout>
   );
 }
@@ -48,17 +56,18 @@ export default withAuth(Discussions);
 export async function getServerSideProps({ req }) {
   const cookies = parseCookies(req);
   const { token } = cookies;
+  let discussionsList = [];
   try {
     const discussions = await Post.get({
       type: Post.GET_DISCUSSIONS,
       token,
     });
 
-    return {
-      props: { token, discussions: discussions.data },
-    };
+    discussionsList = discussions.data.data;
   } catch (error) {
     console.log(error);
   }
-  return { props: {} };
+  return {
+    props: { token, discussions: discussionsList },
+  };
 }

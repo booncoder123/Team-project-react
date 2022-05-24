@@ -1,4 +1,4 @@
-import FeatureDropDown from "./FeatureDropDown";
+import FeatureDropDown from "../../components/FeatureDropDown";
 import classes from "./index.module.css";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
@@ -116,7 +116,7 @@ function Profile(props) {
     <div className={classes.container}>
       <div className={classes.header}>
         <div>
-          <FeatureDropDown />
+          <FeatureDropDown feature={"Profile"} />
         </div>
         <div className={classes.logout}>
           <button className={classes.button} onClick={handleLogout}>

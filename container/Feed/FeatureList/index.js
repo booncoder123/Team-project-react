@@ -5,38 +5,33 @@ import Box from "@mui/material/Box";
 import classes from "./index.module.css";
 import { useRouter } from "next/router";
 
-
 import ModifyTab from "../../../components/ModifyTab";
 import ModifyTabs from "../../../components/ModifyTabs";
 
-
-
 export default function FeatureList(props) {
-
   const router = useRouter();
 
   const checkCurrentPage = (page) => {
     const router = useRouter();
     // console.log(page,router.pathname.split("/")[2])
-    if(page === router.pathname.split("/")[2]){
+    if (page === router.pathname.split("/")[2]) {
       return 1;
     }
     return 0;
-  
-  }
+  };
 
   const getValue = () => {
     // console.log(router.pathname.split("/")[2]);
     switch (router.pathname.split("/")[2]) {
       case "Discussions":
         return 0;
-      
+
       case "News":
         return 1;
-       
+
       case "Jobs":
         return 2;
-       
+
       default:
         return 0;
     }
@@ -57,7 +52,6 @@ export default function FeatureList(props) {
     }
   };
   const nextPageHandler = (page) => {
-
     router.push(`/Feed/${page}`);
   };
   return (
@@ -68,23 +62,19 @@ export default function FeatureList(props) {
         variant="scrollable"
         scrollButtons={false}
         aria-label="scrollable prevent tabs example"
-        TabIndicatorProps={{  
+        TabIndicatorProps={{
           style: {
-              display: "none",
+            display: "none",
           },
-        }} 
-        
+        }}
       >
-        <ModifyTab label="Discussions" active={checkCurrentPage("Discussions")}/>
-        <ModifyTab label="News" active={checkCurrentPage("News")}/>
-        <ModifyTab label="Jobs" active={checkCurrentPage("Jobs")}/>
-        <ModifyTab label="Item Four" />
-        <ModifyTab label="Item Five" />
-        <ModifyTab label="Item Six" />
-        <ModifyTab label="Item Seven" />
+        <ModifyTab
+          label="Discussions"
+          active={checkCurrentPage("Discussions")}
+        />
+        <ModifyTab label="News" active={checkCurrentPage("News")} />
+        <ModifyTab label="Jobs" active={checkCurrentPage("Jobs")} />
       </ModifyTabs>
     </Box>
   );
 }
-
-

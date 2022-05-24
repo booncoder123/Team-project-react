@@ -1,4 +1,4 @@
-import FeatureDropDown from "./FeatureDropDown";
+import FeatureDropDown from "../../components/FeatureDropDown";
 import classes from "./index.module.css";
 import SearchBar from "../../components/SearchBar";
 import Dropdown from "../../components/Dropdown";
@@ -18,7 +18,7 @@ function ProjectsLanding(props) {
   const nextPageHandler = (title) => {
     router.push(`Projects/ProjectDetail?projectId=${title}`);
   };
-  
+
   //Variables and functions
   const years = [
     { label: "1" },
@@ -26,11 +26,7 @@ function ProjectsLanding(props) {
     { label: "3" },
     { label: "4" },
   ];
-  const tracks = [
-    { label: "AI" },
-    { label: "IoT" },
-    { label: "Enterprise" },
-  ];
+  const tracks = [{ label: "AI" }, { label: "IoT" }, { label: "Enterprise" }];
   const [searchValue, setSearchValue] = useState(null);
   const [year, setYear] = useState(null);
   const [inputYear, setInputYear] = useState("");
@@ -50,61 +46,73 @@ function ProjectsLanding(props) {
   };
 
   const getSearchDetailValue = (searchValue) => {
-    if(searchValue != null) {
-      const detail = searchValue.projectDetail
-      if(detail != null) {
-        return detail.name + " " + detail.year + " " + detail.type
+    if (searchValue != null) {
+      const detail = searchValue.projectDetail;
+      if (detail != null) {
+        return detail.name + " " + detail.year + " " + detail.type;
       }
     }
-  }
-  
+  };
+
   //Filter function
-  const projectList = props.projects.data
+  const projectList = props.projects.data;
   const searchHandler = (value) => {
-    if(value != null || String(value).length == 0) {
+    if (value != null || String(value).length == 0) {
       const newProjectList = projectList.filter((project) => {
-        const searchString = getSearchDetailValue(searchValue)
-        const projectDetail = project.projectDetail.name + " " + project.projectDetail.year + " " + project.projectDetail.type
-        if(projectDetail.includes(searchString)){
-          return true
+        const searchString = getSearchDetailValue(searchValue);
+        const projectDetail =
+          project.projectDetail.name +
+          " " +
+          project.projectDetail.year +
+          " " +
+          project.projectDetail.type;
+        if (projectDetail.includes(searchString)) {
+          return true;
         }
       });
-      return newProjectList
+      return newProjectList;
+    } else {
+      return projectList;
     }
-    else {
-      return projectList
-    }
-  }
+  };
   const dropDownHandler = (searchValue) => {
-    if(searchValue != null) {
+    if (searchValue != null) {
       const newProjectList = projectList.filter((project) => {
-        const searchString = searchValue.toLowerCase()
-        const projectDetail = project.projectDetail.name + " " + project.projectDetail.year + " " + project.projectDetail.type
-        if(projectDetail.includes(searchString)){
-          return true
+        const searchString = searchValue.toLowerCase();
+        const projectDetail =
+          project.projectDetail.name +
+          " " +
+          project.projectDetail.year +
+          " " +
+          project.projectDetail.type;
+        if (projectDetail.includes(searchString)) {
+          return true;
         }
       });
-      return newProjectList
+      return newProjectList;
+    } else {
+      return projectList;
     }
-    else {
-      return projectList
-    }
-  }
-  const searchResults = searchHandler(searchValue)
-  const yearResults = dropDownHandler(inputYear)
-  const trackResults = dropDownHandler(inputTrack)
+  };
+  const searchResults = searchHandler(searchValue);
+  const yearResults = dropDownHandler(inputYear);
+  const trackResults = dropDownHandler(inputTrack);
 
   //Intersection
   const filteredArrayFunc = (list1, list2, list3) => {
-    const data = [list1, list2, list3]
-    return data.reduce((a, b) => a.filter(c => b.includes(c)))
-  }
-  const filteredArray = filteredArrayFunc(searchResults, yearResults, trackResults)
+    const data = [list1, list2, list3];
+    return data.reduce((a, b) => a.filter((c) => b.includes(c)));
+  };
+  const filteredArray = filteredArrayFunc(
+    searchResults,
+    yearResults,
+    trackResults
+  );
 
   return (
     <div className={classes.container}>
       <div className={classes.heading}>
-        <FeatureDropDown />
+        <FeatureDropDown feature={"Projects"} />
         <div style={{ marginBottom: "10px" }}>
           <AddCircleOutlineIcon
             fontSize="large"
@@ -114,37 +122,40 @@ function ProjectsLanding(props) {
       </div>
 
       <div style={{ paddingRight: "25px", marginTop: "25px" }}>
-        <SearchBar placeholder="Search..." 
-        options={props.projects.data}
-        setValue={setSearchValue}
-        getOptionLabel={(option) => `${option.projectDetail.name}`}
+        <SearchBar
+          placeholder="Search..."
+          options={props.projects.data}
+          setValue={setSearchValue}
+          getOptionLabel={(option) => `${option.projectDetail.name}`}
         />
       </div>
       <div className={classes.filter}>
         <div className={classes.Dropdown}>
-          <Dropdown placeholder="Year"
-          options={years}
-          setValue={setYear}
-          onChange={handleYear}
-          // inputValue={inputType}
-          setInputValue={setInputYear}
-          onInputChange={handleInputYear}
+          <Dropdown
+            placeholder="Year"
+            options={years}
+            setValue={setYear}
+            onChange={handleYear}
+            // inputValue={inputType}
+            setInputValue={setInputYear}
+            onInputChange={handleInputYear}
           />
         </div>
         <div className={classes.Dropdown}>
-          <Dropdown placeholder="Track" 
-          options={tracks}
-          setValue={setTrack}
-          onChange={handleTrack}
-          // inputValue={inputType}
-          setInputValue={setInputTrack}
-          onInputChange={handleInputTrack}
+          <Dropdown
+            placeholder="Track"
+            options={tracks}
+            setValue={setTrack}
+            onChange={handleTrack}
+            // inputValue={inputType}
+            setInputValue={setInputTrack}
+            onInputChange={handleInputTrack}
           />
         </div>
       </div>
       <div className={classes.projects}>
         {filteredArray.map((project) => {
-          console.log(project)
+          console.log(project);
           return (
             <div>
               <ProjectPost

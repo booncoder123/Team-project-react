@@ -1,7 +1,7 @@
 import classes from "./index.module.css";
 import RectangularButton from "../../../../components/RectangularButton";
 import SingleImageUpload from "../../../../components/SingleImageUpload";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import withAuth from "../../../../helpers/withAuth";
 import { parseCookies } from "../../../../helpers/cookie";
@@ -14,7 +14,7 @@ const CreateDiscussion = (props) => {
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
 
-  console.log("image from front", image)
+  console.log("image from front", image);
 
   //Functions
   const router = useRouter();
@@ -26,22 +26,22 @@ const CreateDiscussion = (props) => {
   };
   const handleSubmit2 = () => {
     console.log(image);
-    console.log(description)
-    console.log(typeof description)
-  }
+    console.log(description);
+    console.log(typeof description);
+  };
   const handleSubmit = () => {
-    console.log('***this is posting a job')
-    console.log(description, postType)
-    
-    const cookie = parseCookies()
-    const { token } = cookie
-    console.log(token)
+    console.log("***this is posting a job");
+    console.log(description, postType);
+
+    const cookie = parseCookies();
+    const { token } = cookie;
+    console.log(token);
     postDataToDatabase(token);
 
     // router.push('/Feed/Discussions/')
   };
   const handleCancel = () => {
-    router.push('/Feed/Discussions')
+    router.push("/Feed/Discussions");
   };
   const postDataToDatabase = async (token) => {
     try {
@@ -60,7 +60,7 @@ const CreateDiscussion = (props) => {
         token,
       });
       console.log("Result", result);
-      router.push('/Feed/Discussions')
+      router.push("/Feed/Discussions");
     } catch (error) {
       console.log("error", error);
     }
@@ -70,27 +70,32 @@ const CreateDiscussion = (props) => {
     <div className={classes.container}>
       <div className={classes.header}>Post Discussion</div>
       <div className={classes.commentPanel}>
-        <WYSIWYGEditor 
-        setValue={setDescription}
-        height={'200px'}
-        />
-        <SingleImageUpload setImage={setImage}/>
+        <WYSIWYGEditor setValue={setDescription} height={"200px"} />
+        <SingleImageUpload setImage={setImage} />
       </div>
       <div className={classes.button}>
         <RectangularButton
           onClick={handleSubmit}
-          style={{ backgroundColor: "#F08F34", width:"100%",justifyContent:"center",marginRight:31}}
+          style={{
+            backgroundColor: "#F08F34",
+            width: "100%",
+            justifyContent: "center",
+            marginRight: 31,
+          }}
           name="Post"
         />
         <RectangularButton
           onClick={handleCancel}
-          style={{ backgroundColor: "#424642",width:"100%",justifyContent:"center"}}
+          style={{
+            backgroundColor: "#424642",
+            width: "100%",
+            justifyContent: "center",
+          }}
           name="Cancel"
         />
       </div>
     </div>
   );
 };
-  
-  export default withAuth(CreateDiscussion);
-  
+
+export default withAuth(CreateDiscussion);
