@@ -2,6 +2,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  background-color: var(--neutral);
 }
 .header {
   align-items: center;
@@ -22,6 +23,7 @@
   flex-direction: row;
   align-items: center;
   height: 100px;
+
 
 }
 
