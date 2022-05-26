@@ -28,6 +28,7 @@ export default function Discussion(props) {
         },
         token,
       });
+
       setCounter(result.data.data.likers.length);
     } catch (error) {
       console.log("error", error);
